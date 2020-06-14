@@ -1,7 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {rentsCount, cardsNames} = props;
 
   return (
@@ -143,6 +143,11 @@ const Main = (props) => {
       </main>
     </div>
   );
+};
+
+Main.propTypes = {
+  rentsCount: PropTypes.number.isRequired,
+  cardsNames: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default Main;
