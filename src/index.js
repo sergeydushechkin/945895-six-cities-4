@@ -6,9 +6,12 @@ const Settings = {
   RENTS_COUNT: 312
 };
 
+const CARDS_NAMES = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`];
+
 ReactDOM.render(
     <App
       rentsCount = {Settings.RENTS_COUNT}
+      cardsNames = {CARDS_NAMES}
     />,
     document.querySelector(`#root`)
 );
