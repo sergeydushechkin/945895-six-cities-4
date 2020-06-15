@@ -8,6 +8,7 @@ it(`Render Main`, () => {
         <Main
           rentsCount = {312}
           cardsNames = {[`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`]}
+          onPlaceCardHeaderClick = {() => {}}
         />
     )
     .toJSON();
