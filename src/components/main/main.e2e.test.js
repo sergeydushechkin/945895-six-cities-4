@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
 
@@ -10,7 +10,7 @@ Enzyme.configure({
 it(`Should header to be pressed`, () => {
   const onPlaceCardHeaderClick = jest.fn();
 
-  const main = shallow(
+  const main = mount(
       <Main
         rentsCount = {312}
         cardsNames = {[`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`]}
