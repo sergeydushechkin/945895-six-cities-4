@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {mount} from "enzyme";
+import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Card from "./card.jsx";
 
@@ -10,7 +10,7 @@ Enzyme.configure({
 it(`Should card header to be pressed`, () => {
   const onPlaceCardHeaderClick = jest.fn();
 
-  const card = mount(
+  const card = shallow(
       <Card
         cardName={`Beautiful & luxurious apartment at great location`}
         onPlaceCardHeaderClick={onPlaceCardHeaderClick}
