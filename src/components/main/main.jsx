@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import CardsList from "../cards-list/cards-list.jsx";
 
 const Main = (props) => {
-  const {rentsCount, cardsNames} = props;
+  const {rentsCount, cardsNames, onPlaceCardHeaderClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -96,7 +96,7 @@ const Main = (props) => {
                 --> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardsList cardsNames={cardsNames} />
+                <CardsList cardsNames={cardsNames} onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
               </div>
             </section>
             <div className="cities__right-section">
@@ -111,7 +111,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentsCount: PropTypes.number.isRequired,
-  cardsNames: PropTypes.arrayOf(PropTypes.string).isRequired
+  cardsNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onPlaceCardHeaderClick: PropTypes.func.isRequired
 };
 
 export default Main;
