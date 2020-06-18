@@ -3,6 +3,7 @@
 exports[`Render Card 1`] = `
 <article
   className="cities__place-card place-card"
+  onMouseEnter={[Function]}
 >
   <div
     className="place-card__mark"
@@ -38,7 +39,8 @@ exports[`Render Card 1`] = `
         <b
           className="place-card__price-value"
         >
-          €120
+          €
+          120
         </b>
         <span
           className="place-card__price-text"
@@ -75,7 +77,7 @@ exports[`Render Card 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "96%",
             }
           }
         />
@@ -91,7 +93,6 @@ exports[`Render Card 1`] = `
     >
       <a
         href="#"
-        onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location
       </a>

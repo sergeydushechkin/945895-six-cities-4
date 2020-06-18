@@ -3,23 +3,23 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Card from "./card.jsx";
 
+import offers from "../../mocks/tests_offers.js";
+
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
 it(`Should card header to be pressed`, () => {
-  const onPlaceCardHeaderClick = jest.fn();
+  const onPlaceCardMouseEnter = jest.fn();
 
   const card = shallow(
       <Card
-        cardName={`Beautiful & luxurious apartment at great location`}
-        onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+        offer={offers[0]}
+        onPlaceCardMouseEnter={onPlaceCardMouseEnter}
       />
   );
 
-  const placeCardHeader = card.find(`.place-card__name a`);
+  card.props().onMouseEnter();
 
-  placeCardHeader.props().onClick();
-
-  expect(onPlaceCardHeaderClick.mock.calls.length).toBe(1);
+  expect(onPlaceCardMouseEnter.mock.calls[0][0]).toMatchObject(offers[0]);
 });
