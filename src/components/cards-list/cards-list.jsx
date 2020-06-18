@@ -6,12 +6,12 @@ class CardsList extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {activeOffer: null};
+    this.state = {activeOfferId: null};
     this._onPlaceCardMouseEnter = this._onPlaceCardMouseEnter.bind(this);
   }
 
-  _onPlaceCardMouseEnter(offer) {
-    this.setState({activeOffer: offer});
+  _onPlaceCardMouseEnter(id) {
+    this.setState({activeOfferId: id});
   }
 
   render() {
@@ -30,6 +30,7 @@ class CardsList extends React.PureComponent {
 CardsList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         picture: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,

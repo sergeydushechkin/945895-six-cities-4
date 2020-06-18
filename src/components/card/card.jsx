@@ -7,7 +7,7 @@ const Card = (props) => {
   const ratingWidth = Math.floor(rating * 20);
 
   return (
-    <article onMouseEnter={() => onPlaceCardMouseEnter(offer)} className="cities__place-card place-card">
+    <article onMouseEnter={() => onPlaceCardMouseEnter(offer.id)} className="cities__place-card place-card">
       {
         isPremium && <div className="place-card__mark">
           <span>Premium</span>
@@ -48,6 +48,7 @@ const Card = (props) => {
 
 Card.propTypes = {
   offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

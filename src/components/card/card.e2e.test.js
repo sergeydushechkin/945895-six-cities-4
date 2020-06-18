@@ -21,5 +21,5 @@ it(`Should card header to be pressed`, () => {
 
   card.props().onMouseEnter();
 
-  expect(onPlaceCardMouseEnter.mock.calls[0][0]).toMatchObject(offers[0]);
+  expect(onPlaceCardMouseEnter.mock.calls[0][0]).toBe(offers[0].id);
 });
