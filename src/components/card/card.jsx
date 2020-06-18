@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Card = (props) => {
-  const {offer, onPlaceCardMouseMove} = props;
+  const {offer, onPlaceCardMouseEnter} = props;
   const {title, picture, price, rating, type, isPremium, isFavorite} = offer;
   const ratingWidth = Math.floor(rating * 20);
 
   return (
-    <article /*onMouseMove={onPlaceCardMouseMove(offer)}*/ className="cities__place-card place-card">
+    <article onMouseEnter={() => onPlaceCardMouseEnter(offer)} className="cities__place-card place-card">
       {
         isPremium && <div className="place-card__mark">
           <span>Premium</span>
@@ -33,7 +33,7 @@ const Card = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={`width: ${ratingWidth}%`}></span>
+            <span style={{width: `${ratingWidth}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -56,7 +56,7 @@ Card.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired
   }),
-  onPlaceCardMouseMove: PropTypes.func.isRequired
+  onPlaceCardMouseEnter: PropTypes.func.isRequired
 };
 
 export default Card;

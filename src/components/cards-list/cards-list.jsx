@@ -7,9 +7,10 @@ class CardsList extends React.PureComponent {
     super(props);
 
     this.state = {activeOffer: null};
+    this._onPlaceCardMouseEnter = this._onPlaceCardMouseEnter.bind(this);
   }
 
-  _onPlaceCardMouseMove(offer) {
+  _onPlaceCardMouseEnter(offer) {
     this.setState({activeOffer: offer});
   }
 
@@ -19,7 +20,7 @@ class CardsList extends React.PureComponent {
     return (
       offers.map((offer) => {
         return (
-          <Card key={offer.id} offer={offer} onPlaceCardMouseMove={this._onPlaceCardMouseMove} />
+          <Card key={offer.id} offer={offer} onPlaceCardMouseEnter={this._onPlaceCardMouseEnter} />
         );
       })
     );
