@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Card = (props) => {
   const {offer, onPlaceCardMouseEnter} = props;
   const {title, picture, price, rating, type, isPremium, isFavorite} = offer;
-  const ratingWidth = Math.floor(rating * 20);
+  const ratingWidth = Math.round(rating) * 20;
 
   return (
     <article onMouseEnter={() => onPlaceCardMouseEnter(offer.id)} className="cities__place-card place-card">
