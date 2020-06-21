@@ -10,6 +10,7 @@ it(`Render Main`, () => {
         <Main
           rentsCount={312}
           offers = {offers}
+          onPlaceCardHeaderClick = {() => {}}
         />
     )
     .toJSON();

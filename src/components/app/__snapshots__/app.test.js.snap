@@ -300,7 +300,7 @@ exports[`Render App 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "96%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -316,6 +316,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>
@@ -396,7 +397,7 @@ exports[`Render App 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "84%",
+                          "width": "80%",
                         }
                       }
                     />
@@ -412,6 +413,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>
@@ -419,7 +421,7 @@ exports[`Render App 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Private room
                 </p>
               </div>
             </article>

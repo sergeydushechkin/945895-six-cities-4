@@ -8,8 +8,11 @@ it(`Render Card`, () => {
   const tree = renderer
     .create(
         <Card
+          key={offers[0].id}
           offer={offers[0]}
+          isNearPlaces={false}
           onPlaceCardMouseEnter={() => {}}
+          onPlaceCardHeaderClick={() => {}}
         />
     )
     .toJSON();
