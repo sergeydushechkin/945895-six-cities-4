@@ -17,8 +17,10 @@ export default [
     isPremium: true,
     isFavorite: false,
     bedrooms: 2,
-    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
+    descriptions: [
+      `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+      `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`
+    ],
     guests: 3,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     hostId: 1
@@ -34,9 +36,9 @@ export default [
     isPremium: false,
     isFavorite: true,
     bedrooms: 1,
-    description: `Large wood and stone place in Amsterdam`,
+    descriptions: [`Large wood and stone place in Amsterdam`],
     guests: 2,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`],
     hostId: 3
-  },
+  }
 ];
