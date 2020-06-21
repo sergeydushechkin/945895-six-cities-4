@@ -5,21 +5,54 @@ import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 
 class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this._onPlaceCardHeaderClick = this._onPlaceCardHeaderClick.bind(this);
+    this.state = {offerId: -1};
+  }
+
+  _onPlaceCardHeaderClick(id) {
+    this.setState({offerId: id});
+  }
+
+  _renderMainScreen() {
+    const {rentsCount, offers, users} = this.props;
+
+    if (this.state.offerId === -1) {
+      return (
+        <Main
+          rentsCount={rentsCount}
+          offers = {offers}
+          onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
+        />
+      );
+    } else {
+      return (
+        <Property
+          offerId = {this.state.offerId}
+          offers = {offers}
+          users = {users}
+          onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
+        />
+      );
+    }
+  }
 
   render() {
-    const {rentsCount, offers} = this.props;
+    const {offers, users} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Main
-              rentsCount={rentsCount}
-              offers = {offers}
-            />
+            {this._renderMainScreen()}
           </Route>
           <Route exact path="/property">
             <Property
+              offerId = {1}
+              offers = {offers}
+              users = {users}
+              onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
             />
           </Route>
         </Switch>
@@ -30,17 +63,8 @@ class App extends React.PureComponent {
 
 App.propTypes = {
   rentsCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        picture: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isFavorite: PropTypes.bool.isRequired
-      })
-  )
+  offers: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 export default App;
