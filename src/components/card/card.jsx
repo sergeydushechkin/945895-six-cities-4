@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getRatingWidth} from "../../utils.js";
 
 const Card = (props) => {
-  const {offer, onPlaceCardMouseEnter} = props;
-  const {title, picture, price, rating, type, isPremium, isFavorite} = offer;
-  const ratingWidth = Math.floor(rating * 20);
+  const {offer, onPlaceCardMouseEnter, isNearPlaces, onPlaceCardHeaderClick} = props;
+  const {title, pictures, price, rating, type, isPremium, isFavorite, id} = offer;
 
   return (
-    <article onMouseEnter={() => onPlaceCardMouseEnter(offer.id)} className="cities__place-card place-card">
+    <article onMouseEnter={() => onPlaceCardMouseEnter(offer.id)} className={`${isNearPlaces ? `near-places__card` : `cities__place-card`} place-card`}>
       {
         isPremium && <div className="place-card__mark">
           <span>Premium</span>
         </div>
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${isNearPlaces ? `near-places__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={picture} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={pictures[0]} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -33,12 +33,12 @@ const Card = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${ratingWidth}%`}}></span>
+            <span style={{width: `${getRatingWidth(rating)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <a onClick={() => onPlaceCardHeaderClick(id)} href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -50,14 +50,16 @@ Card.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
+    pictures: PropTypes.arrayOf(PropTypes.string),
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired
   }),
-  onPlaceCardMouseEnter: PropTypes.func.isRequired
+  onPlaceCardMouseEnter: PropTypes.func.isRequired,
+  onPlaceCardHeaderClick: PropTypes.func.isRequired,
+  isNearPlaces: PropTypes.bool.isRequired
 };
 
 export default Card;

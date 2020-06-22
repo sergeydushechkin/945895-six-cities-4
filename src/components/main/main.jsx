@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import CardsList from "../cards-list/cards-list.jsx";
 
 const Main = (props) => {
-  const {rentsCount, offers} = props;
+  const {rentsCount, offers, onPlaceCardHeaderClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -96,7 +96,7 @@ const Main = (props) => {
                 --> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardsList offers={offers}/>
+                <CardsList offers={offers} onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
               </div>
             </section>
             <div className="cities__right-section">
@@ -111,17 +111,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   rentsCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        picture: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        rating: PropTypes.number.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        isFavorite: PropTypes.bool.isRequired
-      })
-  )
+  offers: PropTypes.array.isRequired,
+  onPlaceCardHeaderClick: PropTypes.func.isRequired
 };
 
 export default Main;

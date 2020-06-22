@@ -78,7 +78,7 @@ Array [
           <span
             style={
               Object {
-                "width": "96%",
+                "width": "100%",
               }
             }
           />
@@ -94,6 +94,7 @@ Array [
       >
         <a
           href="#"
+          onClick={[Function]}
         >
           Beautiful & luxurious apartment at great location
         </a>
@@ -174,7 +175,7 @@ Array [
           <span
             style={
               Object {
-                "width": "84%",
+                "width": "80%",
               }
             }
           />
@@ -190,6 +191,7 @@ Array [
       >
         <a
           href="#"
+          onClick={[Function]}
         >
           Wood and stone place
         </a>
@@ -197,7 +199,7 @@ Array [
       <p
         className="place-card__type"
       >
-        Apartment
+        Private room
       </p>
     </div>
   </article>,
