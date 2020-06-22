@@ -8,7 +8,7 @@ class Property extends React.PureComponent {
     const {offerId, offers, users, onPlaceCardHeaderClick} = this.props;
 
     const offer = offers.find((it) => it.id === offerId);
-    const {pictures, isPremium, title, rating, type, bedrooms, guests, features, descriptions} = offer;
+    const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, descriptions} = offer;
 
     const user = users.find((it) => offer.hostId === it.id);
     const {name, pro, avatar} = user;
@@ -60,7 +60,7 @@ class Property extends React.PureComponent {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button className={`property__bookmark-button button${isFavorite ? ` property__bookmark-button--active` : ``}`} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
