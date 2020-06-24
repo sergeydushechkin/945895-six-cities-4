@@ -11,7 +11,12 @@ it(`Render Main`, () => {
           rentsCount={312}
           offers = {offers}
           onPlaceCardHeaderClick = {() => {}}
-        />
+        />,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }
     )
     .toJSON();
 

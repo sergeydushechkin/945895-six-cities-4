@@ -12,7 +12,12 @@ it(`Render App`, () => {
           rentsCount = {312}
           offers = {offers}
           users = {users}
-        />
+        />,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }
     )
     .toJSON();
 
