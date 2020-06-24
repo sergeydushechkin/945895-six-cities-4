@@ -23,7 +23,8 @@ export default [
     ],
     guests: 3,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
-    hostId: 1
+    hostId: 1,
+    coordinates: [52.3909553943508, 4.85309666406198]
   },
   {
     id: 2,
@@ -39,7 +40,8 @@ export default [
     descriptions: [`Large wood and stone place in Amsterdam`],
     guests: 2,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`],
-    hostId: 3
+    hostId: 3,
+    coordinates: [52.369553943508, 4.85309666406198]
   },
   {
     id: 3,
@@ -55,7 +57,8 @@ export default [
     descriptions: [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`],
     guests: 1,
     features: [`Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`],
-    hostId: 4
+    hostId: 4,
+    coordinates: [52.3909553943508, 4.929309666406198]
   },
   {
     id: 4,
@@ -73,6 +76,7 @@ export default [
     ],
     guests: 3,
     features: [`Wi-Fi`, `Washing machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
-    hostId: 1
+    hostId: 1,
+    coordinates: [52.3809553943508, 4.939309666406198]
   },
 ];
