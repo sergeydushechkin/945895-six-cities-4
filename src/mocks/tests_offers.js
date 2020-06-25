@@ -24,7 +24,23 @@ export default [
     guests: 3,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     hostId: 1,
-    coordinates: [52.3909553943508, 4.85309666406198]
+    coordinates: [52.3909553943508, 4.85309666406198],
+    reviews: [
+      {
+        id: 1,
+        userId: 2,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        rating: 4.3,
+        date: `2019-04-24`
+      },
+      {
+        id: 2,
+        userId: 3,
+        text: `Very good`,
+        rating: 3.2,
+        date: `2019-04-25`
+      }
+    ]
   },
   {
     id: 2,
@@ -41,6 +57,22 @@ export default [
     guests: 2,
     features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`],
     hostId: 3,
-    coordinates: [52.369553943508, 4.85309666406198]
+    coordinates: [52.369553943508, 4.85309666406198],
+    reviews: [
+      {
+        id: 1,
+        userId: 2,
+        text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        rating: 4.3,
+        date: `2019-04-24`
+      },
+      {
+        id: 2,
+        userId: 3,
+        text: `Very good`,
+        rating: 3.2,
+        date: `2019-04-25`
+      }
+    ]
   }
 ];
