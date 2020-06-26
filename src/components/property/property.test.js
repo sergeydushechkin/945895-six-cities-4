@@ -5,7 +5,7 @@ import Property from "./property.jsx";
 import offers from "../../mocks/tests_offers.js";
 import users from "../../mocks/tests_users.js";
 
-it(`Render Main`, () => {
+it(`Render Property`, () => {
   const tree = renderer
     .create(
         <Property
@@ -13,7 +13,12 @@ it(`Render Main`, () => {
           offers = {offers}
           users = {users}
           onPlaceCardHeaderClick = {() => {}}
-        />
+        />,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }
     )
     .toJSON();
 

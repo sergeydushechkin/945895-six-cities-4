@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {getRatingWidth} from "../../utils.js";
 import CardsList from "../cards-list/cards-list.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
+import Map from "../map/map.jsx";
 
 const Property = (props) => {
   const {offerId, offers, users, onPlaceCardHeaderClick} = props;
@@ -176,13 +177,22 @@ const Property = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            city={[52.38333, 4.9]}
+            offers={offers}
+            activeOfferId={offerId}
+            className={`property__map map`}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CardsList offers={offers} isNearPlaces={true} onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
+              <CardsList
+                offers={offers}
+                isNearPlaces={true}
+                onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+              />
             </div>
           </section>
         </div>
