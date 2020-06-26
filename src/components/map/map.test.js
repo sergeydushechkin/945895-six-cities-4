@@ -11,6 +11,7 @@ it(`Render Map`, () => {
           city={[52.38333, 4.9]}
           offers={offers}
           activeOfferId={1}
+          className={`cities__map map`}
         />,
         {
           createNodeMock: () => {

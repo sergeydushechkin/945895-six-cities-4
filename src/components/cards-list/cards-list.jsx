@@ -2,35 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import Card from "../card/card.jsx";
 
-class CardsList extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const CardsList = (props) => {
+  const {offers, isNearPlaces = false, onPlaceCardHeaderClick, onPlaceCardMouseEnter = () => {}} = props;
 
-    this.state = {activeOfferId: null};
-    this._onPlaceCardMouseEnter = this._onPlaceCardMouseEnter.bind(this);
-  }
-
-  _onPlaceCardMouseEnter(id) {
-    this.setState({activeOfferId: id});
-  }
-
-  render() {
-    const {offers, isNearPlaces = false, onPlaceCardHeaderClick} = this.props;
-
-    return (
-      offers.map((offer) => {
-        return (
-          <Card
-            key={offer.id}
-            offer={offer}
-            isNearPlaces={isNearPlaces}
-            onPlaceCardMouseEnter={this._onPlaceCardMouseEnter}
-            onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
-        );
-      })
-    );
-  }
-}
+  return (
+    offers.map((offer) => {
+      return (
+        <Card
+          key={offer.id}
+          offer={offer}
+          isNearPlaces={isNearPlaces}
+          onPlaceCardMouseEnter={onPlaceCardMouseEnter}
+          onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
+      );
+    })
+  );
+};
 
 CardsList.propTypes = {
   offers: PropTypes.arrayOf(
@@ -46,7 +33,8 @@ CardsList.propTypes = {
       })
   ),
   isNearPlaces: PropTypes.bool,
-  onPlaceCardHeaderClick: PropTypes.func.isRequired
+  onPlaceCardHeaderClick: PropTypes.func.isRequired,
+  onPlaceCardMouseEnter: PropTypes.func
 };
 
 export default CardsList;
