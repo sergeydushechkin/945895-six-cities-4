@@ -651,7 +651,6 @@ exports[`Render Property 1`] = `
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -755,7 +754,6 @@ exports[`Render Property 1`] = `
           </article>
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="near-places__image-wrapper place-card__image-wrapper"

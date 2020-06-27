@@ -10,7 +10,6 @@ it(`Render CardsList`, () => {
         <CardsList
           offers={offers}
           onPlaceCardHeaderClick={() => {}}
-          onPlaceCardMouseEnter={() => {}}
         />
     )
     .toJSON();

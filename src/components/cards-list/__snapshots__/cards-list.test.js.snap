@@ -4,7 +4,6 @@ exports[`Render CardsList 1`] = `
 Array [
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
   >
     <div
       className="place-card__mark"
@@ -108,7 +107,6 @@ Array [
   </article>,
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
   >
     <div
       className="cities__image-wrapper place-card__image-wrapper"

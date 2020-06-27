@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Card from "../card/card.jsx";
 
 const CardsList = (props) => {
-  const {offers, isNearPlaces = false, onPlaceCardHeaderClick, onPlaceCardMouseEnter = () => {}} = props;
+  const {offers, isNearPlaces = false, onPlaceCardHeaderClick} = props;
 
   return (
     offers.map((offer) => {
@@ -12,7 +12,6 @@ const CardsList = (props) => {
           key={offer.id}
           offer={offer}
           isNearPlaces={isNearPlaces}
-          onPlaceCardMouseEnter={onPlaceCardMouseEnter}
           onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
       );
     })
@@ -34,7 +33,6 @@ CardsList.propTypes = {
   ),
   isNearPlaces: PropTypes.bool,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
-  onPlaceCardMouseEnter: PropTypes.func
 };
 
 export default CardsList;
