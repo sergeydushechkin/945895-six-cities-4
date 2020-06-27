@@ -97,11 +97,19 @@ const Main = (props) => {
                 --> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardsList offers={offers} onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
+                <CardsList
+                  offers={offers}
+                  onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+                />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={[52.38333, 4.9]} offers={offers} activeOfferId={1}/>
+              <Map
+                city={[52.38333, 4.9]}
+                offers={offers}
+                activeOfferId={1}
+                className={`cities__map map`}
+              />
             </div>
           </div>
         </div>

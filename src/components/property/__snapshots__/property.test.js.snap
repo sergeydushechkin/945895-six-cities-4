@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Main 1`] = `
+exports[`Render Property 1`] = `
 <div
   className="page"
 >
@@ -302,7 +302,7 @@ exports[`Render Main 1`] = `
               className="property__host-user user"
             >
               <div
-                className="property__avatar-wrapper user__avatar-wrapper"
+                className="property__avatar-wrapper user__avatar-wrapper property__avatar-wrapper--pro"
               >
                 <img
                   alt="Host avatar"
@@ -343,7 +343,7 @@ exports[`Render Main 1`] = `
               <span
                 className="reviews__amount"
               >
-                1
+                2
               </span>
             </h2>
             <ul
@@ -404,7 +404,66 @@ exports[`Render Main 1`] = `
                     className="reviews__time"
                     dateTime="2019-04-24"
                   >
-                    April 2019
+                    2019-04-24
+                  </time>
+                </div>
+              </li>
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height="54"
+                      src="img/avatar-max.jpg"
+                      width="54"
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Ivan
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "60%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    Very good
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2019-04-25"
+                  >
+                    2019-04-25
                   </time>
                 </div>
               </li>
@@ -592,7 +651,6 @@ exports[`Render Main 1`] = `
         >
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -696,7 +754,6 @@ exports[`Render Main 1`] = `
           </article>
           <article
             className="near-places__card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="near-places__image-wrapper place-card__image-wrapper"

@@ -1,17 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Card from "./card.jsx";
+import ReviewsList from "./reviews-list.jsx";
 
 import offers from "../../mocks/tests_offers.js";
+import users from "../../mocks/tests_users.js";
 
-it(`Render Card`, () => {
+it(`Render ReviewList`, () => {
   const tree = renderer
     .create(
-        <Card
-          key={offers[0].id}
-          offer={offers[0]}
-          isNearPlaces={false}
-          onPlaceCardHeaderClick={() => {}}
+        <ReviewsList
+          reviews={offers[0].reviews}
+          users={users}
         />
     )
     .toJSON();

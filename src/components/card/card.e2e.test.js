@@ -10,7 +10,6 @@ Enzyme.configure({
 });
 
 it(`Should card header to be pressed`, () => {
-  const onPlaceCardMouseEnter = jest.fn();
   const onPlaceCardHeaderClick = jest.fn();
 
   const card = shallow(
@@ -18,7 +17,6 @@ it(`Should card header to be pressed`, () => {
         key={offers[0].id}
         offer={offers[0]}
         isNearPlaces={false}
-        onPlaceCardMouseEnter={onPlaceCardMouseEnter}
         onPlaceCardHeaderClick={onPlaceCardHeaderClick}
       />
   );
@@ -26,9 +24,6 @@ it(`Should card header to be pressed`, () => {
   const placeCardHeader = card.find(`.place-card__name a`);
 
   placeCardHeader.props().onClick();
-  card.props().onMouseEnter();
-
-  expect(onPlaceCardMouseEnter.mock.calls[0][0]).toBe(offers[0].id);
 
   expect(onPlaceCardHeaderClick.mock.calls.length).toBe(1);
   expect(onPlaceCardHeaderClick.mock.calls[0][0]).toBe(offers[0].id);

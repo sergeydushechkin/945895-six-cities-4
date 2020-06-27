@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import {getRatingWidth} from "../../utils.js";
 
 const Card = (props) => {
-  const {offer, onPlaceCardMouseEnter, isNearPlaces, onPlaceCardHeaderClick} = props;
+  const {offer, isNearPlaces, onPlaceCardHeaderClick} = props;
   const {title, pictures, price, rating, type, isPremium, isFavorite, id} = offer;
 
   return (
-    <article onMouseEnter={() => onPlaceCardMouseEnter(offer.id)} className={`${isNearPlaces ? `near-places__card` : `cities__place-card`} place-card`}>
+    <article className={`${isNearPlaces ? `near-places__card` : `cities__place-card`} place-card`}>
       {
         isPremium && <div className="place-card__mark">
           <span>Premium</span>
@@ -57,7 +57,6 @@ Card.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired
   }),
-  onPlaceCardMouseEnter: PropTypes.func.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
   isNearPlaces: PropTypes.bool.isRequired
 };

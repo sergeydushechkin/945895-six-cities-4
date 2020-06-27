@@ -7,23 +7,13 @@ class Map extends React.PureComponent {
     super(props);
 
     this._mapRef = React.createRef();
+    this._markersLayer = null;
   }
 
   componentDidMount() {
-    const {city, activeOfferId, offers} = this.props;
+    const {city} = this.props;
 
     const zoom = 12;
-
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
-
-    const iconActive = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
-      iconSize: [30, 30]
-    });
-
     const map = leaflet.map(this._mapRef.current, {
       center: city,
       zoom,
@@ -39,28 +29,53 @@ class Map extends React.PureComponent {
       })
       .addTo(map);
 
-    offers.forEach((it) => {
-      if (it.id === activeOfferId) {
-        leaflet.marker(it.coordinates, {iconActive}).addTo(map);
-      } else {
-        leaflet.marker(it.coordinates, {icon}).addTo(map);
-      }
-    });
+    this._markersLayer = leaflet.layerGroup().addTo(map);
+    this._renderMarkers();
   }
 
   componentWillUnmount() {
     this._mapRef.current.remove();
   }
 
+  componentDidUpdate() {
+    this._markersLayer.clearLayers();
+    this._renderMarkers();
+  }
+
+  _renderMarkers() {
+    const {activeOfferId, offers} = this.props;
+
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+
+    const iconActive = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [30, 30]
+    });
+
+    offers.forEach((it) => {
+      if (it.id === activeOfferId) {
+        leaflet.marker(it.coordinates, {iconActive}).addTo(this._markersLayer);
+      } else {
+        leaflet.marker(it.coordinates, {icon}).addTo(this._markersLayer);
+      }
+    });
+  }
+
   render() {
-    return <section ref={this._mapRef} className="cities__map map"></section>;
+    return (
+      <section ref={this._mapRef} className={this.props.className}></section>
+    );
   }
 }
 
 Map.propTypes = {
   activeOfferId: PropTypes.any.isRequired,
   city: PropTypes.array.isRequired,
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  className: PropTypes.string.isRequired
 };
 
 export default Map;
