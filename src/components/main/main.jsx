@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
+import LocationsList from "../locations-list/locations-list.jsx";
+import ActionCreator from "../../reducer.js";
 
 const Main = (props) => {
-  const {rentsCount, offers, onPlaceCardHeaderClick} = props;
+  const {rentsCount, offers, onPlaceCardHeaderClick, city} = props;
+  const locations = Array.from(new Set(offers.map((it) => it.city.name)));
 
   return (
     <div className="page page--gray page--main">
@@ -34,38 +38,7 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <LocationsList locations={locations} activeLocation={city}/>
           </section>
         </div>
         <div className="cities">
@@ -105,7 +78,7 @@ const Main = (props) => {
             </section>
             <div className="cities__right-section">
               <Map
-                city={[52.38333, 4.9]}
+                city={offers[0].city.coordinates}
                 offers={offers}
                 activeOfferId={1}
                 className={`cities__map map`}
@@ -121,7 +94,13 @@ const Main = (props) => {
 Main.propTypes = {
   rentsCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  onPlaceCardHeaderClick: PropTypes.func.isRequired
+  onPlaceCardHeaderClick: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {activeOffers: state.offers.filter((it) => it.city.name === state.city)};
+};
+
+export {Main};
+export default connect(mapStateToProps, null)(Main);
