@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
+import {connect} from "react-redux";
 
 const Main = (props) => {
-  const {offers, onPlaceCardHeaderClick, city, activeOffers, onLocationButtonClick} = props;
-  const locations = Array.from(new Set(offers.map((it) => it.city.name)));
+  const {onPlaceCardHeaderClick, city, activeOffers} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -36,11 +36,7 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList
-              locations={locations}
-              activeLocation={city}
-              onLocationButtonClick={onLocationButtonClick}
-            />
+            <LocationsList />
           </section>
         </div>
         <div className="cities">
@@ -94,11 +90,17 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.array.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   activeOffers: PropTypes.array.isRequired,
-  onLocationButtonClick: PropTypes.func.isRequired
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    activeOffers: state.offers.filter((it) => it.city.name === state.city),
+    city: state.city,
+  };
+};
+
+export {Main};
+export default connect(mapStateToProps, null)(Main);
