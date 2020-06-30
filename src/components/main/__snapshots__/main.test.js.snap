@@ -77,43 +77,9 @@ exports[`Render Main 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
               className="locations__item-link tabs__item tabs__item--active"
+              href="#"
+              onClick={[Function]}
             >
               <span>
                 Amsterdam
@@ -126,21 +92,10 @@ exports[`Render Main 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Dusseldorf
+                Paris
               </span>
             </a>
           </li>
@@ -164,8 +119,9 @@ exports[`Render Main 1`] = `
           <b
             className="places__found"
           >
-            312
-             places to stay in Amsterdam
+            2
+             places to stay in 
+            Amsterdam
           </b>
           <form
             action="#"
@@ -340,7 +296,7 @@ exports[`Render Main 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="img/apartment-03.jpg"
                     width="260"
                   />
                 </a>
@@ -358,7 +314,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      80
+                      999
                     </b>
                     <span
                       className="place-card__price-text"
@@ -367,7 +323,7 @@ exports[`Render Main 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button place-card__bookmark-button--active"
+                    className="place-card__bookmark-button button"
                     type="button"
                   >
                     <svg
@@ -395,7 +351,7 @@ exports[`Render Main 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "60%",
                         }
                       }
                     />
@@ -413,13 +369,13 @@ exports[`Render Main 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Wood and stone place
+                    Not bad!
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  Hotel
                 </p>
               </div>
             </article>

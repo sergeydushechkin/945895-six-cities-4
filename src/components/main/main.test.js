@@ -8,9 +8,11 @@ it(`Render Main`, () => {
   const tree = renderer
     .create(
         <Main
-          rentsCount={312}
+          city={`Amsterdam`}
           offers = {offers}
+          activeOffers = {offers}
           onPlaceCardHeaderClick = {() => {}}
+          onLocationButtonClick = {() => {}}
         />,
         {
           createNodeMock: () => {
