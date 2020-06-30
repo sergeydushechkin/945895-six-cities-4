@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -66,12 +65,6 @@ App.propTypes = {
   users: PropTypes.array.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onLocationButtonClick(city) {
-    dispatch(ActionCreator.changeCity(city));
-  }
-});
-
 const mapStateToProps = (state) => {
   return {
     offers: state.offers,
@@ -80,4 +73,4 @@ const mapStateToProps = (state) => {
 };
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);
