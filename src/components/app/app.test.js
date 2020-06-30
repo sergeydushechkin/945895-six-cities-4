@@ -11,17 +11,16 @@ const mockStore = configureStore([]);
 
 it(`Render App`, () => {
   const store = mockStore({
-    city: `Amsterdam`,
-    offers
+    offers,
+    users,
+    city: offers[0].city.name,
+    locations: Array.from(new Set(offers.map((it) => it.city.name)))
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
-            offers = {offers}
-            users = {users}
-          />
+          <App />
         </Provider>,
         {
           createNodeMock: () => {
