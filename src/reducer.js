@@ -1,9 +1,12 @@
 import offers from "./mocks/offers.js";
+import users from "./mocks/users.js";
 import {extend} from "./utils.js";
 
 const initialState = {
   city: offers[0].city.name,
-  offers
+  offers,
+  locations: Array.from(new Set(offers.map((it) => it.city.name))),
+  users
 };
 
 const ActionType = {

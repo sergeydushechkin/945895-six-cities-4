@@ -24,10 +24,6 @@ class App extends React.PureComponent {
       return (
         <Main
           onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
-          onLocationButtonClick = {this.props.onLocationButtonClick}
-          activeOffers = {this.props.activeOffers}
-          city = {this.props.city}
-          offers = {this.props.offers}
         />
       );
     } else {
@@ -68,11 +64,7 @@ class App extends React.PureComponent {
 App.propTypes = {
   offers: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
-  city: PropTypes.string.isRequired,
-  activeOffers: PropTypes.array.isRequired,
-  onLocationButtonClick: PropTypes.func.isRequired
 };
-
 
 const mapDispatchToProps = (dispatch) => ({
   onLocationButtonClick(city) {
@@ -83,8 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => {
   return {
     offers: state.offers,
-    activeOffers: state.offers.filter((it) => it.city.name === state.city),
-    city: state.city
+    users: state.users
   };
 };
 
