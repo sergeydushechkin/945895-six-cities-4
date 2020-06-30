@@ -16,13 +16,11 @@ class App extends React.PureComponent {
   }
 
   _renderMainScreen() {
-    const {rentsCount, offers, users} = this.props;
+    const {offers, users} = this.props;
 
     if (this.state.offerId === -1) {
       return (
         <Main
-          rentsCount={rentsCount}
-          offers = {offers}
           onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
         />
       );

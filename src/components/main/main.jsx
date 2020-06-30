@@ -4,10 +4,10 @@ import {connect} from "react-redux";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
-import ActionCreator from "../../reducer.js";
+import {ActionCreator} from "../../reducer.js";
 
 const Main = (props) => {
-  const {rentsCount, offers, onPlaceCardHeaderClick, city} = props;
+  const {offers, onPlaceCardHeaderClick, city, activeOffers, onLocationButtonClick} = props;
   const locations = Array.from(new Set(offers.map((it) => it.city.name)));
 
   return (
@@ -38,14 +38,18 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList locations={locations} activeLocation={city}/>
+            <LocationsList
+              locations={locations}
+              activeLocation={city}
+              onLocationButtonClick={onLocationButtonClick}
+            />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{rentsCount} places to stay in Amsterdam</b>
+              <b className="places__found">{activeOffers.length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -71,15 +75,15 @@ const Main = (props) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 <CardsList
-                  offers={offers}
+                  offers={activeOffers}
                   onPlaceCardHeaderClick={onPlaceCardHeaderClick}
                 />
               </div>
             </section>
             <div className="cities__right-section">
               <Map
-                city={offers[0].city.coordinates}
-                offers={offers}
+                city={activeOffers[0].city.coordinates}
+                offers={activeOffers}
                 activeOfferId={1}
                 className={`cities__map map`}
               />
@@ -92,15 +96,27 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  rentsCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired
+  city: PropTypes.string.isRequired,
+  activeOffers: PropTypes.array.isRequired,
+  onLocationButtonClick: PropTypes.func.isRequired
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onLocationButtonClick(city) {
+    dispatch(ActionCreator.changeCity(city));
+  }
+});
+
+
 const mapStateToProps = (state) => {
-  return {activeOffers: state.offers.filter((it) => it.city.name === state.city)};
+  return {
+    offers: state.offers,
+    activeOffers: state.offers.filter((it) => it.city.name === state.city),
+    city: state.city
+  };
 };
 
 export {Main};
-export default connect(mapStateToProps, null)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

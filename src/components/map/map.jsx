@@ -8,28 +8,30 @@ class Map extends React.PureComponent {
 
     this._mapRef = React.createRef();
     this._markersLayer = null;
+    this._map = null;
   }
 
   componentDidMount() {
     const {city} = this.props;
 
     const zoom = 12;
-    const map = leaflet.map(this._mapRef.current, {
+
+    this._map = leaflet.map(this._mapRef.current, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
 
-    map.setView(city, zoom);
+    this._map.setView(city, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this._map);
 
-    this._markersLayer = leaflet.layerGroup().addTo(map);
+    this._markersLayer = leaflet.layerGroup().addTo(this._map);
     this._renderMarkers();
   }
 
@@ -39,6 +41,7 @@ class Map extends React.PureComponent {
 
   componentDidUpdate() {
     this._markersLayer.clearLayers();
+    this._map.setView(this.props.city, 12);
     this._renderMarkers();
   }
 
