@@ -3,6 +3,8 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -22,6 +24,10 @@ class App extends React.PureComponent {
       return (
         <Main
           onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
+          onLocationButtonClick = {this.props.onLocationButtonClick}
+          activeOffers = {this.props.activeOffers}
+          city = {this.props.city}
+          offers = {this.props.offers}
         />
       );
     } else {
@@ -60,9 +66,27 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  rentsCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
+  city: PropTypes.string.isRequired,
+  activeOffers: PropTypes.array.isRequired,
+  onLocationButtonClick: PropTypes.func.isRequired
 };
 
-export default App;
+
+const mapDispatchToProps = (dispatch) => ({
+  onLocationButtonClick(city) {
+    dispatch(ActionCreator.changeCity(city));
+  }
+});
+
+const mapStateToProps = (state) => {
+  return {
+    offers: state.offers,
+    activeOffers: state.offers.filter((it) => it.city.name === state.city),
+    city: state.city
+  };
+};
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

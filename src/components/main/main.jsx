@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
-import {ActionCreator} from "../../reducer.js";
 
 const Main = (props) => {
   const {offers, onPlaceCardHeaderClick, city, activeOffers, onLocationButtonClick} = props;
@@ -103,20 +101,4 @@ Main.propTypes = {
   onLocationButtonClick: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onLocationButtonClick(city) {
-    dispatch(ActionCreator.changeCity(city));
-  }
-});
-
-
-const mapStateToProps = (state) => {
-  return {
-    offers: state.offers,
-    activeOffers: state.offers.filter((it) => it.city.name === state.city),
-    city: state.city
-  };
-};
-
-export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
