@@ -8,7 +8,10 @@ const TYPES = {
 export default [
   {
     id: 1,
-    city: `Amsterdam`,
+    city: {
+      name: `Amsterdam`,
+      coordinates: [52.38333, 4.9]
+    },
     title: `Beautiful & luxurious apartment at great location`,
     pictures: [`img/apartment-01.jpg`, `img/room.jpg`, `img/apartment-02.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     price: 120,
@@ -43,21 +46,26 @@ export default [
     ]
   },
   {
-    id: 2,
-    city: `Amsterdam`,
-    title: `Wood and stone place`,
-    pictures: [`img/room.jpg`, `img/apartment-02.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
-    price: 80,
-    type: TYPES.room,
-    rating: 4.2,
+    id: 5,
+    city: {
+      name: `Paris`,
+      coordinates: [48.855931, 2.350962]
+    },
+    title: `Not bad!`,
+    pictures: [`img/apartment-03.jpg`, `img/room.jpg`, `img/studio-01.jpg`, `img/apartment-03.jpg`],
+    price: 999,
+    type: TYPES.hotel,
+    rating: 3.2,
     isPremium: false,
-    isFavorite: true,
+    isFavorite: false,
     bedrooms: 1,
-    descriptions: [`Large wood and stone place in Amsterdam`],
-    guests: 2,
-    features: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`],
-    hostId: 3,
-    coordinates: [52.369553943508, 4.85309666406198],
+    descriptions: [
+      `An independent House.`
+    ],
+    guests: 1,
+    features: [`Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
+    hostId: 4,
+    coordinates: [48.854082, 2.350379],
     reviews: [
       {
         id: 1,
