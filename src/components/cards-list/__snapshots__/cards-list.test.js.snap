@@ -118,7 +118,7 @@ Array [
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="img/apartment-03.jpg"
           width="260"
         />
       </a>
@@ -136,7 +136,7 @@ Array [
             className="place-card__price-value"
           >
             €
-            80
+            999
           </b>
           <span
             className="place-card__price-text"
@@ -145,7 +145,7 @@ Array [
           </span>
         </div>
         <button
-          className="place-card__bookmark-button button place-card__bookmark-button--active"
+          className="place-card__bookmark-button button"
           type="button"
         >
           <svg
@@ -173,7 +173,7 @@ Array [
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "60%",
               }
             }
           />
@@ -191,13 +191,13 @@ Array [
           href="#"
           onClick={[Function]}
         >
-          Wood and stone place
+          Not bad!
         </a>
       </h2>
       <p
         className="place-card__type"
       >
-        Private room
+        Hotel
       </p>
     </div>
   </article>,

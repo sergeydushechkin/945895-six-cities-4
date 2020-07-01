@@ -1,20 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
 import App from "./components/app/app.jsx";
-import offers from "./mocks/offers.js";
-import users from "./mocks/users.js";
+import {reducer} from "./reducer.js";
 
-const Settings = {
-  RENTS_COUNT: 312
-};
-
-// const CARDS_NAMES = [`Beautiful & luxurious apartment at great location`, `Wood and stone place`, `Canal View Prinsengracht`];
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+);
 
 ReactDOM.render(
-    <App
-      rentsCount = {Settings.RENTS_COUNT}
-      offers = {offers}
-      users = {users}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.querySelector(`#root`)
 );

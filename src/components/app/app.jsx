@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import {connect} from "react-redux";
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -16,13 +17,11 @@ class App extends React.PureComponent {
   }
 
   _renderMainScreen() {
-    const {rentsCount, offers, users} = this.props;
+    const {offers, users} = this.props;
 
     if (this.state.offerId === -1) {
       return (
         <Main
-          rentsCount={rentsCount}
-          offers = {offers}
           onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
         />
       );
@@ -62,9 +61,16 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  rentsCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    offers: state.offers,
+    users: state.users
+  };
+};
+
+export {App};
+export default connect(mapStateToProps, null)(App);
