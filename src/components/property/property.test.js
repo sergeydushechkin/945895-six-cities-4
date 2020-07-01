@@ -1,19 +1,34 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
 import Property from "./property.jsx";
 
 import offers from "../../mocks/tests_offers.js";
 import users from "../../mocks/tests_users.js";
 
+const mockStore = configureStore([]);
+
 it(`Render Property`, () => {
+  const store = mockStore({
+    offers,
+    city: offers[0].city.name,
+    locations: Array.from(new Set(offers.map((it) => it.city.name))),
+    sortType: `popular`,
+    activeOfferId: null
+  });
+
   const tree = renderer
     .create(
-        <Property
-          offerId = {1}
-          offers = {offers}
-          users = {users}
-          onPlaceCardHeaderClick = {() => {}}
-        />,
+        <Provider store={store}>
+          <Property
+            offerId = {1}
+            offers = {offers}
+            users = {users}
+            onPlaceCardHeaderClick = {() => {}}
+          />
+        </Provider>,
         {
           createNodeMock: () => {
             return document.createElement(`div`);

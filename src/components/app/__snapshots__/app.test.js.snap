@@ -135,6 +135,7 @@ exports[`Render App 1`] = `
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -149,28 +150,33 @@ exports[`Render App 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom "
+              onClick={[Function]}
             >
               <li
                 className="places__option places__option--active"
+                data-sort-type="popular"
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
                 className="places__option"
+                data-sort-type="priceLowHigh"
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
+                data-sort-type="priceHighLow"
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
+                data-sort-type="topRatedFirst"
                 tabIndex="0"
               >
                 Top rated first
@@ -182,6 +188,8 @@ exports[`Render App 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"

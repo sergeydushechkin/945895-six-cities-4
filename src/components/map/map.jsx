@@ -77,7 +77,7 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  activeOfferId: PropTypes.any.isRequired,
+  activeOfferId: PropTypes.any,
   city: PropTypes.array.isRequired,
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired
