@@ -8,12 +8,14 @@ const initialState = {
   offers,
   locations: Array.from(new Set(offers.map((it) => it.city.name))),
   users,
-  sortType: SortTypes.POPULAR
+  sortType: SortTypes.POPULAR,
+  activeOfferId: null
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  CHANGE_SORT: `CHANGE_SORT`
+  CHANGE_SORT: `CHANGE_SORT`,
+  CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
 };
 
 const ActionCreator = {
@@ -25,6 +27,10 @@ const ActionCreator = {
     type: ActionType.CHANGE_SORT,
     payload: sortType
   }),
+  changeActiveOfferId: (id) => ({
+    type: ActionType.CHANGE_ACTIVE_OFFER_ID,
+    payload: id
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +39,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {city: action.payload});
     case ActionType.CHANGE_SORT:
       return extend(state, {sortType: action.payload});
+    case ActionType.CHANGE_ACTIVE_OFFER_ID:
+      return extend(state, {activeOfferId: action.payload});
   }
 
   return state;
