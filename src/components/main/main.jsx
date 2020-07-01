@@ -5,7 +5,7 @@ import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
 import PlacesSorting from "../places-sorting/places-sorting.jsx";
 import {connect} from "react-redux";
-import {SortTypes} from "../../const.js";
+import {sortOffers} from "../../utils.js";
 
 const Main = (props) => {
   const {onPlaceCardHeaderClick, city, activeOffers, activeOfferId} = props;
@@ -74,27 +74,6 @@ Main.propTypes = {
   city: PropTypes.string.isRequired,
   activeOffers: PropTypes.array.isRequired,
   activeOfferId: PropTypes.any
-};
-
-const sortOffers = (offers, sortType) => {
-  let sortedOffers = [];
-
-  switch (sortType) {
-    case SortTypes.POPULAR:
-      sortedOffers = offers;
-      break;
-    case SortTypes.PRICE_LOW_HIGH:
-      sortedOffers = offers.slice().sort((a, b) => a.price - b.price);
-      break;
-    case SortTypes.PRICE_HIGH_LOW:
-      sortedOffers = offers.slice().sort((a, b) => b.price - a.price);
-      break;
-    case SortTypes.TOP_RATED_FIRST:
-      sortedOffers = offers.slice().sort((a, b) => b.rating - a.rating);
-      break;
-  }
-
-  return sortedOffers;
 };
 
 const mapStateToProps = (state) => {
