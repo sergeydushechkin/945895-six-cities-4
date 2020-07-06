@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {connect} from "react-redux";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+
+const MainWrapped = withActiveItem(Main);
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -21,7 +24,7 @@ class App extends React.PureComponent {
 
     if (this.state.offerId === -1) {
       return (
-        <Main
+        <MainWrapped
           onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
         />
       );

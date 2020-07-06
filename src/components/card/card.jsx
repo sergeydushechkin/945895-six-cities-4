@@ -1,15 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
 import {getRatingWidth} from "../../utils.js";
 
 const Card = (props) => {
-  const {offer, isNearPlaces, onPlaceCardHeaderClick, onPlaceCardMouseEnter, onPlaceCardMouseLeave} = props;
+  const {offer, isNearPlaces, onPlaceCardHeaderClick, onActiveItemChange} = props;
   const {title, pictures, price, rating, type, isPremium, isFavorite, id} = offer;
 
   return (
-    <article onMouseEnter={() => onPlaceCardMouseEnter(offer.id)} onMouseLeave={onPlaceCardMouseLeave} className={`${isNearPlaces ? `near-places__card` : `cities__place-card`} place-card`}>
+    <article onMouseEnter={() => onActiveItemChange(offer.id)} onMouseLeave={() => onActiveItemChange(-1)} className={`${isNearPlaces ? `near-places__card` : `cities__place-card`} place-card`}>
       {
         isPremium && <div className="place-card__mark">
           <span>Premium</span>
@@ -60,19 +58,8 @@ Card.propTypes = {
     isFavorite: PropTypes.bool.isRequired
   }),
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
-  onPlaceCardMouseEnter: PropTypes.func.isRequired,
-  onPlaceCardMouseLeave: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
   isNearPlaces: PropTypes.bool.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onPlaceCardMouseEnter(id) {
-    dispatch(ActionCreator.changeActiveOfferId(id));
-  },
-  onPlaceCardMouseLeave() {
-    dispatch(ActionCreator.changeActiveOfferId(null));
-  }
-});
-
-export {Card};
-export default connect(null, mapDispatchToProps)(Card);
+export default Card;
