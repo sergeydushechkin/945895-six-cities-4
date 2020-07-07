@@ -29,32 +29,31 @@ exports[`Render PlacesSorting 1`] = `
   </span>
   <ul
     className="places__options places__options--custom "
-    onClick={[Function]}
   >
     <li
       className="places__option places__option--active"
-      data-sort-type="popular"
+      onClick={[Function]}
       tabIndex="0"
     >
       Popular
     </li>
     <li
       className="places__option"
-      data-sort-type="priceLowHigh"
+      onClick={[Function]}
       tabIndex="0"
     >
       Price: low to high
     </li>
     <li
       className="places__option"
-      data-sort-type="priceHighLow"
+      onClick={[Function]}
       tabIndex="0"
     >
       Price: high to low
     </li>
     <li
       className="places__option"
-      data-sort-type="topRatedFirst"
+      onClick={[Function]}
       tabIndex="0"
     >
       Top rated first

@@ -4,6 +4,13 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import {SortTypes} from "../../const.js";
 
+const SortTypeTexts = {
+  [SortTypes.POPULAR]: `Popular`,
+  [SortTypes.PRICE_LOW_HIGH]: `Price: low to high`,
+  [SortTypes.PRICE_HIGH_LOW]: `Price: high to low`,
+  [SortTypes.TOP_RATED_FIRST]: `Top rated first`,
+};
+
 class PlacesSorting extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -18,15 +25,10 @@ class PlacesSorting extends React.PureComponent {
     this.setState((state) => ({isOpen: !state.isOpen}));
   }
 
-  _handleOptionClick(evt) {
-    evt.preventDefault();
+  _handleOptionClick(sortType) {
     const {onSortMenuItemClick} = this.props;
-    const sortType = evt.target.dataset.sortType;
-
-    if (sortType) {
-      this.setState({isOpen: false});
-      onSortMenuItemClick(sortType);
-    }
+    this.setState({isOpen: false});
+    onSortMenuItemClick(sortType);
   }
 
   _getMenuClass(type) {
@@ -35,31 +37,24 @@ class PlacesSorting extends React.PureComponent {
   }
 
   render() {
+    const {sortType} = this.props;
     const isOpen = this.state.isOpen;
 
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span onClick={this._handleMenuClick} className="places__sorting-type" tabIndex="0">
-          Popular
+          {SortTypeTexts[sortType]}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
           </svg>
         </span>
-        <ul onClick={(evt) => this._handleOptionClick(evt)} className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
-          <li data-sort-type={SortTypes.POPULAR} className={this._getMenuClass(SortTypes.POPULAR)} tabIndex="0">Popular</li>
-          <li data-sort-type={SortTypes.PRICE_LOW_HIGH} className={this._getMenuClass(SortTypes.PRICE_LOW_HIGH)} tabIndex="0">Price: low to high</li>
-          <li data-sort-type={SortTypes.PRICE_HIGH_LOW} className={this._getMenuClass(SortTypes.PRICE_HIGH_LOW)} tabIndex="0">Price: high to low</li>
-          <li data-sort-type={SortTypes.TOP_RATED_FIRST} className={this._getMenuClass(SortTypes.TOP_RATED_FIRST)} tabIndex="0">Top rated first</li>
+        <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
+          <li onClick={() => this._handleOptionClick(SortTypes.POPULAR)} className={this._getMenuClass(SortTypes.POPULAR)} tabIndex="0">Popular</li>
+          <li onClick={() => this._handleOptionClick(SortTypes.PRICE_LOW_HIGH)} className={this._getMenuClass(SortTypes.PRICE_LOW_HIGH)} tabIndex="0">Price: low to high</li>
+          <li onClick={() => this._handleOptionClick(SortTypes.PRICE_HIGH_LOW)} className={this._getMenuClass(SortTypes.PRICE_HIGH_LOW)} tabIndex="0">Price: high to low</li>
+          <li onClick={() => this._handleOptionClick(SortTypes.TOP_RATED_FIRST)} className={this._getMenuClass(SortTypes.TOP_RATED_FIRST)} tabIndex="0">Top rated first</li>
         </ul>
-        {/* <!--
-        <select class="places__sorting-type" id="places-sorting">
-          <option class="places__option" value="popular" selected="">Popular</option>
-          <option class="places__option" value="to-high">Price: low to high</option>
-          <option class="places__option" value="to-low">Price: high to low</option>
-          <option class="places__option" value="top-rated">Top rated first</option>
-        </select>
-        --> */}
       </form>
     );
   }
