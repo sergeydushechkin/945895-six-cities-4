@@ -24,6 +24,7 @@ it(`Render CardsList`, () => {
           <CardsList
             offers={offers}
             onPlaceCardHeaderClick={() => {}}
+            onActiveItemChange={() => {}}
           />
         </Provider>
     )

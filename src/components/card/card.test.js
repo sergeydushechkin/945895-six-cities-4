@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Card} from "./card.jsx";
+import Card from "./card.jsx";
 
 import offers from "../../mocks/tests_offers.js";
 
@@ -12,8 +12,7 @@ it(`Render Card`, () => {
           offer={offers[0]}
           isNearPlaces={false}
           onPlaceCardHeaderClick={() => {}}
-          onPlaceCardMouseEnter={() => {}}
-          onPlaceCardMouseLeave={() => {}}
+          onActiveItemChange={() => {}}
         />
     )
     .toJSON();

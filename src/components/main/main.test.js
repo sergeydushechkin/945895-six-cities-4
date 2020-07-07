@@ -25,6 +25,8 @@ it(`Render Main`, () => {
             city={`Amsterdam`}
             activeOffers = {offers}
             onPlaceCardHeaderClick = {() => {}}
+            activeItemId = {-1}
+            onActiveItemChange={() => {}}
           />
         </Provider>,
         {

@@ -25,6 +25,7 @@ class App extends React.PureComponent {
     if (this.state.offerId === -1) {
       return (
         <MainWrapped
+          initActiveItemId={-1}
           onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
         />
       );

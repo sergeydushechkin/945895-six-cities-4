@@ -7,7 +7,7 @@ const withActiveItem = (Component) => {
       super(props);
 
       this.state = {
-        activeItemId: -1
+        activeItemId: this.props.initActiveItemId
       };
 
       this.onActiveItemChange = this.onActiveItemChange.bind(this);
@@ -18,9 +18,12 @@ const withActiveItem = (Component) => {
     }
 
     render() {
+      const activeItemId = this.state.activeItemId;
+
       return (
         <Component
-          {... this.props}
+          {...this.props}
+          activeItemId={activeItemId}
           onActiveItemChange={this.onActiveItemChange}
         />
       );
@@ -28,8 +31,10 @@ const withActiveItem = (Component) => {
   }
 
   WithActiveItem.propTypes = {
-
+    initActiveItemId: PropTypes.any.isRequired,
   };
+
+  return WithActiveItem;
 };
 
 export default withActiveItem;

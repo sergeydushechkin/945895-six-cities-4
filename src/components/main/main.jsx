@@ -7,11 +7,13 @@ import PlacesSorting from "../places-sorting/places-sorting.jsx";
 import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 import {sortOffers} from "../../utils.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+
+const LocationsListWrapped = withActiveItem(LocationsList);
 
 class Main extends React.PureComponent {
   render() {
-    const {onPlaceCardHeaderClick, city, activeOffers, locations, onCityChange} = this.props;
-    const activeOfferId = this.state.activeItemId;
+    const {onPlaceCardHeaderClick, city, activeOffers, locations, onCityChange, onActiveItemChange, activeItemId} = this.props;
 
     return (
       <div className="page page--gray page--main">
@@ -41,8 +43,8 @@ class Main extends React.PureComponent {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <LocationsList
-                activeItem={city}
+              <LocationsListWrapped
+                initActiveItemId={locations[0]}
                 locations={locations}
                 onCityChange={onCityChange}
               />
@@ -58,7 +60,7 @@ class Main extends React.PureComponent {
                   <CardsList
                     offers={activeOffers}
                     onPlaceCardHeaderClick={onPlaceCardHeaderClick}
-                    onActiveItemChange={this.onActiveItemChange}
+                    onActiveItemChange={onActiveItemChange}
                   />
                 </div>
               </section>
@@ -66,7 +68,7 @@ class Main extends React.PureComponent {
                 <Map
                   city={activeOffers[0].city.coordinates}
                   offers={activeOffers}
-                  activeOfferId={activeOfferId}
+                  activeOfferId={activeItemId}
                   className={`cities__map map`}
                 />
               </div>
@@ -82,9 +84,10 @@ Main.propTypes = {
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   activeOffers: PropTypes.array.isRequired,
-  activeOfferId: PropTypes.any,
+  activeItemId: PropTypes.any.isRequired,
   locations: PropTypes.array.isRequired,
   onCityChange: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -93,7 +96,6 @@ const mapStateToProps = (state) => {
   return {
     activeOffers: sortOffers(filteredOffers, state.sortType),
     city: state.city,
-    activeOfferId: state.activeOfferId,
     locations: state.locations,
   };
 };
