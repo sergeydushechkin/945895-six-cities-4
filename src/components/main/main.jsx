@@ -8,8 +8,10 @@ import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 import {sortOffers} from "../../utils.js";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sorting.js";
 
 const LocationsListWrapped = withActiveItem(LocationsList);
+const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 class Main extends React.PureComponent {
   render() {
@@ -55,7 +57,7 @@ class Main extends React.PureComponent {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{activeOffers.length} places to stay in {city}</b>
-                <PlacesSorting />
+                <WrappedPlacesSorting />
                 <div className="cities__places-list places__list tabs__content">
                   <CardsList
                     offers={activeOffers}

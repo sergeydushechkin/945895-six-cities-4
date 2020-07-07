@@ -15,6 +15,9 @@ describe(`Test PlacesSorting component items clicks and return value`, () => {
         <PlacesSorting
           onSortMenuItemClick={onSortMenuItemClick}
           sortType={`popular`}
+          onMenuClose={() => {}}
+          onMenuClick={() => {}}
+          isOpen={false}
         />
     );
 
@@ -33,6 +36,9 @@ describe(`Test PlacesSorting component items clicks and return value`, () => {
         <PlacesSorting
           onSortMenuItemClick={onSortMenuItemClick}
           sortType={`popular`}
+          onMenuClose={() => {}}
+          onMenuClick={() => {}}
+          isOpen={false}
         />
     );
 

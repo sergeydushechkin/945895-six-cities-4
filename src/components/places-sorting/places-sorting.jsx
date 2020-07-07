@@ -15,19 +15,12 @@ class PlacesSorting extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {isOpen: false};
-
-    this._handleMenuClick = this._handleMenuClick.bind(this);
     this._handleOptionClick = this._handleOptionClick.bind(this);
   }
 
-  _handleMenuClick() {
-    this.setState((state) => ({isOpen: !state.isOpen}));
-  }
-
   _handleOptionClick(sortType) {
-    const {onSortMenuItemClick} = this.props;
-    this.setState({isOpen: false});
+    const {onSortMenuItemClick, onMenuClose} = this.props;
+    onMenuClose();
     onSortMenuItemClick(sortType);
   }
 
@@ -37,13 +30,12 @@ class PlacesSorting extends React.PureComponent {
   }
 
   render() {
-    const {sortType} = this.props;
-    const isOpen = this.state.isOpen;
+    const {sortType, onMenuClick, isOpen} = this.props;
 
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
-        <span onClick={this._handleMenuClick} className="places__sorting-type" tabIndex="0">
+        <span onClick={onMenuClick} className="places__sorting-type" tabIndex="0">
           {SortTypeTexts[sortType]}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
@@ -62,7 +54,10 @@ class PlacesSorting extends React.PureComponent {
 
 PlacesSorting.propTypes = {
   sortType: PropTypes.oneOf([SortTypes.POPULAR, SortTypes.PRICE_LOW_HIGH, SortTypes.PRICE_HIGH_LOW, SortTypes.TOP_RATED_FIRST]).isRequired,
-  onSortMenuItemClick: PropTypes.func.isRequired
+  onSortMenuItemClick: PropTypes.func.isRequired,
+  onMenuClick: PropTypes.func.isRequired,
+  onMenuClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {

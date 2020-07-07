@@ -9,6 +9,9 @@ it(`Render PlacesSorting`, () => {
         <PlacesSorting
           sortType={`popular`}
           onSortMenuItemClick={() => {}}
+          onMenuClose={() => {}}
+          onMenuClick={() => {}}
+          isOpen={false}
         />
     )
     .toJSON();
