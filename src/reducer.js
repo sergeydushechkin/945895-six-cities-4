@@ -9,7 +9,7 @@ const initialState = {
   locations: Array.from(new Set(offers.map((it) => it.city.name))),
   users,
   sortType: SortTypes.POPULAR,
-  activeOfferId: null
+  activeOfferId: -1
 };
 
 const ActionType = {
