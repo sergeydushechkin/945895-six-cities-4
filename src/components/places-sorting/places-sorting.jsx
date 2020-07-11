@@ -2,14 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
-import {SortTypes} from "../../const.js";
-
-const SortTypeTexts = {
-  [SortTypes.POPULAR]: `Popular`,
-  [SortTypes.PRICE_LOW_HIGH]: `Price: low to high`,
-  [SortTypes.PRICE_HIGH_LOW]: `Price: high to low`,
-  [SortTypes.TOP_RATED_FIRST]: `Top rated first`,
-};
+import {SortTypes, SortTypeTexts} from "../../const.js";
 
 class PlacesSorting extends React.PureComponent {
   constructor(props) {

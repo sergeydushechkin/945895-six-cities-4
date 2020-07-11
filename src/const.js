@@ -5,4 +5,11 @@ const SortTypes = {
   TOP_RATED_FIRST: `topRatedFirst`
 };
 
-export {SortTypes};
+const SortTypeTexts = {
+  [SortTypes.POPULAR]: `Popular`,
+  [SortTypes.PRICE_LOW_HIGH]: `Price: low to high`,
+  [SortTypes.PRICE_HIGH_LOW]: `Price: high to low`,
+  [SortTypes.TOP_RATED_FIRST]: `Top rated first`,
+};
+
+export {SortTypes, SortTypeTexts};
