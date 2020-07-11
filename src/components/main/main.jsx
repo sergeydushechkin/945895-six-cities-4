@@ -1,23 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CardsList from "../cards-list/cards-list.jsx";
-import Map from "../map/map.jsx";
-import LocationsList from "../locations-list/locations-list.jsx";
-import PlacesSorting from "../places-sorting/places-sorting.jsx";
-import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import {sortOffers} from "../../utils.js";
+import LocationsList from "../locations-list/locations-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sorting.js";
+import Places from "../places/places.jsx";
+import PlacesEmpty from "../places-empty/places-empty.jsx";
 
 const LocationsListWrapped = withActiveItem(LocationsList);
-const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 const Main = (props) => {
   const {onPlaceCardHeaderClick, city, activeOffers, locations, onCityChange, onActiveItemChange, activeItemId} = props;
 
   return (
-    <div className="page page--gray page--main">
+    <div className={`page page--gray page--main${activeOffers.length ? `` : ` page__main--index-empty`}`}>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -52,28 +49,18 @@ const Main = (props) => {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{activeOffers.length} places to stay in {city}</b>
-              <WrappedPlacesSorting />
-              <div className="cities__places-list places__list tabs__content">
-                <CardsList
-                  offers={activeOffers}
-                  onPlaceCardHeaderClick={onPlaceCardHeaderClick}
-                  onActiveItemChange={onActiveItemChange}
-                />
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <Map
-                city={activeOffers[0].city.coordinates}
-                offers={activeOffers}
-                activeOfferId={activeItemId}
-                className={`cities__map map`}
-              />
-            </div>
-          </div>
+          {activeOffers.length
+            ?
+            <Places
+              activeOffers={activeOffers}
+              onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+              onActiveItemChange={onActiveItemChange}
+              activeItemId={activeItemId}
+              city={city}
+            />
+            :
+            <PlacesEmpty />
+          }
         </div>
       </main>
     </div>
@@ -94,7 +81,7 @@ const mapStateToProps = (state) => {
   const filteredOffers = state.offers.filter((it) => it.city.name === state.city);
 
   return {
-    activeOffers: sortOffers(filteredOffers, state.sortType),
+    activeOffers: filteredOffers ? sortOffers(filteredOffers, state.sortType) : [],
     city: state.city,
     locations: state.locations,
   };
