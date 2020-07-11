@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Card from "../card/card.jsx";
 
 const CardsList = (props) => {
-  const {offers, isNearPlaces = false, onPlaceCardHeaderClick} = props;
+  const {offers, isNearPlaces = false, onPlaceCardHeaderClick, onActiveItemChange} = props;
 
   return (
     offers.map((offer) => {
@@ -12,7 +12,9 @@ const CardsList = (props) => {
           key={offer.id}
           offer={offer}
           isNearPlaces={isNearPlaces}
-          onPlaceCardHeaderClick={onPlaceCardHeaderClick}/>
+          onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+          onActiveItemChange={onActiveItemChange}
+        />
       );
     })
   );
@@ -32,7 +34,7 @@ CardsList.propTypes = {
       })
   ),
   isNearPlaces: PropTypes.bool,
-  onPlaceCardHeaderClick: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default CardsList;

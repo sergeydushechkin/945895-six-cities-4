@@ -4,11 +4,17 @@ import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
 import PlacesSorting from "../places-sorting/places-sorting.jsx";
+import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 import {sortOffers} from "../../utils.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sorting.js";
+
+const LocationsListWrapped = withActiveItem(LocationsList);
+const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 const Main = (props) => {
-  const {onPlaceCardHeaderClick, city, activeOffers, activeOfferId} = props;
+  const {onPlaceCardHeaderClick, city, activeOffers, locations, onCityChange, onActiveItemChange, activeItemId} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -38,7 +44,11 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList />
+            <LocationsListWrapped
+              initActiveItemId={locations[0]}
+              locations={locations}
+              onCityChange={onCityChange}
+            />
           </section>
         </div>
         <div className="cities">
@@ -46,11 +56,12 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{activeOffers.length} places to stay in {city}</b>
-              <PlacesSorting />
+              <WrappedPlacesSorting />
               <div className="cities__places-list places__list tabs__content">
                 <CardsList
                   offers={activeOffers}
                   onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+                  onActiveItemChange={onActiveItemChange}
                 />
               </div>
             </section>
@@ -58,7 +69,7 @@ const Main = (props) => {
               <Map
                 city={activeOffers[0].city.coordinates}
                 offers={activeOffers}
-                activeOfferId={activeOfferId}
+                activeOfferId={activeItemId}
                 className={`cities__map map`}
               />
             </div>
@@ -73,7 +84,10 @@ Main.propTypes = {
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   activeOffers: PropTypes.array.isRequired,
-  activeOfferId: PropTypes.any
+  activeItemId: PropTypes.any.isRequired,
+  locations: PropTypes.array.isRequired,
+  onCityChange: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -82,9 +96,15 @@ const mapStateToProps = (state) => {
   return {
     activeOffers: sortOffers(filteredOffers, state.sortType),
     city: state.city,
-    activeOfferId: state.activeOfferId
+    locations: state.locations,
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(city) {
+    dispatch(ActionCreator.changeCity(city));
+  }
+});
+
 export {Main};
-export default connect(mapStateToProps, null)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

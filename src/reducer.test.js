@@ -13,7 +13,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     locations: Array.from(new Set(offers.map((it) => it.city.name))),
     users,
     sortType: SortTypes.POPULAR,
-    activeOfferId: null
+    activeOfferId: -1
   });
 });
 
@@ -57,7 +57,7 @@ it(`Reducer should change active offer id by a given value`, () => {
     locations,
     users,
     sortType: SortTypes.POPULAR,
-    activeOfferId: null
+    activeOfferId: -1
   }, {
     type: ActionType.CHANGE_ACTIVE_OFFER_ID,
     payload: 2,

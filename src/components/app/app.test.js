@@ -16,7 +16,7 @@ it(`Render App`, () => {
     city: offers[0].city.name,
     locations: Array.from(new Set(offers.map((it) => it.city.name))),
     sortType: `popular`,
-    activeOfferId: null
+    activeOfferId: -1
   });
 
   const tree = renderer

@@ -192,6 +192,7 @@ const Property = (props) => {
                 offers={offers}
                 isNearPlaces={true}
                 onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+                onActiveItemChange={() => {}}
               />
             </div>
           </section>

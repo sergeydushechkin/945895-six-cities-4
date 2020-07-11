@@ -4,41 +4,36 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+
+const MainWrapped = withActiveItem(Main);
 
 class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this._onPlaceCardHeaderClick = this._onPlaceCardHeaderClick.bind(this);
-    this.state = {offerId: -1};
-  }
-
-  _onPlaceCardHeaderClick(id) {
-    this.setState({offerId: id});
-  }
-
   _renderMainScreen() {
-    const {offers, users} = this.props;
+    const {offers, users, onChangeActiveOfferId, offerId} = this.props;
 
-    if (this.state.offerId === -1) {
+    if (offerId === -1) {
       return (
-        <Main
-          onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
+        <MainWrapped
+          initActiveItemId={-1}
+          onPlaceCardHeaderClick = {onChangeActiveOfferId}
         />
       );
     } else {
       return (
         <Property
-          offerId = {this.state.offerId}
+          offerId = {offerId}
           offers = {offers}
           users = {users}
-          onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
+          onPlaceCardHeaderClick = {onChangeActiveOfferId}
         />
       );
     }
   }
 
   render() {
-    const {offers, users} = this.props;
+    const {offers, users, onChangeActiveOfferId} = this.props;
 
     return (
       <BrowserRouter>
@@ -51,7 +46,7 @@ class App extends React.PureComponent {
               offerId = {1}
               offers = {offers}
               users = {users}
-              onPlaceCardHeaderClick = {this._onPlaceCardHeaderClick}
+              onPlaceCardHeaderClick = {onChangeActiveOfferId}
             />
           </Route>
         </Switch>
@@ -63,14 +58,23 @@ class App extends React.PureComponent {
 App.propTypes = {
   offers: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
+  onChangeActiveOfferId: PropTypes.func.isRequired,
+  offerId: PropTypes.any.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeActiveOfferId(id) {
+    dispatch(ActionCreator.changeActiveOfferId(id));
+  }
+});
 
 const mapStateToProps = (state) => {
   return {
     offers: state.offers,
-    users: state.users
+    users: state.users,
+    offerId: state.activeOfferId,
   };
 };
 
 export {App};
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
