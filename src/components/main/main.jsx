@@ -83,7 +83,7 @@ const mapStateToProps = (state) => {
   return {
     activeOffers: filteredOffers ? sortOffers(filteredOffers, state.sortType) : [],
     city: state.city,
-    locations: state.locations,
+    locations: Array.from(new Set(state.offers.map((it) => it.city.name))),
   };
 };
 

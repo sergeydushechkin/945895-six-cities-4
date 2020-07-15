@@ -5,9 +5,8 @@ import {SortTypes} from "./const.js";
 import offerAdapter from "./adapters/offer.js";
 
 const initialState = {
-  city: ``, // offers[0].city.name,
+  city: ``,
   offers: [],
-  locations: [], // Array.from(new Set(offers.map((it) => it.city.name))),
   users: [],
   sortType: SortTypes.POPULAR,
   activeOfferId: -1
@@ -18,7 +17,6 @@ const ActionType = {
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  GET_LOCATIONS: `GET_LOCATIONS`,
 };
 
 const ActionCreator = {
@@ -38,10 +36,6 @@ const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: loadedOffers
   }),
-  loadLocations: (loadedOffers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: loadedOffers
-  })
 };
 
 const Operation = {
@@ -50,6 +44,7 @@ const Operation = {
       .then((response) => {
         const loadedOffers = response.data.map((offer) => offerAdapter(offer));
         dispatch(ActionCreator.loadOffers(loadedOffers));
+        dispatch(ActionCreator.changeCity(loadedOffers[0].city.name));
       });
   }
 };
@@ -64,8 +59,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {activeOfferId: action.payload});
     case ActionType.LOAD_OFFERS:
       return extend(state, {offers: action.payload});
-    case ActionType.GET_LOCATIONS:
-      return extend(state, {locations: action.payload});
   }
 
   return state;

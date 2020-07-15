@@ -28,6 +28,7 @@ const Places = (props) => {
       <div className="cities__right-section">
         <Map
           city={activeOffers[0].city.coordinates}
+          zoom={activeOffers[0].city.zoom}
           offers={activeOffers}
           activeOfferId={activeItemId}
           className={`cities__map map`}

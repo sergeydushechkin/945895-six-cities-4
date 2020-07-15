@@ -21,11 +21,14 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadOffers());
+store.dispatch(Operation.loadOffers())
+  .then(() => {
+    ReactDOM.render(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        document.querySelector(`#root`)
+    );
+  });
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+
