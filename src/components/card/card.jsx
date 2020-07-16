@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getRatingWidth} from "../../utils.js";
+import {getRatingWidth, capitalizeFirstLetter} from "../../utils.js";
 
 const Card = (props) => {
   const {offer, isNearPlaces, onPlaceCardHeaderClick, onActiveItemChange} = props;
@@ -40,7 +40,7 @@ const Card = (props) => {
         <h2 className="place-card__name">
           <a onClick={() => onPlaceCardHeaderClick(id)} href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>
     </article>
   );
