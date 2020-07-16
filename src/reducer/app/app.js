@@ -1,10 +1,8 @@
-import {extend} from "./utils.js";
-import {SortTypes} from "./const.js";
-import offerAdapter from "./adapters/offer.js";
+import {extend} from "../../utils.js";
+import {SortTypes} from "../../const.js";
 
 const initialState = {
   city: ``,
-  offers: [],
   sortType: SortTypes.POPULAR,
   activeOfferId: -1
 };
@@ -13,7 +11,6 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
-  LOAD_OFFERS: `LOAD_OFFERS`,
 };
 
 const ActionCreator = {
@@ -29,21 +26,6 @@ const ActionCreator = {
     type: ActionType.CHANGE_ACTIVE_OFFER_ID,
     payload: id
   }),
-  loadOffers: (loadedOffers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: loadedOffers
-  }),
-};
-
-const Operation = {
-  loadOffers: () => (dispatch, getState, api) => {
-    return api.get(`/hotels`)
-      .then((response) => {
-        const loadedOffers = response.data.map((offer) => offerAdapter(offer));
-        dispatch(ActionCreator.loadOffers(loadedOffers));
-        dispatch(ActionCreator.changeCity(loadedOffers[0].city.name));
-      });
-  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -54,11 +36,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {sortType: action.payload});
     case ActionType.CHANGE_ACTIVE_OFFER_ID:
       return extend(state, {activeOfferId: action.payload});
-    case ActionType.LOAD_OFFERS:
-      return extend(state, {offers: action.payload});
   }
 
   return state;
 };
 
-export {reducer, ActionCreator, ActionType, Operation};
+export {reducer, ActionCreator, ActionType};

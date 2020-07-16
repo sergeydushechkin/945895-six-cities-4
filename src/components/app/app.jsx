@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/app/app.js";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import {getOffers} from "../../reducer/data/selectors.js";
+import {getActiveOfferId} from "../../reducer/app/selectors.js";
 
 const MainWrapped = withActiveItem(Main);
 
@@ -67,8 +69,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
   return {
-    offers: state.offers,
-    offerId: state.activeOfferId,
+    offers: getOffers(state),
+    offerId: getActiveOfferId(state),
   };
 };
 

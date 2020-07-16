@@ -5,7 +5,9 @@ import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {createAPI} from "./api.js";
 import App from "./components/app/app.jsx";
-import {reducer, Operation} from "./reducer.js";
+import reducer from "./reducer/reducer.js";
+import {Operation} from "./reducer/data/data.js";
+import {ActionCreator} from "./reducer/app/app.js";
 
 const onUnauthorized = (() => {
   // store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -22,7 +24,9 @@ const store = createStore(
 );
 
 store.dispatch(Operation.loadOffers())
-  .then(() => {
+  .then((loadedOffers) => {
+    store.dispatch(ActionCreator.changeCity(loadedOffers[0].city.name));
+
     ReactDOM.render(
         <Provider store={store}>
           <App />

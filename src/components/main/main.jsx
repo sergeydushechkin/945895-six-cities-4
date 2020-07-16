@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/app/app.js";
 import {sortOffers} from "../../utils.js";
 import LocationsList from "../locations-list/locations-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import Places from "../places/places.jsx";
 import PlacesEmpty from "../places-empty/places-empty.jsx";
+import {getOffers} from "../../reducer/data/selectors.js";
+import {getCity, getSortType} from "../../reducer/app/selectors.js";
 
 const LocationsListWrapped = withActiveItem(LocationsList);
 
@@ -78,12 +80,14 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const filteredOffers = state.offers.filter((it) => it.city.name === state.city);
+  const offers = getOffers(state);
+  const city = getCity(state);
+  const filteredOffers = offers.filter((it) => it.city.name === city);
 
   return {
-    activeOffers: filteredOffers ? sortOffers(filteredOffers, state.sortType) : [],
-    city: state.city,
-    locations: Array.from(new Set(state.offers.map((it) => it.city.name))),
+    activeOffers: filteredOffers ? sortOffers(filteredOffers, getSortType(state)) : [],
+    city,
+    locations: Array.from(new Set(offers.map((it) => it.city.name))),
   };
 };
 
