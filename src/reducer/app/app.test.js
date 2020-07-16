@@ -1,17 +1,9 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import offers from "./mocks/offers.js";
-import users from "./mocks/users.js";
-
-import {SortTypes} from "./const.js";
-
-const locations = Array.from(new Set(offers.map((it) => it.city.name)));
+import {SortTypes} from "../../const.js";
+import {reducer, ActionType, ActionCreator} from "./app.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    city: offers[0].city.name,
-    offers,
-    locations: Array.from(new Set(offers.map((it) => it.city.name))),
-    users,
+    city: ``,
     sortType: SortTypes.POPULAR,
     activeOfferId: -1
   });
@@ -19,56 +11,49 @@ it(`Reducer without additional parameters should return initial state`, () => {
 
 it(`Reducer should change city name by a given value`, () => {
   expect(reducer({
-    city: offers[0].city.name,
-    offers,
-    locations,
-    users
+    city: ``,
+    sortType: SortTypes.POPULAR,
+    activeOfferId: -1,
   }, {
     type: ActionType.CHANGE_CITY,
     payload: `Paris`,
   })).toEqual({
     city: `Paris`,
-    offers,
-    locations,
-    users
+    sortType: SortTypes.POPULAR,
+    activeOfferId: -1,
   });
 });
 
 it(`Reducer should change sort type by a given value`, () => {
   expect(reducer({
-    offers,
-    locations,
-    users,
-    sortType: SortTypes.POPULAR
+    city: ``,
+    sortType: SortTypes.POPULAR,
+    activeOfferId: -1,
   }, {
     type: ActionType.CHANGE_SORT,
     payload: SortTypes.PRICE_HIGH_LOW,
   })).toEqual({
-    offers,
-    locations,
-    users,
-    sortType: SortTypes.PRICE_HIGH_LOW
+    city: ``,
+    activeOfferId: -1,
+    sortType: SortTypes.PRICE_HIGH_LOW,
   });
 });
 
 it(`Reducer should change active offer id by a given value`, () => {
   expect(reducer({
-    offers,
-    locations,
-    users,
+    city: ``,
     sortType: SortTypes.POPULAR,
     activeOfferId: -1
   }, {
     type: ActionType.CHANGE_ACTIVE_OFFER_ID,
     payload: 2,
   })).toEqual({
-    offers,
-    locations,
-    users,
+    city: ``,
     sortType: SortTypes.POPULAR,
     activeOfferId: 2,
   });
 });
+
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for changing city returns correct action`, () => {
