@@ -4,7 +4,7 @@ import {getRatingWidth} from "../../utils.js";
 
 const Card = (props) => {
   const {offer, isNearPlaces, onPlaceCardHeaderClick, onActiveItemChange} = props;
-  const {title, pictures, price, rating, type, isPremium, isFavorite, id} = offer;
+  const {title, price, rating, type, isPremium, isFavorite, id, previewImage} = offer;
 
   return (
     <article onMouseEnter={() => onActiveItemChange(offer.id)} onMouseLeave={() => onActiveItemChange(-1)} className={`${isNearPlaces ? `near-places__card` : `cities__place-card`} place-card`}>
@@ -15,7 +15,7 @@ const Card = (props) => {
       }
       <div className={`${isNearPlaces ? `near-places__image-wrapper` : `cities__image-wrapper`} place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={pictures[0]} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -50,7 +50,7 @@ Card.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    pictures: PropTypes.arrayOf(PropTypes.string),
+    previewImage: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,

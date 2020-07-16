@@ -38,8 +38,10 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    const {city, zoom} = this.props;
+
     this._markersLayer.clearLayers();
-    this._map.setView(this.props.city);
+    this._map.setView(city, zoom);
     this._renderMarkers();
   }
 

@@ -1,5 +1,3 @@
-import offers from "./mocks/offers.js";
-import users from "./mocks/users.js";
 import {extend} from "./utils.js";
 import {SortTypes} from "./const.js";
 import offerAdapter from "./adapters/offer.js";
@@ -7,7 +5,6 @@ import offerAdapter from "./adapters/offer.js";
 const initialState = {
   city: ``,
   offers: [],
-  users: [],
   sortType: SortTypes.POPULAR,
   activeOfferId: -1
 };
