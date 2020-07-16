@@ -6,7 +6,6 @@ import {Provider} from "react-redux";
 import Property from "./property.jsx";
 
 import offers from "../../mocks/tests_offers.js";
-import users from "../../mocks/tests_users.js";
 
 const mockStore = configureStore([]);
 
@@ -25,7 +24,6 @@ it(`Render Property`, () => {
           <Property
             offerId = {1}
             offers = {offers}
-            users = {users}
             onPlaceCardHeaderClick = {() => {}}
           />
         </Provider>,

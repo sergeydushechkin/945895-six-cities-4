@@ -5,14 +5,12 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import offers from "../../mocks/tests_offers.js";
-import users from "../../mocks/tests_users.js";
 
 const mockStore = configureStore([]);
 
 it(`Render App`, () => {
   const store = mockStore({
     offers,
-    users,
     city: offers[0].city.name,
     locations: Array.from(new Set(offers.map((it) => it.city.name))),
     sortType: `popular`,

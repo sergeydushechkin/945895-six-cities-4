@@ -27,6 +27,7 @@ it(`Render Main`, () => {
             onPlaceCardHeaderClick = {() => {}}
             activeItemId = {-1}
             onActiveItemChange={() => {}}
+            sortType = {`popular`}
           />
         </Provider>,
         {
