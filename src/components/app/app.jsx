@@ -8,13 +8,19 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app/app.js";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import {getOffers} from "../../reducer/data/selectors.js";
-import {getActiveOfferId} from "../../reducer/app/selectors.js";
+import {getActiveOfferId, getShowAuthPage} from "../../reducer/app/selectors.js";
 
 const MainWrapped = withActiveItem(Main);
 
 class App extends React.PureComponent {
   _renderMainScreen() {
-    const {offers, onChangeActiveOfferId, offerId} = this.props;
+    const {offers, onChangeActiveOfferId, offerId, showAuth} = this.props;
+
+    if (showAuth) {
+      return (
+        <SignIn />
+      );
+    }
 
     if (offerId === -1) {
       return (
@@ -64,6 +70,7 @@ App.propTypes = {
   offers: PropTypes.array.isRequired,
   onChangeActiveOfferId: PropTypes.func.isRequired,
   offerId: PropTypes.any.isRequired,
+  showAuth: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +83,7 @@ const mapStateToProps = (state) => {
   return {
     offers: getOffers(state),
     offerId: getActiveOfferId(state),
+    showAuth: getShowAuthPage(state),
   };
 };
 

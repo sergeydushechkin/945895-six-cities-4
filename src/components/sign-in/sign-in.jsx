@@ -2,6 +2,7 @@ import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
+import {ActionCreator} from "../../reducer/app/app.js";
 import {Operation} from "../../reducer/user/user.js";
 import Header from "../header/header.jsx";
 
@@ -14,15 +15,27 @@ class SignIn extends React.PureComponent {
     this.password = createRef();
 
     this._handleSubmit = this._handleSubmit.bind(this);
+
+    this.errorText = ``;
+    this.state = {error: false};
   }
 
   _handleSubmit(evt) {
-    const {onUserLogin} = this.props;
+    const {onUserLogin, onChangeActiveOfferId, onChangeAuthPageState} = this.props;
     evt.preventDefault();
 
     onUserLogin({
       email: this.email.current.value,
       password: this.password.current.value,
+    })
+    .then(() => {
+      this.setState({error: false});
+      onChangeActiveOfferId(-1);
+      onChangeAuthPageState(false);
+    })
+    .catch((err) => {
+      this.errorText = err.response.data.error;
+      this.setState({error: true});
     });
   }
 
@@ -46,6 +59,9 @@ class SignIn extends React.PureComponent {
                   <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" ref={this.password}/>
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
+                {this.state.error &&
+                  <div style={{marginTop: `15px`, fontSize: `15px`, color: `#ff0000`}}>{this.errorText}</div>
+                }
               </form>
             </section>
             <section className="locations locations--login locations--current">
@@ -64,11 +80,19 @@ class SignIn extends React.PureComponent {
 
 SignIn.propTypes = {
   onUserLogin: PropTypes.func.isRequired,
+  onChangeActiveOfferId: PropTypes.func.isRequired,
+  onChangeAuthPageState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  onChangeActiveOfferId(id) {
+    dispatch(ActionCreator.changeActiveOfferId(id));
+  },
+  onChangeAuthPageState(state) {
+    dispatch(ActionCreator.changeAuthPageState(state));
+  },
   onUserLogin(authInfo) {
-    dispatch(Operation.loginUser(authInfo));
+    return dispatch(Operation.loginUser(authInfo));
   }
 });
 

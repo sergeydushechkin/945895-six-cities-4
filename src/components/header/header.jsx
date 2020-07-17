@@ -4,9 +4,10 @@ import {connect} from "react-redux";
 
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getAuthStatus, getAuthInfo} from "../../reducer/user/selectors.js";
+import {ActionCreator} from "../../reducer/app/app.js";
 
 const Header = (props) => {
-  const {isLogoActive = false, authInfo, authStatus} = props;
+  const {isLogoActive = false, authInfo, authStatus, onChangeAuthPageState} = props;
   return (
     <header className="header">
       <div className="container">
@@ -19,7 +20,10 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <a onClick={(evt) => {
+                  evt.preventDefault();
+                  onChangeAuthPageState(true);
+                }} className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   {
@@ -46,7 +50,8 @@ Header.propTypes = {
     isPro: PropTypes.bool,
     name: PropTypes.string.isRequired,
   }).isRequired,
-  authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired
+  authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
+  onChangeAuthPageState: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -56,5 +61,11 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onChangeAuthPageState(state) {
+    dispatch(ActionCreator.changeAuthPageState(state));
+  }
+});
+
 export {Header};
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

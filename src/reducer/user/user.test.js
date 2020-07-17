@@ -90,12 +90,16 @@ describe(`Operation work correctly`, () => {
 
     apiMock
       .onGet(`/login`)
-      .reply(200, {fake: true});
+      .reply(200, AuthInfoRaw);
 
     return authChecker(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.CHANGE_AUTH_INFO,
+          payload: AuthInfo,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.CHANGE_AUTH_STATUS,
           payload: AuthorizationStatus.AUTH,
         });

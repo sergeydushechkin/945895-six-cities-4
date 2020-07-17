@@ -17,6 +17,7 @@ it(`Render Header`, () => {
           isLogoActive={false}
           authStatus={`AUTH`}
           authInfo={AuthInfo}
+          onChangeAuthPageState={() => {}}
         />
     )
     .toJSON();

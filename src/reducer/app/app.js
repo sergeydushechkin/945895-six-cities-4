@@ -3,12 +3,14 @@ import {SortTypes} from "../../const.js";
 
 const initialState = {
   sortType: SortTypes.POPULAR,
-  activeOfferId: -1
+  activeOfferId: -1,
+  showAuthPage: false,
 };
 
 const ActionType = {
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
+  CHANGE_AUTH_PAGE_STATE: `CHANGE_AUTH_PAGE_STATE`,
 };
 
 const ActionCreator = {
@@ -20,6 +22,10 @@ const ActionCreator = {
     type: ActionType.CHANGE_ACTIVE_OFFER_ID,
     payload: id
   }),
+  changeAuthPageState: (state) => ({
+    type: ActionType.CHANGE_AUTH_PAGE_STATE,
+    payload: state
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +34,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {sortType: action.payload});
     case ActionType.CHANGE_ACTIVE_OFFER_ID:
       return extend(state, {activeOfferId: action.payload});
+    case ActionType.CHANGE_AUTH_PAGE_STATE:
+      return extend(state, {showAuthPage: action.payload});
   }
 
   return state;
