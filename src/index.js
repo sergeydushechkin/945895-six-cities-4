@@ -7,7 +7,6 @@ import {createAPI} from "./api.js";
 import App from "./components/app/app.jsx";
 import reducer from "./reducer/reducer.js";
 import {Operation as DataOperation} from "./reducer/data/data.js";
-import {ActionCreator as AppActionCreator} from "./reducer/app/app.js";
 import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from "./reducer/user/user.js";
 
 const onUnauthorized = (() => {
