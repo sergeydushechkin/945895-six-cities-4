@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app/app.js";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
@@ -47,6 +48,10 @@ class App extends React.PureComponent {
               offerId = {1}
               offers = {offers}
               onPlaceCardHeaderClick = {onChangeActiveOfferId}
+            />
+          </Route>
+          <Route exact path="/signin">
+            <SignIn
             />
           </Route>
         </Switch>
