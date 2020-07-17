@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
+import NameSpace from "../../reducer/name-space.js";
 import Property from "./property.jsx";
 
 import offers from "../../mocks/tests_offers.js";
@@ -11,11 +12,25 @@ const mockStore = configureStore([]);
 
 it(`Render Property`, () => {
   const store = mockStore({
-    offers,
-    city: offers[0].city.name,
-    locations: Array.from(new Set(offers.map((it) => it.city.name))),
-    sortType: `popular`,
-    activeOfferId: null
+    [NameSpace.DATA]: {
+      offers
+    },
+    [NameSpace.APP]: {
+      city: offers[0].city.name,
+      sortType: `popular`,
+      activeOfferId: -1,
+      showAuthPage: false,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `NO_AUTH`,
+      authInfo: {
+        avatarUrl: ``,
+        email: ``,
+        id: null,
+        isPro: null,
+        name: ``,
+      }
+    },
   });
 
   const tree = renderer

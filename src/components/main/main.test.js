@@ -18,6 +18,18 @@ it(`Render Main`, () => {
     },
     [NameSpace.APP]: {
       sortType: `popular`,
+      activeOfferId: -1,
+      showAuthPage: false,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `NO_AUTH`,
+      authInfo: {
+        avatarUrl: ``,
+        email: ``,
+        id: null,
+        isPro: null,
+        name: ``,
+      }
     },
   });
 

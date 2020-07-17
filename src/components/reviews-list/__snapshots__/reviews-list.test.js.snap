@@ -17,7 +17,7 @@ exports[`Render ReviewList 1`] = `
           alt="Reviews avatar"
           className="reviews__avatar user__avatar"
           height="54"
-          src="img/avatar-max.jpg"
+          src="img/1.png"
           width="54"
         />
       </div>
@@ -57,9 +57,9 @@ exports[`Render ReviewList 1`] = `
       </p>
       <time
         className="reviews__time"
-        dateTime="2019-04-24"
+        dateTime="2019-04-23"
       >
-        2019-04-24
+        2019-04-23
       </time>
     </div>
   </li>
@@ -76,14 +76,14 @@ exports[`Render ReviewList 1`] = `
           alt="Reviews avatar"
           className="reviews__avatar user__avatar"
           height="54"
-          src="img/avatar-max.jpg"
+          src="img/1.png"
           width="54"
         />
       </div>
       <span
         className="reviews__user-name"
       >
-        Ivan
+        Inna
       </span>
     </div>
     <div
@@ -98,7 +98,7 @@ exports[`Render ReviewList 1`] = `
           <span
             style={
               Object {
-                "width": "60%",
+                "width": "80%",
               }
             }
           />
@@ -112,13 +112,13 @@ exports[`Render ReviewList 1`] = `
       <p
         className="reviews__text"
       >
-        Very good
+        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
       </p>
       <time
         className="reviews__time"
-        dateTime="2019-04-25"
+        dateTime="2019-04-24"
       >
-        2019-04-25
+        2019-04-24
       </time>
     </div>
   </li>

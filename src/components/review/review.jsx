@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import {getRatingWidth} from "../../utils.js";
 
 const Review = (props) => {
-  const {review, user} = props;
+  const {review} = props;
 
+  const {text, rating, date, user} = review;
   const {avatar, name} = user;
-  const {text, rating, date} = review;
-
 
   return (
     <li className="reviews__item">
@@ -38,17 +37,17 @@ const Review = (props) => {
 Review.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.any.isRequired,
-    userId: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired
+    date: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.any.isRequired,
+      name: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatar: PropTypes.string.isRequired
+    }).isRequired,
   }).isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.any.isRequired,
-    name: PropTypes.string.isRequired,
-    pro: PropTypes.bool.isRequired,
-    avatar: PropTypes.string.isRequired
-  }).isRequired,
+
 };
 
 export default Review;
