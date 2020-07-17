@@ -14,10 +14,10 @@ it(`Render Main`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       offers,
+      city: offers[0].city.name,
     },
     [NameSpace.APP]: {
       sortType: `popular`,
-      city: offers[0].city.name,
     },
   });
 

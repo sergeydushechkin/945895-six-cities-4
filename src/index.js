@@ -7,7 +7,6 @@ import {createAPI} from "./api.js";
 import App from "./components/app/app.jsx";
 import reducer from "./reducer/reducer.js";
 import {Operation} from "./reducer/data/data.js";
-import {ActionCreator} from "./reducer/app/app.js";
 
 const onUnauthorized = (() => {
   // store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -24,9 +23,7 @@ const store = createStore(
 );
 
 store.dispatch(Operation.loadOffers())
-  .then((loadedOffers) => {
-    store.dispatch(ActionCreator.changeCity(loadedOffers[0].city.name));
-
+  .then(() => {
     ReactDOM.render(
         <Provider store={store}>
           <App />

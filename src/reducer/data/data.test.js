@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
-import {reducer, ActionType, Operation} from "./data.js";
+import {reducer, ActionType, Operation, ActionCreator} from "./data.js";
 
 const offersRaw = [
   {
@@ -48,22 +48,52 @@ const api = createAPI(() => {});
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
+    city: ``,
     offers: []
   });
 });
 
 it(`Reducer should update offers by load offers`, () => {
   expect(reducer({
+    city: ``,
     offers: [],
   }, {
     type: ActionType.LOAD_OFFERS,
     payload: offersRaw,
   })).toEqual({
+    city: ``,
     offers: offersRaw,
   });
 });
 
+it(`Reducer should change city name by a given value`, () => {
+  expect(reducer({
+    city: ``,
+    offers: [],
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: `Paris`,
+  })).toEqual({
+    city: `Paris`,
+    offers: [],
+  });
+});
+
 describe(`Operation work correctly`, () => {
+  it(`Action creator for changing city returns correct action`, () => {
+    expect(ActionCreator.changeCity(`Paris`)).toEqual({
+      type: ActionType.CHANGE_CITY,
+      payload: `Paris`,
+    });
+  });
+
+  it(`Action creator for changing city returns correct action`, () => {
+    expect(ActionCreator.loadOffers(offersResult)).toEqual({
+      type: ActionType.LOAD_OFFERS,
+      payload: offersResult,
+    });
+  });
+
   it(`Should make a correct API call to /hotels`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
@@ -75,10 +105,14 @@ describe(`Operation work correctly`, () => {
 
     return offersLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
           payload: [...offersResult],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.CHANGE_CITY,
+          payload: `Dusseldorf`,
         });
       });
   });

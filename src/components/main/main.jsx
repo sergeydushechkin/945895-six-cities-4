@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/app/app.js";
+import {ActionCreator} from "../../reducer/data/data.js";
 import LocationsList from "../locations-list/locations-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import Places from "../places/places.jsx";
 import PlacesEmpty from "../places-empty/places-empty.jsx";
 import {getFilteredOffers, getLocations} from "../../reducer/data/selectors.js";
-import {getCity, getSortType} from "../../reducer/app/selectors.js";
+import {getSortType} from "../../reducer/app/selectors.js";
+import {getCity} from "../../reducer/data/selectors.js";
 
 const LocationsListWrapped = withActiveItem(LocationsList);
 

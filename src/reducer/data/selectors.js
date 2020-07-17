@@ -1,11 +1,14 @@
 import {createSelector} from "reselect";
 import NameSpace from "../name-space.js";
-import {getCity} from "../app/selectors.js";
 
 const NAME_SPACE = NameSpace.DATA;
 
 const getOffers = (state) => {
   return state[NAME_SPACE].offers;
+};
+
+const getCity = (state) => {
+  return state[NAME_SPACE].city;
 };
 
 const getFilteredOffers = createSelector(
@@ -23,4 +26,4 @@ const getLocations = createSelector(
     }
 );
 
-export {getOffers, getFilteredOffers, getLocations};
+export {getOffers, getFilteredOffers, getLocations, getCity};
