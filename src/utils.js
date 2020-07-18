@@ -29,4 +29,8 @@ const sortOffers = (offers, sortType) => {
   return sortedOffers;
 };
 
-export {getRatingWidth, extend, sortOffers};
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export {getRatingWidth, extend, sortOffers, capitalizeFirstLetter};

@@ -1,8 +1,8 @@
 const TYPES = {
-  apartment: `Apartment`,
-  room: `Private room`,
-  house: `House`,
-  hotel: `Hotel`
+  apartment: `apartment`,
+  room: `room`,
+  house: `house`,
+  hotel: `hotel`
 };
 
 export default [

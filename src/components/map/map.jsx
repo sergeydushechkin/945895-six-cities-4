@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
-const MAP_ZOOM = 12;
-
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -14,9 +12,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {city} = this.props;
-
-    const zoom = MAP_ZOOM;
+    const {city, zoom} = this.props;
 
     this._map = leaflet.map(this._mapRef.current, {
       center: city,
@@ -42,8 +38,10 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    const {city, zoom} = this.props;
+
     this._markersLayer.clearLayers();
-    this._map.setView(this.props.city);
+    this._map.setView(city, zoom);
     this._renderMarkers();
   }
 
@@ -62,9 +60,9 @@ class Map extends React.PureComponent {
 
     offers.forEach((it) => {
       if (it.id === activeOfferId) {
-        leaflet.marker(it.coordinates, {iconActive}).addTo(this._markersLayer);
+        leaflet.marker(it.location.coordinates, {iconActive}).addTo(this._markersLayer);
       } else {
-        leaflet.marker(it.coordinates, {icon}).addTo(this._markersLayer);
+        leaflet.marker(it.location.coordinates, {icon}).addTo(this._markersLayer);
       }
     });
   }
@@ -79,6 +77,7 @@ class Map extends React.PureComponent {
 Map.propTypes = {
   activeOfferId: PropTypes.any,
   city: PropTypes.array.isRequired,
+  zoom: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   className: PropTypes.string.isRequired
 };

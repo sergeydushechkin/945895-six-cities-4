@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/app/app.js";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import {getOffers} from "../../reducer/data/selectors.js";
+import {getActiveOfferId} from "../../reducer/app/selectors.js";
 
 const MainWrapped = withActiveItem(Main);
 
 class App extends React.PureComponent {
   _renderMainScreen() {
-    const {offers, users, onChangeActiveOfferId, offerId} = this.props;
+    const {offers, onChangeActiveOfferId, offerId} = this.props;
 
     if (offerId === -1) {
       return (
@@ -25,7 +27,6 @@ class App extends React.PureComponent {
         <Property
           offerId = {offerId}
           offers = {offers}
-          users = {users}
           onPlaceCardHeaderClick = {onChangeActiveOfferId}
         />
       );
@@ -33,7 +34,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {offers, users, onChangeActiveOfferId} = this.props;
+    const {offers, onChangeActiveOfferId} = this.props;
 
     return (
       <BrowserRouter>
@@ -45,7 +46,6 @@ class App extends React.PureComponent {
             <Property
               offerId = {1}
               offers = {offers}
-              users = {users}
               onPlaceCardHeaderClick = {onChangeActiveOfferId}
             />
           </Route>
@@ -57,7 +57,6 @@ class App extends React.PureComponent {
 
 App.propTypes = {
   offers: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired,
   onChangeActiveOfferId: PropTypes.func.isRequired,
   offerId: PropTypes.any.isRequired,
 };
@@ -70,9 +69,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
   return {
-    offers: state.offers,
-    users: state.users,
-    offerId: state.activeOfferId,
+    offers: getOffers(state),
+    offerId: getActiveOfferId(state),
   };
 };
 

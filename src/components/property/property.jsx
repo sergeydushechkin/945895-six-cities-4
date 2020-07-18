@@ -6,13 +6,11 @@ import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
 const Property = (props) => {
-  const {offerId, offers, users, onPlaceCardHeaderClick} = props;
+  const {offerId, offers, onPlaceCardHeaderClick} = props;
 
   const offer = offers.find((it) => it.id === offerId);
-  const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, descriptions, reviews} = offer;
-
-  const user = users.find((it) => offer.hostId === it.id);
-  const {name, pro, avatar} = user;
+  const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, description, reviews = [], host, location} = offer;
+  const {name, isPro, avatarUrl} = host;
 
   return (
     <div className="page">
@@ -42,7 +40,7 @@ const Property = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {pictures.map((picture, index) => {
+              {pictures.slice(0, 6).map((picture, index) => {
                 return (
                   <div key={`${picture}-${index}`} className="property__image-wrapper">
                     <img className="property__image" src={picture} alt="Photo studio" />
@@ -105,28 +103,23 @@ const Property = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper${pro ? ` property__avatar-wrapper--pro` : ``}`}>
-                    <img className="property__avatar user__avatar" src={avatar} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper user__avatar-wrapper${isPro ? ` property__avatar-wrapper--pro` : ``}`}>
+                    <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {name}
                   </span>
                 </div>
                 <div className="property__description">
-                  {descriptions.map((description, index) => {
-                    return (
-                      <p key={`${description}-${index}`} className="property__text">
-                        {description}
-                      </p>
-                    );
-                  })}
+                  <p className="property__text">
+                    {description}
+                  </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList
                   reviews={reviews}
-                  users={users}
                 />
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -178,10 +171,11 @@ const Property = (props) => {
             </div>
           </div>
           <Map
-            city={[52.38333, 4.9]}
+            city={location.coordinates}
             offers={offers}
             activeOfferId={offerId}
             className={`property__map map`}
+            zoom={location.zoom}
           />
         </section>
         <div className="container">
@@ -205,7 +199,6 @@ const Property = (props) => {
 Property.propTypes = {
   offerId: PropTypes.number,
   offers: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired
 };
 
