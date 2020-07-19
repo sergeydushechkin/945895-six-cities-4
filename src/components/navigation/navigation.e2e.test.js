@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import HeaderNav from "./header-nav.jsx";
+import {Navigation} from "./navigation.jsx";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -15,11 +15,11 @@ const AuthInfo = {
   name: `Oliver.conner`
 };
 
-it(`Test HeaderNav component items clicks and return value`, () => {
+it(`Test Navigation component items clicks and return value`, () => {
   const onChangeAuthPageState = jest.fn();
 
   const placesSorting = shallow(
-      <HeaderNav
+      <Navigation
         authStatus={`AUTH`}
         authInfo={AuthInfo}
         onChangeAuthPageState={onChangeAuthPageState}

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import HeaderNav from "./header-nav.jsx";
+import {Navigation} from "./navigation.jsx";
 
 const AuthInfo = {
   avatarUrl: `img/1.png`,
@@ -10,10 +10,10 @@ const AuthInfo = {
   name: `Oliver.conner`
 };
 
-it(`Render Header`, () => {
+it(`Render Navigation`, () => {
   const tree = renderer
     .create(
-        <HeaderNav
+        <Navigation
           authStatus={`AUTH`}
           authInfo={AuthInfo}
           onChangeAuthPageState={() => {}}

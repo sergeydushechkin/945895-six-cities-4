@@ -1,24 +1,35 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Header} from "./header.jsx";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 
-const AuthInfo = {
-  avatarUrl: `img/1.png`,
-  email: `Oliver.conner@gmail.com`,
-  id: 1,
-  isPro: false,
-  name: `Oliver.conner`
-};
+import NameSpace from "../../reducer/name-space.js";
+
+import Header from "./header.jsx";
+
+const mockStore = configureStore([]);
 
 it(`Render Header`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: `NO_AUTH`,
+      authInfo: {
+        avatarUrl: ``,
+        email: ``,
+        id: null,
+        isPro: null,
+        name: ``,
+      }
+    },
+  });
+
   const tree = renderer
     .create(
-        <Header
-          isLogoActive={false}
-          authStatus={`AUTH`}
-          authInfo={AuthInfo}
-          onChangeAuthPageState={() => {}}
-        />
+        <Provider store={store}>
+          <Header
+            isLogoActive={false}
+          />
+        </Provider>
     )
     .toJSON();
 
