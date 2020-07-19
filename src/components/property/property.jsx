@@ -7,10 +7,9 @@ import {getAuthStatus} from "../../reducer/user/selectors.js";
 
 import {getRatingWidth} from "../../utils.js";
 import CardsList from "../cards-list/cards-list.jsx";
-import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
-import ReviewsForm from "../reviews-form/reviews-form.jsx";
+import Reviews from "../reviews/reviews.jsx";
 
 const Property = (props) => {
   const {offerId, offers, onPlaceCardHeaderClick, authStatus} = props;
@@ -108,15 +107,10 @@ const Property = (props) => {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList
-                  reviews={reviews}
-                />
-                {isUserLoggedIn &&
-                  <ReviewsForm />
-                }
-              </section>
+              <Reviews
+                reviews={reviews}
+                isUserLoggedIn={isUserLoggedIn}
+              />
             </div>
           </div>
           <Map
