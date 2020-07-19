@@ -4,23 +4,13 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
 import NameSpace from "../../reducer/name-space.js";
-import Property from "./property.jsx";
 
-import offers from "../../mocks/tests_offers.js";
+import Header from "./header.jsx";
 
 const mockStore = configureStore([]);
 
-it(`Render Property`, () => {
+it(`Render Header`, () => {
   const store = mockStore({
-    [NameSpace.DATA]: {
-      offers
-    },
-    [NameSpace.APP]: {
-      city: offers[0].city.name,
-      sortType: `popular`,
-      activeOfferId: -1,
-      showAuthPage: false,
-    },
     [NameSpace.USER]: {
       authorizationStatus: `NO_AUTH`,
       authInfo: {
@@ -36,17 +26,10 @@ it(`Render Property`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Property
-            offerId = {1}
-            offers = {offers}
-            onPlaceCardHeaderClick = {() => {}}
+          <Header
+            isLogoActive={false}
           />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return document.createElement(`div`);
-          }
-        }
+        </Provider>
     )
     .toJSON();
 
