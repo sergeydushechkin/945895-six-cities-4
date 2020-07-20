@@ -58,17 +58,14 @@ class ReviewsForm extends React.PureComponent {
         text = value;
     }
 
-    console.log(text, rating);
-
     this.setState({isSubmitDisabled: !(rating && (text.length >= 50 && text.length <= 300))});
   }
 
   handleSubmit(evt) {
-    const func = debugFunc();
-
     evt.preventDefault();
     this.setState({isFormDisabled: true, isSubmitDisabled: true});
 
+    const func = debugFunc();
     func
       .then(() => {
         this._resetFromState();
