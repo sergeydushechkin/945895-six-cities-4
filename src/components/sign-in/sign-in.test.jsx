@@ -13,12 +13,13 @@ const mockStore = configureStore([]);
 it(`Render SignIn`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      offers
+      offers,
+      city: offers[0].city.name,
+      activeOfferId: -1,
+      comments: [],
     },
     [NameSpace.APP]: {
-      city: offers[0].city.name,
       sortType: `popular`,
-      activeOfferId: -1,
       showAuthPage: false,
     },
     [NameSpace.USER]: {

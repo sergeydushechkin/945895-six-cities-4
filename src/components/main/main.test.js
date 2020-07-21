@@ -15,10 +15,11 @@ it(`Render Main`, () => {
     [NameSpace.DATA]: {
       offers,
       city: offers[0].city.name,
+      activeOfferId: -1,
+      comments: [],
     },
     [NameSpace.APP]: {
       sortType: `popular`,
-      activeOfferId: -1,
       showAuthPage: false,
     },
     [NameSpace.USER]: {

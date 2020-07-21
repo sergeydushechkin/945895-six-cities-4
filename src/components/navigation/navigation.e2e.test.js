@@ -18,7 +18,7 @@ const AuthInfo = {
 it(`Test Navigation component items clicks and return value`, () => {
   const onChangeAuthPageState = jest.fn();
 
-  const placesSorting = shallow(
+  const navigation = shallow(
       <Navigation
         authStatus={`AUTH`}
         authInfo={AuthInfo}
@@ -26,7 +26,7 @@ it(`Test Navigation component items clicks and return value`, () => {
       />
   );
 
-  const headerNavItem = placesSorting.find(`.user a`);
+  const headerNavItem = navigation.find(`.user a`);
 
   headerNavItem.simulate(`click`, {
     preventDefault: () => {}
