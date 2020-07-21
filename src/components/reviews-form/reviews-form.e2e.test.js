@@ -8,7 +8,7 @@ Enzyme.configure({
 });
 
 it(`Test ReviewsForm component items clicks and return value`, () => {
-  const onPostComment = jest.fn();
+  const onPostComment = jest.fn().mockImplementation(() => Promise.resolve(`value`));
 
   const reviewsForm = shallow(
       <ReviewsForm

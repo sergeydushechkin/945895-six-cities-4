@@ -18,7 +18,7 @@ const Property = (props) => {
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
   const offer = offers.find((it) => it.id === offerId);
-  const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, description, host, location} = offer;
+  const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, description, host, location, price} = offer;
   const {name, isPro, avatarUrl} = host;
 
   return (
@@ -75,7 +75,7 @@ const Property = (props) => {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
