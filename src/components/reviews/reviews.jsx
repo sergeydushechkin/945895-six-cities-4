@@ -5,7 +5,7 @@ import ReviewsList from "../reviews-list/reviews-list.jsx";
 import ReviewsForm from "../reviews-form/reviews-form.jsx";
 
 const Reviews = (props) => {
-  const {reviews, isUserLoggedIn} = props;
+  const {reviews, isUserLoggedIn, offerId, onPostComment} = props;
 
   return (
     <section className="property__reviews reviews">
@@ -14,7 +14,10 @@ const Reviews = (props) => {
         reviews={reviews}
       />
       {isUserLoggedIn &&
-        <ReviewsForm />
+        <ReviewsForm
+          offerId={offerId}
+          onPostComment={onPostComment}
+        />
       }
     </section>
   );
@@ -23,6 +26,8 @@ const Reviews = (props) => {
 Reviews.propTypes = {
   reviews: PropTypes.array.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
+  onPostComment: PropTypes.func.isRequired,
+  offerId: PropTypes.any.isRequired,
 };
 
 export default Reviews;

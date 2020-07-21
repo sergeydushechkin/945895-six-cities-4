@@ -5,6 +5,7 @@ exports[`Render ReviewsForm 1`] = `
   action="#"
   className="reviews__form form"
   method="post"
+  onSubmit={[Function]}
 >
   <label
     className="reviews__label form__label"
@@ -18,6 +19,7 @@ exports[`Render ReviewsForm 1`] = `
   >
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="5-stars"
       name="rating"
       type="radio"
@@ -40,6 +42,7 @@ exports[`Render ReviewsForm 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="4-stars"
       name="rating"
       type="radio"
@@ -62,6 +65,7 @@ exports[`Render ReviewsForm 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="3-stars"
       name="rating"
       type="radio"
@@ -84,6 +88,7 @@ exports[`Render ReviewsForm 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="2-stars"
       name="rating"
       type="radio"
@@ -106,6 +111,7 @@ exports[`Render ReviewsForm 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="1-star"
       name="rating"
       type="radio"
@@ -129,6 +135,7 @@ exports[`Render ReviewsForm 1`] = `
   </div>
   <textarea
     className="reviews__textarea form__textarea"
+    disabled={false}
     id="review"
     name="review"
     onChange={[Function]}
@@ -157,11 +164,12 @@ exports[`Render ReviewsForm 1`] = `
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled="disabled"
+      disabled={true}
       type="submit"
     >
       Submit
     </button>
   </div>
+  
 </form>
 `;

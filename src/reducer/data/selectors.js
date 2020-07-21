@@ -15,6 +15,10 @@ const getActiveOfferId = (state) => {
   return state[NAME_SPACE].activeOfferId;
 };
 
+const getComments = (state) => {
+  return state[NAME_SPACE].comments;
+};
+
 const getFilteredOffers = createSelector(
     getOffers,
     getCity,
@@ -30,4 +34,4 @@ const getLocations = createSelector(
     }
 );
 
-export {getOffers, getFilteredOffers, getLocations, getCity, getActiveOfferId};
+export {getOffers, getCity, getActiveOfferId, getComments, getFilteredOffers, getLocations};

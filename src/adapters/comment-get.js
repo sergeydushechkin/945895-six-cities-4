@@ -5,10 +5,10 @@ const createCommentsGet = (data) => {
     id: data.id,
     rating: data.rating,
     user: {
-      avatarUrl: data.avatar_url,
-      id: data.id,
-      isPro: data.is_pro,
-      name: data.name,
+      avatarUrl: data.user.avatar_url,
+      id: data.user.id,
+      isPro: data.user.is_pro,
+      name: data.user.name,
     },
   };
 };

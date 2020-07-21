@@ -1,18 +1,5 @@
 import React, {createRef} from "react";
-// import PropTypes from "prop-types";
-
-const debugFunc = (() => {
-  return new Promise(function (resolve, reject) {
-    setTimeout(() => {
-      const result = Math.random() > 0.5;
-      if (result) {
-        resolve(result);
-      } else {
-        reject(result);
-      }
-    }, 1000);
-  });
-});
+import PropTypes from "prop-types";
 
 class ReviewsForm extends React.PureComponent {
   constructor(props) {
@@ -63,15 +50,21 @@ class ReviewsForm extends React.PureComponent {
 
   handleSubmit(evt) {
     evt.preventDefault();
+
+    const {offerId, onPostComment} = this.props;
+    const commentsPost = {
+      comment: this.state.text,
+      rating: this.state.rating,
+    };
+
     this.setState({isFormDisabled: true, isSubmitDisabled: true});
 
-    const func = debugFunc();
-    func
+    onPostComment(offerId, commentsPost)
       .then(() => {
         this._resetFromState();
       })
       .catch((result) => {
-        this.setState({isFormDisabled: false, isSubmitDisabled: false, errorText: `Error: ${result}`});
+        this.setState({isFormDisabled: false, isSubmitDisabled: false, errorText: `${result}; text: ${result.response.data.error}`});
       });
   }
 
@@ -131,5 +124,10 @@ class ReviewsForm extends React.PureComponent {
     );
   }
 }
+
+ReviewsForm.propTypes = {
+  onPostComment: PropTypes.func.isRequired,
+  offerId: PropTypes.any.isRequired,
+};
 
 export default ReviewsForm;

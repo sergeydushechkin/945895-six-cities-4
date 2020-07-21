@@ -13,7 +13,7 @@ const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
-  CHANGE_COMMENTS: `CHANGE_COMMENTS`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const ActionCreator = {
@@ -30,7 +30,7 @@ const ActionCreator = {
     payload: id
   }),
   loadComments: (comments) => ({
-    type: ActionType.CHANGE_COMMENTS,
+    type: ActionType.LOAD_COMMENTS,
     payload: comments
   }),
 };
@@ -45,11 +45,12 @@ const Operation = {
         return loadedOffers;
       });
   },
-  postComment: (offerId,commentData) => (dispatch, getState, api) => {
-    return api.post(`/comments/${offerId}`, commentData)
+  postComment: (offerId, commentsData) => (dispatch, getState, api) => {
+    return api.post(`/comments/${offerId}`, commentsData)
       .then((response) => {
         const loadedComments = response.data.map((comment) => createCommentsGet(comment));
         dispatch(ActionCreator.loadComments(loadedComments));
+        return loadedComments;
       });
   }
 };
@@ -62,7 +63,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {city: action.payload});
     case ActionType.CHANGE_ACTIVE_OFFER_ID:
       return extend(state, {activeOfferId: action.payload});
-    case ActionType.CHANGE_COMMENTS:
+    case ActionType.LOAD_COMMENTS:
       return extend(state, {comments: action.payload});
   }
 
