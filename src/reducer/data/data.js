@@ -2,6 +2,11 @@ import {extend} from "../../utils.js";
 import offerAdapter from "../../adapters/offer.js";
 import createCommentsGet from "../../adapters/comment-get.js";
 
+const FavoriteStatus = {
+  IN_FAVORITES: `1`,
+  NOT_IN_FAVORITES: `0`,
+};
+
 const initialState = {
   city: ``,
   offers: [],
@@ -52,6 +57,17 @@ const Operation = {
         dispatch(ActionCreator.loadComments(loadedComments));
         return loadedComments;
       });
+  },
+  postFavorite: (offerId, isFavorite) => (dispatch, getState, api) => {
+    const favoriteStatus = isFavorite ? FavoriteStatus.IN_FAVORITES : FavoriteStatus.NOT_IN_FAVORITES;
+    return api.post(`/favorite/${offerId}/${favoriteStatus}`)
+      .then((response) => {
+        const loadedOffer = offerAdapter(response.data);
+        const offers = getState().offers = getState().offers;
+        const index = offers.findIndex((it) => it.id === loadedOffer.id);
+        const newOffers = [].concat(...offers.slice(0, index), loadedOffer, ...offers.slice(index + 1, offers.length));
+        dispatch(ActionCreator.loadOffers(newOffers));
+      });
   }
 };
 
@@ -70,4 +86,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionCreator, ActionType, Operation};
+export {reducer, ActionCreator, ActionType, Operation, FavoriteStatus};
