@@ -2,7 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {Router} from "react-router-dom";
 
+import history from "../../history.js";
 import NameSpace from "../../reducer/name-space.js";
 import {SignIn} from "./sign-in.jsx";
 
@@ -20,7 +22,6 @@ it(`Render SignIn`, () => {
     },
     [NameSpace.APP]: {
       sortType: `popular`,
-      showAuthPage: false,
     },
     [NameSpace.USER]: {
       authorizationStatus: `NO_AUTH`,
@@ -37,11 +38,13 @@ it(`Render SignIn`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <SignIn
-            onUserLogin={() => {}}
-            onChangeActiveOfferId={() => {}}
-            onChangeAuthPageState={() => {}}
-          />
+          <Router history={history}>
+            <SignIn
+              onUserLogin={() => {}}
+              onChangeActiveOfferId={() => {}}
+              onChangeAuthPageState={() => {}}
+            />
+          </Router>
         </Provider>,
         {
           createNodeMock: () => {

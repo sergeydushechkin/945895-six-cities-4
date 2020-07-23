@@ -2,7 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
 
+import history from "../../history.js";
 import NameSpace from "../../reducer/name-space.js";
 
 import Header from "./header.jsx";
@@ -26,9 +28,11 @@ it(`Render Header`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Header
-            isLogoActive={false}
-          />
+          <Router history={history}>
+            <Header
+              isLogoActive={false}
+            />
+          </Router>
         </Provider>
     )
     .toJSON();

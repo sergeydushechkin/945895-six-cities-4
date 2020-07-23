@@ -25,6 +25,7 @@ it(`Render CardsList`, () => {
             offers={offers}
             onPlaceCardHeaderClick={() => {}}
             onActiveItemChange={() => {}}
+            onFavoritesToggle={() => {}}
           />
         </Provider>
     )
