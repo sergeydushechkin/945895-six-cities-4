@@ -7,6 +7,7 @@ import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {getShowAuthPage} from "../../reducer/app/selectors.js";
 import {getOffers, getActiveOfferId} from "../../reducer/data/selectors.js";
 import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import Main from "../main/main.jsx";
@@ -22,13 +23,13 @@ class App extends React.PureComponent {
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             <MainWrapped
               initActiveItemId={-1}
               onPlaceCardHeaderClick = {onChangeActiveOfferId}
             />
           </Route>
-          <Route exact path="/login">
+          <Route exact path={AppRoute.LOGIN}>
             <SignIn
             />
           </Route>

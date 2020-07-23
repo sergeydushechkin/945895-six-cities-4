@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Navigation 1`] = `
+exports[`Render Navigation AUTH 1`] = `
 <nav
   className="header__nav"
 >
@@ -12,7 +12,7 @@ exports[`Render Navigation 1`] = `
     >
       <a
         className="header__nav-link header__nav-link--profile"
-        href="#"
+        href="/favorites"
         onClick={[Function]}
       >
         <div
@@ -22,6 +22,35 @@ exports[`Render Navigation 1`] = `
           className="header__user-name user__name"
         >
           Oliver.conner@gmail.com
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`Render Navigation NO AUTH 1`] = `
+<nav
+  className="header__nav"
+>
+  <ul
+    className="header__nav-list"
+  >
+    <li
+      className="header__nav-item user"
+    >
+      <a
+        className="header__nav-link header__nav-link--profile"
+        href="/login"
+        onClick={[Function]}
+      >
+        <div
+          className="header__avatar-wrapper user__avatar-wrapper"
+        />
+        <span
+          className="header__login"
+        >
+          Sign in
         </span>
       </a>
     </li>
