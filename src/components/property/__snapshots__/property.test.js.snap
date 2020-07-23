@@ -219,7 +219,8 @@ exports[`Render Property 1`] = `
             <b
               className="property__price-value"
             >
-              €120
+              €
+              120
             </b>
             <span
               className="property__price-text"

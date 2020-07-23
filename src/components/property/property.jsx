@@ -4,20 +4,21 @@ import {connect} from "react-redux";
 
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getAuthStatus} from "../../reducer/user/selectors.js";
+import {Operation} from "../../reducer/data/data.js";
+import {getComments} from "../../reducer/data/selectors.js";
 
 import {getRatingWidth} from "../../utils.js";
 import CardsList from "../cards-list/cards-list.jsx";
-import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Header from "../header/header.jsx";
 import Map from "../map/map.jsx";
-import ReviewsForm from "../reviews-form/reviews-form.jsx";
+import Reviews from "../reviews/reviews.jsx";
 
 const Property = (props) => {
-  const {offerId, offers, onPlaceCardHeaderClick, authStatus} = props;
+  const {offerId, offers, onPlaceCardHeaderClick, authStatus, reviews, postComment} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
   const offer = offers.find((it) => it.id === offerId);
-  const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, description, reviews = [], host, location} = offer;
+  const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, description, host, location, price} = offer;
   const {name, isPro, avatarUrl} = host;
 
   return (
@@ -74,7 +75,7 @@ const Property = (props) => {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -108,15 +109,12 @@ const Property = (props) => {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList
-                  reviews={reviews}
-                />
-                {isUserLoggedIn &&
-                  <ReviewsForm />
-                }
-              </section>
+              <Reviews
+                reviews={reviews}
+                isUserLoggedIn={isUserLoggedIn}
+                offerId={offerId}
+                onPostComment={postComment}
+              />
             </div>
           </div>
           <Map
@@ -146,17 +144,26 @@ const Property = (props) => {
 };
 
 Property.propTypes = {
-  offerId: PropTypes.number,
+  offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
   authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
+  reviews: PropTypes.array.isRequired,
+  postComment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     authStatus: getAuthStatus(state),
+    reviews: getComments(state),
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  postComment(offerId, commentData) {
+    return dispatch(Operation.postComment(offerId, commentData));
+  }
+});
+
 export {Property};
-export default connect(mapStateToProps)(Property);
+export default connect(mapStateToProps, mapDispatchToProps)(Property);

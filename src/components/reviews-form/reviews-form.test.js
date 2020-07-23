@@ -5,7 +5,10 @@ import ReviewsForm from "./reviews-form.jsx";
 it(`Render ReviewsForm`, () => {
   const tree = renderer
     .create(
-        <ReviewsForm />
+        <ReviewsForm
+          offerId={1}
+          onPostComment={() => {}}
+        />
     )
     .toJSON();
 
