@@ -153,6 +153,23 @@ describe(`Reducer work correctly`, () => {
       comments: commentsRaw,
     });
   });
+
+  it(`Reducer should change comments by a given value`, () => {
+    expect(reducer({
+      city: ``,
+      offers: offersResult,
+      activeOfferId: -1,
+      comments: [],
+    }, {
+      type: ActionType.UPDATE_FAVORITE,
+      payload: offersResult[0],
+    })).toEqual({
+      city: ``,
+      offers: offersResult,
+      activeOfferId: -1,
+      comments: [],
+    });
+  });
 });
 
 
@@ -182,6 +199,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.changeActiveOfferId(commentsResult)).toEqual({
       type: ActionType.CHANGE_ACTIVE_OFFER_ID,
       payload: commentsResult,
+    });
+  });
+
+  it(`Action creator for changing offer id returns correct action`, () => {
+    expect(ActionCreator.updateFavorite(offersResult[0])).toEqual({
+      type: ActionType.UPDATE_FAVORITE,
+      payload: offersResult[0],
     });
   });
 });
@@ -225,6 +249,25 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_COMMENTS,
           payload: [...commentsResult],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/1`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const postFavorite = Operation.postFavorite(1, false);
+
+    apiMock
+      .onPost(`/favorite/1/0`)
+      .reply(200, offersRaw[0]);
+
+    return postFavorite(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_FAVORITE,
+          payload: offersResult[0],
         });
       });
   });

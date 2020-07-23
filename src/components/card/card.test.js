@@ -13,6 +13,7 @@ it(`Render Card`, () => {
           isNearPlaces={false}
           onPlaceCardHeaderClick={() => {}}
           onActiveItemChange={() => {}}
+          onFavoritesToggle={() => {}}
         />
     )
     .toJSON();

@@ -39,7 +39,7 @@ exports[`Render Property 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -416,6 +416,7 @@ exports[`Render Property 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -514,6 +515,7 @@ exports[`Render Property 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg

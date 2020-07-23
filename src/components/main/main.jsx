@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import {ActionCreator, Operation} from "../../reducer/data/data.js";
 import {getFilteredOffers, getLocations, getCity} from "../../reducer/data/selectors.js";
 import {getSortType} from "../../reducer/app/selectors.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import Header from "../header/header.jsx";
@@ -80,8 +82,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeCity(city));
   },
   onFavoritesToggle(offerId, favoriteStatus) {
-    return dispatch(Operation.postFavorite(offerId, favoriteStatus));
-  }
+    dispatch(Operation.postFavorite(offerId, favoriteStatus))
+    .catch((error) => {
+      if (error.response.status === 401) {
+        history.push(AppRoute.LOGIN);
+      }
+    });
+  },
 });
 
 export {Main};

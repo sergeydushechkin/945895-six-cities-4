@@ -19,6 +19,7 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
 };
 
 const ActionCreator = {
@@ -38,6 +39,10 @@ const ActionCreator = {
     type: ActionType.LOAD_COMMENTS,
     payload: comments
   }),
+  updateFavorite: (offer) => ({
+    type: ActionType.UPDATE_FAVORITE,
+    payload: offer
+  })
 };
 
 const Operation = {
@@ -62,11 +67,7 @@ const Operation = {
     const favoriteStatus = isFavorite ? FavoriteStatus.IN_FAVORITES : FavoriteStatus.NOT_IN_FAVORITES;
     return api.post(`/favorite/${offerId}/${favoriteStatus}`)
       .then((response) => {
-        const loadedOffer = offerAdapter(response.data);
-        const offers = getState().offers = getState().offers;
-        const index = offers.findIndex((it) => it.id === loadedOffer.id);
-        const newOffers = [].concat(...offers.slice(0, index), loadedOffer, ...offers.slice(index + 1, offers.length));
-        dispatch(ActionCreator.loadOffers(newOffers));
+        dispatch(ActionCreator.updateFavorite(offerAdapter(response.data)));
       });
   }
 };
@@ -81,6 +82,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {activeOfferId: action.payload});
     case ActionType.LOAD_COMMENTS:
       return extend(state, {comments: action.payload});
+    case ActionType.UPDATE_FAVORITE:
+      const index = state.offers.findIndex((it) => it.id === action.payload.id);
+      return extend(state, {offers: [].concat(...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1, state.offers.length))});
   }
 
   return state;

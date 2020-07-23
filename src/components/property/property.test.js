@@ -2,7 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
 
+import history from "../../history.js";
 import NameSpace from "../../reducer/name-space.js";
 import Property from "./property.jsx";
 
@@ -20,7 +22,6 @@ it(`Render Property`, () => {
     },
     [NameSpace.APP]: {
       sortType: `popular`,
-      showAuthPage: false,
     },
     [NameSpace.USER]: {
       authorizationStatus: `NO_AUTH`,
@@ -37,11 +38,13 @@ it(`Render Property`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Property
-            offerId = {1}
-            offers = {offers}
-            onPlaceCardHeaderClick = {() => {}}
-          />
+          <Router history={history}>
+            <Property
+              offerId = {1}
+              offers = {offers}
+              onPlaceCardHeaderClick = {() => {}}
+            />
+          </Router>
         </Provider>,
         {
           createNodeMock: () => {

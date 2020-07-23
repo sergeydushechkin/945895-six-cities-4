@@ -10,52 +10,45 @@ Enzyme.configure({
 });
 
 describe(`Card mouse input testing`, () => {
-  it(`Should card header to be pressed, mouse enter registered, value is correct`, () => {
-    const onActiveItemChange = jest.fn();
-    const onPlaceCardHeaderClick = jest.fn();
+  const onActiveItemChange = jest.fn();
+  const onPlaceCardHeaderClick = jest.fn();
+  const onFavoritesToggle = jest.fn();
 
-    const card = shallow(
-        <Card
-          key={offers[0].id}
-          offer={offers[0]}
-          isNearPlaces={false}
-          onPlaceCardHeaderClick={onPlaceCardHeaderClick}
-          onActiveItemChange={onActiveItemChange}
-        />
-    );
+  const card = shallow(
+      <Card
+        key={offers[0].id}
+        offer={offers[0]}
+        isNearPlaces={false}
+        onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+        onActiveItemChange={onActiveItemChange}
+        onFavoritesToggle={onFavoritesToggle}
+      />
+  );
 
-    const placeCardHeader = card.find(`.place-card__name a`);
+  const placeCardHeader = card.find(`.place-card__name a`);
+  const placeCardBookmark = card.find(`.place-card__bookmark-button`);
 
+  it(`Should card header to be pressed, value is correct`, () => {
     placeCardHeader.props().onClick();
-    card.props().onMouseEnter();
-
-    expect(onActiveItemChange.mock.calls.length).toBe(1);
-    expect(onActiveItemChange.mock.calls[0][0]).toBe(offers[0].id);
-
     expect(onPlaceCardHeaderClick.mock.calls.length).toBe(1);
     expect(onPlaceCardHeaderClick.mock.calls[0][0]).toBe(offers[0].id);
   });
 
-  it(`Should mouse leave registered, value is correct`, () => {
-    const onActiveItemChange = jest.fn();
-    const onPlaceCardHeaderClick = jest.fn();
+  it(`Should bookmark button registered, value is correct`, () => {
+    placeCardBookmark.props().onClick();
+    expect(onFavoritesToggle.mock.calls.length).toBe(1);
+    expect(onFavoritesToggle.mock.calls[0][0]).toBe(offers[0].id, !offers[0].isFavorite);
+  });
 
-    const card = shallow(
-        <Card
-          key={offers[0].id}
-          offer={offers[0]}
-          isNearPlaces={false}
-          onPlaceCardHeaderClick={onPlaceCardHeaderClick}
-          onActiveItemChange={onActiveItemChange}
-        />
-    );
-
-    const placeCardHeader = card.find(`.place-card__name a`);
-
-    placeCardHeader.props().onClick();
-    card.props().onMouseLeave();
-
+  it(`Should mouse enter registered, value is correct`, () => {
+    card.props().onMouseEnter();
     expect(onActiveItemChange.mock.calls.length).toBe(1);
-    expect(onActiveItemChange.mock.calls[0][0]).toBe(-1);
+    expect(onActiveItemChange.mock.calls[0][0]).toBe(offers[0].id);
+  });
+
+  it(`Should mouse leave registered, value is correct`, () => {
+    card.props().onMouseLeave();
+    expect(onActiveItemChange.mock.calls.length).toBe(2);
+    expect(onActiveItemChange.mock.calls[1][0]).toBe(-1);
   });
 });
