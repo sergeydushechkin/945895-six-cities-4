@@ -11,7 +11,7 @@ import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sortin
 const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 const Places = (props) => {
-  const {activeOffers, onPlaceCardHeaderClick, onActiveItemChange, activeItemId, city, sortType} = props;
+  const {activeOffers, onActiveItemChange, activeItemId, city, sortType} = props;
   const filteredOffers = sortOffers(activeOffers, sortType);
 
   return (
@@ -23,7 +23,6 @@ const Places = (props) => {
         <div className="cities__places-list places__list tabs__content">
           <CardsList
             offers={filteredOffers}
-            onPlaceCardHeaderClick={onPlaceCardHeaderClick}
             onActiveItemChange={onActiveItemChange}
             isNearPlaces={false}
           />
@@ -44,7 +43,6 @@ const Places = (props) => {
 
 Places.propTypes = {
   activeOffers: PropTypes.array.isRequired,
-  onPlaceCardHeaderClick: PropTypes.func.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
   activeItemId: PropTypes.any.isRequired,
   city: PropTypes.string.isRequired,

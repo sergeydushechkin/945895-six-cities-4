@@ -18,7 +18,6 @@ it(`Render Places`, () => {
         <Provider store={store}>
           <Places
             activeOffers={offers}
-            onPlaceCardHeaderClick={() => {}}
             onActiveItemChange={() => {}}
             activeItemId={1}
             city={`Paris`}

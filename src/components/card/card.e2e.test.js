@@ -11,7 +11,7 @@ Enzyme.configure({
 
 describe(`Card mouse input testing`, () => {
   const onActiveItemChange = jest.fn();
-  const onPlaceCardHeaderClick = jest.fn();
+  const onChangeActiveOfferId = jest.fn();
   const onFavoritesToggle = jest.fn();
 
   const card = shallow(
@@ -19,7 +19,7 @@ describe(`Card mouse input testing`, () => {
         key={offers[0].id}
         offer={offers[0]}
         isNearPlaces={false}
-        onPlaceCardHeaderClick={onPlaceCardHeaderClick}
+        onChangeActiveOfferId={onChangeActiveOfferId}
         onActiveItemChange={onActiveItemChange}
         onFavoritesToggle={onFavoritesToggle}
       />
@@ -30,8 +30,8 @@ describe(`Card mouse input testing`, () => {
 
   it(`Should card header to be pressed, value is correct`, () => {
     placeCardHeader.props().onClick();
-    expect(onPlaceCardHeaderClick.mock.calls.length).toBe(1);
-    expect(onPlaceCardHeaderClick.mock.calls[0][0]).toBe(offers[0].id);
+    expect(onChangeActiveOfferId.mock.calls.length).toBe(1);
+    expect(onChangeActiveOfferId.mock.calls[0][0]).toBe(offers[0].id);
   });
 
   it(`Should bookmark button registered, value is correct`, () => {

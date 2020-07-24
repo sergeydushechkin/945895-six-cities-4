@@ -6,13 +6,16 @@ import {ActionCreator} from "../../../reducer/data/data.js";
 import {getFilteredOffers, getLocations, getCity} from "../../../reducer/data/selectors.js";
 import {getSortType} from "../../../reducer/app/selectors.js";
 
+import withActiveItem from "../../../hocs/with-active-item/with-active-item.js";
 import Header from "../../header/header.jsx";
 import LocationsList from "../../locations-list/locations-list.jsx";
 import Places from "../../places/places.jsx";
 import PlacesEmpty from "../../places-empty/places-empty.jsx";
 
+const PlacesWrapped = withActiveItem(Places);
+
 const MainPage = (props) => {
-  const {onChangeActiveOfferId, city, activeOffers, locations, onCityChange, onActiveItemChange, activeItemId, sortType} = props;
+  const {city, activeOffers, locations, onCityChange, sortType} = props;
 
   return (
     <div className={`page page--gray page--main${activeOffers.length ? `` : ` page__main--index-empty`}`}>
@@ -33,11 +36,8 @@ const MainPage = (props) => {
         <div className="cities">
           {activeOffers.length
             ?
-            <Places
+            <PlacesWrapped
               activeOffers={activeOffers}
-              onPlaceCardHeaderClick={onChangeActiveOfferId}
-              onActiveItemChange={onActiveItemChange}
-              activeItemId={activeItemId}
               city={city}
               sortType={sortType}
             />
@@ -51,13 +51,10 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  onChangeActiveOfferId: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   activeOffers: PropTypes.array.isRequired,
-  activeItemId: PropTypes.any.isRequired,
   locations: PropTypes.array.isRequired,
   onCityChange: PropTypes.func.isRequired,
-  onActiveItemChange: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
 };
 
@@ -73,9 +70,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(ActionCreator.changeCity(city));
-  },
-  onChangeActiveOfferId(id) {
-    dispatch(ActionCreator.changeActiveOfferId(id));
   }
 });
 

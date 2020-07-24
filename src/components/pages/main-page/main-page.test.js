@@ -24,8 +24,6 @@ it(`Render MainPage`, () => {
             <MainPage
               activeOffers = {offers}
               onChangeActiveOfferId = {() => {}}
-              activeItemId = {-1}
-              onActiveItemChange={() => {}}
               sortType = {`popular`}
             />
           </Router>

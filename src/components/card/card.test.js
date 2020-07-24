@@ -11,7 +11,7 @@ it(`Render Card`, () => {
           key={offers[0].id}
           offer={offers[0]}
           isNearPlaces={false}
-          onPlaceCardHeaderClick={() => {}}
+          onChangeActiveOfferId={() => {}}
           onActiveItemChange={() => {}}
           onFavoritesToggle={() => {}}
         />

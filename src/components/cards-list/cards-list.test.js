@@ -18,7 +18,6 @@ it(`Render CardsList`, () => {
         <Provider store={store}>
           <CardsList
             offers={offers}
-            onPlaceCardHeaderClick={() => {}}
             onActiveItemChange={() => {}}
             isNearPlaces={false}
           />
