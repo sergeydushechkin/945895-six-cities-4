@@ -1,6 +1,6 @@
 import {extend} from "../../utils.js";
-import offerAdapter from "../../adapters/offer.js";
-import createCommentsGet from "../../adapters/comment-get.js";
+import offerAdapter from "../../adapters/offer/offer.js";
+import createCommentsGet from "../../adapters/comment-get/comment-get.js";
 
 const FavoriteStatus = {
   IN_FAVORITES: `1`,

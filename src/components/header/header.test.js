@@ -5,25 +5,14 @@ import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
 import history from "../../history.js";
-import NameSpace from "../../reducer/name-space.js";
+import testStore from "../../mocks/tests-mock-store.js";
 
 import Header from "./header.jsx";
 
 const mockStore = configureStore([]);
 
 it(`Render Header`, () => {
-  const store = mockStore({
-    [NameSpace.USER]: {
-      authorizationStatus: `NO_AUTH`,
-      authInfo: {
-        avatarUrl: ``,
-        email: ``,
-        id: null,
-        isPro: null,
-        name: ``,
-      }
-    },
-  });
+  const store = mockStore(testStore);
 
   const tree = renderer
     .create(

@@ -1,4 +1,4 @@
-import createAuthInfo from "../../adapters/auth-info.js";
+import createAuthInfo from "../../adapters/auth-info/auth-info.js";
 import {extend} from "../../utils.js";
 
 const AuthorizationStatus = {
