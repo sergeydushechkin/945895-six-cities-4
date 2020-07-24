@@ -9,11 +9,9 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withActiveItem(MockComponent);
 
 it(`Should active item change`, () => {
-  const wrapper = shallow(<MockComponentWrapped
-    initActiveItemId={1}
-  />);
+  const wrapper = shallow(<MockComponentWrapped/>);
 
-  expect(wrapper.props().activeItemId).toEqual(1);
+  expect(wrapper.props().activeItemId).toEqual(-1);
 
   wrapper.props().onActiveItemChange(3);
   expect(wrapper.props().activeItemId).toEqual(3);

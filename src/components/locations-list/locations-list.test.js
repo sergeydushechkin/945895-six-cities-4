@@ -7,9 +7,8 @@ it(`Render LocationsList`, () => {
     .create(
         <LocationsList
           locations={[`Amsterdam`, `Paris`, `London`]}
-          activeItemId={`Paris`}
+          city={`Paris`}
           onCityChange={() => {}}
-          onActiveItemChange={() => {}}
         />
     )
     .toJSON();

@@ -1,5 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import history from "../../history.js";
+import {Operation} from "../../reducer/data/data.js";
+import {AppRoute} from "../../const.js";
 import {getRatingWidth, capitalizeFirstLetter} from "../../utils.js";
 
 const Card = (props) => {
@@ -63,4 +68,16 @@ Card.propTypes = {
   onFavoritesToggle: PropTypes.func.isRequired,
 };
 
-export default Card;
+const mapDispatchToProps = (dispatch) => ({
+  onFavoritesToggle(offerId, favoriteStatus) {
+    dispatch(Operation.postFavorite(offerId, favoriteStatus))
+    .catch((error) => {
+      if (error.response.status === 401) {
+        history.push(AppRoute.LOGIN);
+      }
+    });
+  },
+});
+
+export {Card};
+export default connect(null, mapDispatchToProps)(Card);

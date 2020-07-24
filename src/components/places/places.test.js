@@ -23,7 +23,6 @@ it(`Render Places`, () => {
             activeOffers={offers}
             onPlaceCardHeaderClick={() => {}}
             onActiveItemChange={() => {}}
-            onFavoritesToggle={() => {}}
             activeItemId={1}
             city={`Paris`}
             sortType={`popular`}

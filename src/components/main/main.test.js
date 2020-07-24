@@ -42,7 +42,7 @@ it(`Render Main`, () => {
           <Router history={history}>
             <Main
               activeOffers = {offers}
-              onPlaceCardHeaderClick = {() => {}}
+              onChangeActiveOfferId = {() => {}}
               activeItemId = {-1}
               onActiveItemChange={() => {}}
               sortType = {`popular`}

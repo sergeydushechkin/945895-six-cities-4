@@ -11,7 +11,7 @@ import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sortin
 const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 const Places = (props) => {
-  const {activeOffers, onPlaceCardHeaderClick, onActiveItemChange, activeItemId, city, sortType, onFavoritesToggle} = props;
+  const {activeOffers, onPlaceCardHeaderClick, onActiveItemChange, activeItemId, city, sortType} = props;
   const filteredOffers = sortOffers(activeOffers, sortType);
 
   return (
@@ -25,7 +25,7 @@ const Places = (props) => {
             offers={filteredOffers}
             onPlaceCardHeaderClick={onPlaceCardHeaderClick}
             onActiveItemChange={onActiveItemChange}
-            onFavoritesToggle={onFavoritesToggle}
+            isNearPlaces={false}
           />
         </div>
       </section>
@@ -49,7 +49,6 @@ Places.propTypes = {
   activeItemId: PropTypes.any.isRequired,
   city: PropTypes.string.isRequired,
   sortType: PropTypes.oneOf([SortTypes.POPULAR, SortTypes.PRICE_LOW_HIGH, SortTypes.PRICE_HIGH_LOW, SortTypes.TOP_RATED_FIRST]).isRequired,
-  onFavoritesToggle: PropTypes.func.isRequired,
 };
 
 export default Places;

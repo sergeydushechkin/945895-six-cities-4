@@ -23,15 +23,12 @@ const store = createStore(
     )
 );
 
-store.dispatch(DataOperation.loadOffers())
-  .then(() => {
-    store.dispatch(UserOperation.checkAuth());
-    ReactDOM.render(
-        <Provider store={store}>
-          <App />
-        </Provider>,
-        document.querySelector(`#root`)
-    );
-  });
+store.dispatch(DataOperation.loadOffers());
+store.dispatch(UserOperation.checkAuth());
 
-
+ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.querySelector(`#root`)
+);

@@ -19,7 +19,6 @@ it(`Render App`, () => {
     },
     [NameSpace.APP]: {
       sortType: `popular`,
-      showAuthPage: false,
     },
     [NameSpace.USER]: {
       authorizationStatus: `NO_AUTH`,
