@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer/data/data.js";
-import {getFilteredOffers, getLocations, getCity} from "../../reducer/data/selectors.js";
-import {getSortType} from "../../reducer/app/selectors.js";
+import {ActionCreator} from "../../../reducer/data/data.js";
+import {getFilteredOffers, getLocations, getCity} from "../../../reducer/data/selectors.js";
+import {getSortType} from "../../../reducer/app/selectors.js";
 
-import Header from "../header/header.jsx";
-import LocationsList from "../locations-list/locations-list.jsx";
-import Places from "../places/places.jsx";
-import PlacesEmpty from "../places-empty/places-empty.jsx";
+import Header from "../../header/header.jsx";
+import LocationsList from "../../locations-list/locations-list.jsx";
+import Places from "../../places/places.jsx";
+import PlacesEmpty from "../../places-empty/places-empty.jsx";
 
-const Main = (props) => {
+const MainPage = (props) => {
   const {onChangeActiveOfferId, city, activeOffers, locations, onCityChange, onActiveItemChange, activeItemId, sortType} = props;
 
   return (
@@ -50,7 +50,7 @@ const Main = (props) => {
   );
 };
 
-Main.propTypes = {
+MainPage.propTypes = {
   onChangeActiveOfferId: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   activeOffers: PropTypes.array.isRequired,
@@ -79,5 +79,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

@@ -1,19 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import NameSpace from "../../reducer/name-space.js";
-import Main from "./main.jsx";
+import history from "../../../history.js";
+import NameSpace from "../../../reducer/name-space.js";
+import {SignInPage} from "./sign-in-page.jsx";
 
-import offers from "../../mocks/tests_offers.js";
-
+import offers from "../../../mocks/tests_offers.js";
 
 const mockStore = configureStore([]);
 
-it(`Render Main`, () => {
+it(`Render SignInPage`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       offers,
@@ -40,12 +39,10 @@ it(`Render Main`, () => {
     .create(
         <Provider store={store}>
           <Router history={history}>
-            <Main
-              activeOffers = {offers}
-              onChangeActiveOfferId = {() => {}}
-              activeItemId = {-1}
-              onActiveItemChange={() => {}}
-              sortType = {`popular`}
+            <SignInPage
+              onUserLogin={() => {}}
+              onChangeActiveOfferId={() => {}}
+              onChangeAuthPageState={() => {}}
             />
           </Router>
         </Provider>,

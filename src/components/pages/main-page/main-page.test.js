@@ -4,19 +4,20 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import NameSpace from "../../reducer/name-space.js";
-import Property from "./property.jsx";
+import history from "../../../history.js";
+import NameSpace from "../../../reducer/name-space.js";
+import MainPage from "./main-page.jsx";
 
-import offers from "../../mocks/tests_offers.js";
+import offers from "../../../mocks/tests_offers.js";
+
 
 const mockStore = configureStore([]);
 
-it(`Render Property`, () => {
+it(`Render MainPage`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      city: offers[0].city.name,
       offers,
+      city: offers[0].city.name,
       activeOfferId: -1,
       comments: [],
     },
@@ -39,10 +40,12 @@ it(`Render Property`, () => {
     .create(
         <Provider store={store}>
           <Router history={history}>
-            <Property
-              offerId = {1}
-              offers = {offers}
-              onPlaceCardHeaderClick = {() => {}}
+            <MainPage
+              activeOffers = {offers}
+              onChangeActiveOfferId = {() => {}}
+              activeItemId = {-1}
+              onActiveItemChange={() => {}}
+              sortType = {`popular`}
             />
           </Router>
         </Provider>,

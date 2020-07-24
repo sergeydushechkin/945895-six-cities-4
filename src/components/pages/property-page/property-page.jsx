@@ -2,20 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getAuthStatus} from "../../reducer/user/selectors.js";
-import {Operation} from "../../reducer/data/data.js";
-import {getComments} from "../../reducer/data/selectors.js";
-import history from "../../history.js";
-import {AppRoute} from "../../const.js";
+import {AuthorizationStatus} from "../../../reducer/user/user.js";
+import {getAuthStatus} from "../../../reducer/user/selectors.js";
+import {Operation} from "../../../reducer/data/data.js";
+import {getComments} from "../../../reducer/data/selectors.js";
+import history from "../../../history.js";
+import {AppRoute} from "../../../const.js";
 
-import {getRatingWidth} from "../../utils.js";
-import CardsList from "../cards-list/cards-list.jsx";
-import Header from "../header/header.jsx";
-import Map from "../map/map.jsx";
-import Reviews from "../reviews/reviews.jsx";
+import {getRatingWidth} from "../../../utils.js";
+import CardsList from "../../cards-list/cards-list.jsx";
+import Header from "../../header/header.jsx";
+import Map from "../../map/map.jsx";
+import Reviews from "../../reviews/reviews.jsx";
 
-const Property = (props) => {
+const PropertyPage = (props) => {
   const {offerId, offers, onPlaceCardHeaderClick, authStatus, reviews, postComment, onFavoritesToggle} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
@@ -146,7 +146,7 @@ const Property = (props) => {
   );
 };
 
-Property.propTypes = {
+PropertyPage.propTypes = {
   offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
@@ -177,5 +177,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {Property};
-export default connect(mapStateToProps, mapDispatchToProps)(Property);
+export {PropertyPage};
+export default connect(mapStateToProps, mapDispatchToProps)(PropertyPage);
