@@ -280,7 +280,6 @@ exports[`Render MainPage 1`] = `
                 >
                   <a
                     href="#"
-                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>

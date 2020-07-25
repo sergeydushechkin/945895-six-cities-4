@@ -6,7 +6,6 @@ const testStore = {
   [NameSpace.DATA]: {
     city: offers[0].city.name,
     offers,
-    activeOfferId: -1,
     comments: [],
   },
   [NameSpace.APP]: {

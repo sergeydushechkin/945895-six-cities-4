@@ -2,7 +2,6 @@ import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator as DataActionCreator} from "../../../reducer/data/data.js";
 import {Operation} from "../../../reducer/user/user.js";
 import {ActionCreator as AppActionCreator} from "../../../reducer/app/app.js";
 
@@ -22,7 +21,7 @@ class SignInPage extends React.PureComponent {
   }
 
   _handleSubmit(evt) {
-    const {onUserLogin, onChangeActiveOfferId, onChangeAuthPageState} = this.props;
+    const {onUserLogin, onChangeAuthPageState} = this.props;
     evt.preventDefault();
 
     onUserLogin({
@@ -31,7 +30,6 @@ class SignInPage extends React.PureComponent {
     })
     .then(() => {
       this.setState({error: false});
-      onChangeActiveOfferId(-1);
       onChangeAuthPageState(false);
     })
     .catch((err) => {
@@ -81,14 +79,10 @@ class SignInPage extends React.PureComponent {
 
 SignInPage.propTypes = {
   onUserLogin: PropTypes.func.isRequired,
-  onChangeActiveOfferId: PropTypes.func.isRequired,
   onChangeAuthPageState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeActiveOfferId(id) {
-    dispatch(DataActionCreator.changeActiveOfferId(id));
-  },
   onChangeAuthPageState(state) {
     dispatch(AppActionCreator.changeAuthPageState(state));
   },

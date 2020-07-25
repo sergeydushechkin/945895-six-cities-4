@@ -460,7 +460,6 @@ exports[`Render PropertyPage 1`] = `
               >
                 <a
                   href="#"
-                  onClick={[Function]}
                 >
                   Beautiful & luxurious apartment at great location
                 </a>
@@ -559,7 +558,6 @@ exports[`Render PropertyPage 1`] = `
               >
                 <a
                   href="#"
-                  onClick={[Function]}
                 >
                   Not bad!
                 </a>

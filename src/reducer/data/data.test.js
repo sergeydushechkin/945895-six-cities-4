@@ -81,7 +81,6 @@ describe(`Reducer work correctly`, () => {
     expect(reducer(void 0, {})).toEqual({
       city: ``,
       offers: [],
-      activeOfferId: -1,
       comments: [],
     });
   });
@@ -90,7 +89,6 @@ describe(`Reducer work correctly`, () => {
     expect(reducer({
       city: ``,
       offers: [],
-      activeOfferId: -1,
       comments: [],
     }, {
       type: ActionType.LOAD_OFFERS,
@@ -98,7 +96,6 @@ describe(`Reducer work correctly`, () => {
     })).toEqual({
       city: ``,
       offers: offersRaw,
-      activeOfferId: -1,
       comments: [],
     });
   });
@@ -107,7 +104,6 @@ describe(`Reducer work correctly`, () => {
     expect(reducer({
       city: ``,
       offers: [],
-      activeOfferId: -1,
       comments: [],
     }, {
       type: ActionType.CHANGE_CITY,
@@ -115,24 +111,6 @@ describe(`Reducer work correctly`, () => {
     })).toEqual({
       city: `Paris`,
       offers: [],
-      activeOfferId: -1,
-      comments: [],
-    });
-  });
-
-  it(`Reducer should change active offer id by a given value`, () => {
-    expect(reducer({
-      city: ``,
-      offers: [],
-      activeOfferId: -1,
-      comments: [],
-    }, {
-      type: ActionType.CHANGE_ACTIVE_OFFER_ID,
-      payload: 2,
-    })).toEqual({
-      city: ``,
-      offers: [],
-      activeOfferId: 2,
       comments: [],
     });
   });
@@ -141,7 +119,6 @@ describe(`Reducer work correctly`, () => {
     expect(reducer({
       city: ``,
       offers: [],
-      activeOfferId: -1,
       comments: [],
     }, {
       type: ActionType.LOAD_COMMENTS,
@@ -149,7 +126,6 @@ describe(`Reducer work correctly`, () => {
     })).toEqual({
       city: ``,
       offers: [],
-      activeOfferId: -1,
       comments: commentsRaw,
     });
   });
@@ -158,7 +134,6 @@ describe(`Reducer work correctly`, () => {
     expect(reducer({
       city: ``,
       offers: offersResult,
-      activeOfferId: -1,
       comments: [],
     }, {
       type: ActionType.UPDATE_FAVORITE,
@@ -166,7 +141,6 @@ describe(`Reducer work correctly`, () => {
     })).toEqual({
       city: ``,
       offers: offersResult,
-      activeOfferId: -1,
       comments: [],
     });
   });
@@ -188,16 +162,10 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for changing offer id returns correct action`, () => {
-    expect(ActionCreator.changeActiveOfferId(3)).toEqual({
-      type: ActionType.CHANGE_ACTIVE_OFFER_ID,
-      payload: 3,
-    });
-  });
 
-  it(`Action creator for changing offer id returns correct action`, () => {
-    expect(ActionCreator.changeActiveOfferId(commentsResult)).toEqual({
-      type: ActionType.CHANGE_ACTIVE_OFFER_ID,
+  it(`Action creator for load comments returns correct action`, () => {
+    expect(ActionCreator.loadComments(commentsResult)).toEqual({
+      type: ActionType.LOAD_COMMENTS,
       payload: commentsResult,
     });
   });

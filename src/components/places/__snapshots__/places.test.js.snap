@@ -175,7 +175,6 @@ exports[`Render Places 1`] = `
           >
             <a
               href="#"
-              onClick={[Function]}
             >
               Beautiful & luxurious apartment at great location
             </a>
@@ -274,7 +273,6 @@ exports[`Render Places 1`] = `
           >
             <a
               href="#"
-              onClick={[Function]}
             >
               Not bad!
             </a>

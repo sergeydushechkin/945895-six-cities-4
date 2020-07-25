@@ -2,13 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import history from "../../history.js";
-import {Operation, ActionCreator} from "../../reducer/data/data.js";
-import {AppRoute} from "../../const.js";
+import {Operation} from "../../reducer/data/data.js";
 import {getRatingWidth, capitalizeFirstLetter} from "../../utils.js";
 
 const Card = (props) => {
-  const {offer, isNearPlaces, onChangeActiveOfferId, onActiveItemChange, onFavoritesToggle} = props;
+  const {offer, isNearPlaces, onActiveItemChange, onFavoritesToggle} = props;
   const {title, price, rating, type, isPremium, isFavorite, id, previewImage} = offer;
 
   return (
@@ -43,7 +41,7 @@ const Card = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={() => onChangeActiveOfferId(id)} href="#">{title}</a>
+          <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>
@@ -62,7 +60,6 @@ Card.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired
   }),
-  onChangeActiveOfferId: PropTypes.func.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
   isNearPlaces: PropTypes.bool.isRequired,
   onFavoritesToggle: PropTypes.func.isRequired,
@@ -70,15 +67,7 @@ Card.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onFavoritesToggle(offerId, favoriteStatus) {
-    dispatch(Operation.postFavorite(offerId, favoriteStatus))
-    .catch((error) => {
-      if (error.response.status === 401) {
-        history.push(AppRoute.LOGIN);
-      }
-    });
-  },
-  onChangeActiveOfferId(id) {
-    dispatch(ActionCreator.changeActiveOfferId(id));
+    dispatch(Operation.postFavorite(offerId, favoriteStatus));
   },
 });
 
