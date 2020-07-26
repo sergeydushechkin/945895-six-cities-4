@@ -38,4 +38,10 @@ const Error = {
   UNAUTHORIZED: 401
 };
 
-export {SortTypes, SortTypeTexts, MONTH_NAMES, AppRoute, Error};
+const CardType = {
+  MAIN: `MAIN`,
+  PROPERTY: `PROPERTY`,
+  FAVORITES: `FAVORITES`,
+};
+
+export {SortTypes, SortTypeTexts, MONTH_NAMES, AppRoute, Error, CardType};

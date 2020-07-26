@@ -22,7 +22,6 @@ it(`Render PropertyPage`, () => {
             <PropertyPage
               offerId = {1}
               offers = {offers}
-              onPlaceCardHeaderClick = {() => {}}
             />
           </Router>
         </Provider>,

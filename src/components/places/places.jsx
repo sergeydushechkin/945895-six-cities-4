@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {SortTypes} from "../../const.js";
+import {SortTypes, CardType} from "../../const.js";
 import {sortOffers} from "../../utils.js";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
@@ -24,7 +24,7 @@ const Places = (props) => {
           <CardsList
             offers={filteredOffers}
             onActiveItemChange={onActiveItemChange}
-            isNearPlaces={false}
+            cardType={CardType.MAIN}
           />
         </div>
       </section>

@@ -7,7 +7,7 @@ import {getAuthStatus} from "../../../reducer/user/selectors.js";
 import {Operation} from "../../../reducer/data/data.js";
 import {getComments} from "../../../reducer/data/selectors.js";
 import history from "../../../history.js";
-import {AppRoute} from "../../../const.js";
+import {AppRoute, CardType} from "../../../const.js";
 
 import {getRatingWidth} from "../../../utils.js";
 import CardsList from "../../cards-list/cards-list.jsx";
@@ -16,7 +16,7 @@ import Map from "../../map/map.jsx";
 import Reviews from "../../reviews/reviews.jsx";
 
 const PropertyPage = (props) => {
-  const {offerId, offers, onPlaceCardHeaderClick, authStatus, reviews, postComment, onFavoritesToggle} = props;
+  const {offerId, offers, authStatus, reviews, postComment} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
   const offer = offers.find((it) => it.id === offerId);
@@ -133,10 +133,8 @@ const PropertyPage = (props) => {
             <div className="near-places__list places__list">
               <CardsList
                 offers={offers}
-                isNearPlaces={true}
-                onPlaceCardHeaderClick={onPlaceCardHeaderClick}
                 onActiveItemChange={() => {}}
-                onFavoritesToggle={onFavoritesToggle}
+                cardType={CardType.PROPERTY}
               />
             </div>
           </section>
@@ -149,11 +147,9 @@ const PropertyPage = (props) => {
 PropertyPage.propTypes = {
   offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  onPlaceCardHeaderClick: PropTypes.func.isRequired,
   authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   reviews: PropTypes.array.isRequired,
   postComment: PropTypes.func.isRequired,
-  onFavoritesToggle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

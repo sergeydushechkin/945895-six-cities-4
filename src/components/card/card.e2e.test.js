@@ -1,6 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import {CardType} from "../../const.js";
 import {Card} from "./card.jsx";
 
 import offers from "../../mocks/tests-offers.js";
@@ -17,9 +18,9 @@ describe(`Card mouse input testing`, () => {
       <Card
         key={offers[0].id}
         offer={offers[0]}
-        isNearPlaces={false}
         onActiveItemChange={onActiveItemChange}
         onFavoritesToggle={onFavoritesToggle}
+        cardType={CardType.MAIN}
       />
   );
 
