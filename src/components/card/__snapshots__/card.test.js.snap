@@ -51,6 +51,7 @@ exports[`Render Card 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -94,7 +95,6 @@ exports[`Render Card 1`] = `
     >
       <a
         href="#"
-        onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location
       </a>

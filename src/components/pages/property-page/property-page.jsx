@@ -2,19 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getAuthStatus} from "../../reducer/user/selectors.js";
-import {Operation} from "../../reducer/data/data.js";
-import {getComments} from "../../reducer/data/selectors.js";
+import {AuthorizationStatus} from "../../../reducer/user/user.js";
+import {getAuthStatus} from "../../../reducer/user/selectors.js";
+import {Operation} from "../../../reducer/data/data.js";
+import {getComments} from "../../../reducer/data/selectors.js";
+import history from "../../../history.js";
+import {AppRoute} from "../../../const.js";
 
-import {getRatingWidth} from "../../utils.js";
-import CardsList from "../cards-list/cards-list.jsx";
-import Header from "../header/header.jsx";
-import Map from "../map/map.jsx";
-import Reviews from "../reviews/reviews.jsx";
+import {getRatingWidth} from "../../../utils.js";
+import CardsList from "../../cards-list/cards-list.jsx";
+import Header from "../../header/header.jsx";
+import Map from "../../map/map.jsx";
+import Reviews from "../../reviews/reviews.jsx";
 
-const Property = (props) => {
-  const {offerId, offers, onPlaceCardHeaderClick, authStatus, reviews, postComment} = props;
+const PropertyPage = (props) => {
+  const {offerId, offers, onPlaceCardHeaderClick, authStatus, reviews, postComment, onFavoritesToggle} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
   const offer = offers.find((it) => it.id === offerId);
@@ -134,6 +136,7 @@ const Property = (props) => {
                 isNearPlaces={true}
                 onPlaceCardHeaderClick={onPlaceCardHeaderClick}
                 onActiveItemChange={() => {}}
+                onFavoritesToggle={onFavoritesToggle}
               />
             </div>
           </section>
@@ -143,13 +146,14 @@ const Property = (props) => {
   );
 };
 
-Property.propTypes = {
+PropertyPage.propTypes = {
   offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   onPlaceCardHeaderClick: PropTypes.func.isRequired,
   authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   reviews: PropTypes.array.isRequired,
   postComment: PropTypes.func.isRequired,
+  onFavoritesToggle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -162,8 +166,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   postComment(offerId, commentData) {
     return dispatch(Operation.postComment(offerId, commentData));
-  }
+  },
+  onFavoritesToggle(offerId, favoriteStatus) {
+    dispatch(Operation.postFavorite(offerId, favoriteStatus))
+    .catch((error) => {
+      if (error.response.status === 401) {
+        history.push(AppRoute.LOGIN);
+      }
+    });
+  },
 });
 
-export {Property};
-export default connect(mapStateToProps, mapDispatchToProps)(Property);
+export {PropertyPage};
+export default connect(mapStateToProps, mapDispatchToProps)(PropertyPage);

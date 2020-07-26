@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends React.PureComponent {
@@ -7,7 +6,7 @@ const withActiveItem = (Component) => {
       super(props);
 
       this.state = {
-        activeItemId: this.props.initActiveItemId
+        activeItemId: -1,
       };
 
       this.onActiveItemChange = this.onActiveItemChange.bind(this);
@@ -29,10 +28,6 @@ const withActiveItem = (Component) => {
       );
     }
   }
-
-  WithActiveItem.propTypes = {
-    initActiveItemId: PropTypes.any.isRequired,
-  };
 
   return WithActiveItem;
 };

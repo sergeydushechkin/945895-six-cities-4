@@ -27,4 +27,14 @@ const MONTH_NAMES = [
   `December`,
 ];
 
-export {SortTypes, SortTypeTexts, MONTH_NAMES};
+const AppRoute = {
+  LOGIN: `/login`,
+  ROOT: `/`,
+  FAVORITES: `/favorites`,
+};
+
+const Error = {
+  UNAUTHORIZED: 401
+};
+
+export {SortTypes, SortTypeTexts, MONTH_NAMES, AppRoute, Error};

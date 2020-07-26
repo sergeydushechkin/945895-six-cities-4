@@ -1,93 +1,29 @@
 import React from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import {Router, Route, Switch} from "react-router-dom";
 
-import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
-import {getShowAuthPage} from "../../reducer/app/selectors.js";
-import {getOffers, getActiveOfferId} from "../../reducer/data/selectors.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
-import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import Main from "../main/main.jsx";
-import Property from "../property/property.jsx";
-import SignIn from "../sign-in/sign-in.jsx";
-
-const MainWrapped = withActiveItem(Main);
+import MainPage from "../pages/main-page/main-page.jsx";
+// import PropertyPage from "../pages/property-page/property-page.jsx";
+import SignInPage from "../pages/sign-in-page/sign-in-page.jsx";
 
 class App extends React.PureComponent {
-  _renderMainScreen() {
-    const {offers, onChangeActiveOfferId, offerId, showAuth} = this.props;
-
-    if (showAuth) {
-      return (
-        <SignIn />
-      );
-    }
-
-    if (offerId === -1) {
-      return (
-        <MainWrapped
-          initActiveItemId={-1}
-          onPlaceCardHeaderClick = {onChangeActiveOfferId}
-        />
-      );
-    } else {
-      return (
-        <Property
-          offerId = {offerId}
-          offers = {offers}
-          onPlaceCardHeaderClick = {onChangeActiveOfferId}
-        />
-      );
-    }
-  }
-
   render() {
-    const {offers, onChangeActiveOfferId} = this.props;
-
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderMainScreen()}
-          </Route>
-          <Route exact path="/property">
-            <Property
-              offerId = {1}
-              offers = {offers}
-              onPlaceCardHeaderClick = {onChangeActiveOfferId}
+          <Route exact path={AppRoute.LOGIN}>
+            <SignInPage
             />
           </Route>
-          <Route exact path="/signin">
-            <SignIn
-            />
+          <Route path={AppRoute.ROOT}>
+            <MainPage />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
-App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  onChangeActiveOfferId: PropTypes.func.isRequired,
-  offerId: PropTypes.any.isRequired,
-  showAuth: PropTypes.bool.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onChangeActiveOfferId(id) {
-    dispatch(DataActionCreator.changeActiveOfferId(id));
-  }
-});
-
-const mapStateToProps = (state) => {
-  return {
-    offers: getOffers(state),
-    offerId: getActiveOfferId(state),
-    showAuth: getShowAuthPage(state),
-  };
-};
-
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

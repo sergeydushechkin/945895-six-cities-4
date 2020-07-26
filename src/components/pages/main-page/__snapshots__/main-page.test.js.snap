@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Main 1`] = `
+exports[`Render MainPage 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -39,7 +39,7 @@ exports[`Render Main 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -236,6 +236,7 @@ exports[`Render Main 1`] = `
                   </div>
                   <button
                     className="place-card__bookmark-button button"
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -279,7 +280,6 @@ exports[`Render Main 1`] = `
                 >
                   <a
                     href="#"
-                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>

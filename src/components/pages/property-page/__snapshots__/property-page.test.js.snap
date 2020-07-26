@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render Property 1`] = `
+exports[`Render PropertyPage 1`] = `
 <div
   className="page"
 >
@@ -39,7 +39,7 @@ exports[`Render Property 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -416,6 +416,7 @@ exports[`Render Property 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -459,7 +460,6 @@ exports[`Render Property 1`] = `
               >
                 <a
                   href="#"
-                  onClick={[Function]}
                 >
                   Beautiful & luxurious apartment at great location
                 </a>
@@ -514,6 +514,7 @@ exports[`Render Property 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg
@@ -557,7 +558,6 @@ exports[`Render Property 1`] = `
               >
                 <a
                   href="#"
-                  onClick={[Function]}
                 >
                   Not bad!
                 </a>

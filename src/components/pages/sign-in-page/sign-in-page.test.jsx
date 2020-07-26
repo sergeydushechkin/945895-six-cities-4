@@ -1,20 +1,29 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {Router} from "react-router-dom";
 
-import testStore from "../../mocks/tests-mock-store.js";
+import history from "../../../history.js";
+
+import {SignInPage} from "./sign-in-page.jsx";
+
+import testStore from "../../../mocks/tests-mock-store.js";
 
 const mockStore = configureStore([]);
 
-it(`Render App`, () => {
+it(`Render SignInPage`, () => {
   const store = mockStore(testStore);
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App />
+          <Router history={history}>
+            <SignInPage
+              onUserLogin={() => {}}
+              onChangeAuthPageState={() => {}}
+            />
+          </Router>
         </Provider>,
         {
           createNodeMock: () => {

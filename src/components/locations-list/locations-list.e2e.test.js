@@ -9,14 +9,12 @@ Enzyme.configure({
 
 it(`Should LocationsList item to be pressed and return proper value`, () => {
   const onCityChange = jest.fn();
-  const onActiveItemChange = jest.fn();
 
   const locationList = shallow(
       <LocationsList
         locations={[`Amsterdam`, `Paris`, `London`]}
-        activeItemId={`Paris`}
+        city={`Paris`}
         onCityChange={onCityChange}
-        onActiveItemChange={onActiveItemChange}
       />
   );
 
@@ -28,7 +26,4 @@ it(`Should LocationsList item to be pressed and return proper value`, () => {
 
   expect(onCityChange.mock.calls.length).toBe(1);
   expect(onCityChange.mock.calls[0][0]).toBe(`London`);
-
-  expect(onActiveItemChange.mock.calls.length).toBe(1);
-  expect(onActiveItemChange.mock.calls[0][0]).toBe(`London`);
 });

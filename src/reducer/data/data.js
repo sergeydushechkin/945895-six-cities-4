@@ -1,19 +1,25 @@
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 import {extend} from "../../utils.js";
-import offerAdapter from "../../adapters/offer.js";
-import createCommentsGet from "../../adapters/comment-get.js";
+import offerAdapter from "../../adapters/offer/offer.js";
+import createCommentsGet from "../../adapters/comment-get/comment-get.js";
+
+const FavoriteStatus = {
+  IN_FAVORITES: `1`,
+  NOT_IN_FAVORITES: `0`,
+};
 
 const initialState = {
   city: ``,
   offers: [],
-  activeOfferId: -1,
   comments: [],
 };
 
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
-  CHANGE_ACTIVE_OFFER_ID: `CHANGE_ACTIVE_OFFER_ID`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
 };
 
 const ActionCreator = {
@@ -25,14 +31,14 @@ const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: city
   }),
-  changeActiveOfferId: (id) => ({
-    type: ActionType.CHANGE_ACTIVE_OFFER_ID,
-    payload: id
-  }),
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments
   }),
+  updateFavorite: (offer) => ({
+    type: ActionType.UPDATE_FAVORITE,
+    payload: offer
+  })
 };
 
 const Operation = {
@@ -52,6 +58,18 @@ const Operation = {
         dispatch(ActionCreator.loadComments(loadedComments));
         return loadedComments;
       });
+  },
+  postFavorite: (offerId, isFavorite) => (dispatch, getState, api) => {
+    const favoriteStatus = isFavorite ? FavoriteStatus.IN_FAVORITES : FavoriteStatus.NOT_IN_FAVORITES;
+    return api.post(`/favorite/${offerId}/${favoriteStatus}`)
+      .then((response) => {
+        dispatch(ActionCreator.updateFavorite(offerAdapter(response.data)));
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          history.push(AppRoute.LOGIN);
+        }
+      });
   }
 };
 
@@ -61,13 +79,14 @@ const reducer = (state = initialState, action) => {
       return extend(state, {offers: action.payload});
     case ActionType.CHANGE_CITY:
       return extend(state, {city: action.payload});
-    case ActionType.CHANGE_ACTIVE_OFFER_ID:
-      return extend(state, {activeOfferId: action.payload});
     case ActionType.LOAD_COMMENTS:
       return extend(state, {comments: action.payload});
+    case ActionType.UPDATE_FAVORITE:
+      const index = state.offers.findIndex((it) => it.id === action.payload.id);
+      return extend(state, {offers: [].concat(...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1, state.offers.length))});
   }
 
   return state;
 };
 
-export {reducer, ActionCreator, ActionType, Operation};
+export {reducer, ActionCreator, ActionType, Operation, FavoriteStatus};

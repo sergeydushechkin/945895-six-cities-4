@@ -4,25 +4,34 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import testStore from "../../mocks/tests-mock-store.js";
+import history from "../../../history.js";
 
-import Header from "./header.jsx";
+import MainPage from "./main-page.jsx";
+
+import testStore from "../../../mocks/tests-mock-store.js";
+import offers from "../../../mocks/tests-offers.js";
+
 
 const mockStore = configureStore([]);
 
-it(`Render Header`, () => {
+it(`Render MainPage`, () => {
   const store = mockStore(testStore);
 
   const tree = renderer
     .create(
         <Provider store={store}>
           <Router history={history}>
-            <Header
-              isLogoActive={false}
+            <MainPage
+              activeOffers = {offers}
+              sortType = {`popular`}
             />
           </Router>
-        </Provider>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }
     )
     .toJSON();
 

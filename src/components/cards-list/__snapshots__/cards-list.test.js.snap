@@ -52,6 +52,7 @@ Array [
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -95,7 +96,6 @@ Array [
       >
         <a
           href="#"
-          onClick={[Function]}
         >
           Beautiful & luxurious apartment at great location
         </a>
@@ -150,6 +150,7 @@ Array [
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -193,7 +194,6 @@ Array [
       >
         <a
           href="#"
-          onClick={[Function]}
         >
           Not bad!
         </a>

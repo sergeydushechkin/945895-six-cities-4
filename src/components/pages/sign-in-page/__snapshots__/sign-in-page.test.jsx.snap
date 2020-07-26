@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render SignIn 1`] = `
+exports[`Render SignInPage 1`] = `
 <div
   className="page page--gray page--login"
 >
@@ -39,7 +39,7 @@ exports[`Render SignIn 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
