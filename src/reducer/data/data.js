@@ -13,6 +13,7 @@ const initialState = {
   city: ``,
   offers: [],
   comments: [],
+  favorites: [],
 };
 
 const ActionType = {
@@ -20,6 +21,7 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   UPDATE_FAVORITE: `UPDATE_FAVORITE`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
 };
 
 const ActionCreator = {
@@ -38,7 +40,11 @@ const ActionCreator = {
   updateFavorite: (offer) => ({
     type: ActionType.UPDATE_FAVORITE,
     payload: offer
-  })
+  }),
+  loadFavorites: (favorites) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: favorites
+  }),
 };
 
 const Operation = {
@@ -84,6 +90,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.UPDATE_FAVORITE:
       const index = state.offers.findIndex((it) => it.id === action.payload.id);
       return extend(state, {offers: [].concat(...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1, state.offers.length))});
+    case ActionType.LOAD_FAVORITES:
+      return extend(state, {favorites: action.payload});
   }
 
   return state;

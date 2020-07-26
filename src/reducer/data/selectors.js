@@ -15,6 +15,10 @@ const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
+const getFavorites = (state) => {
+  return state[NAME_SPACE].favorites;
+};
+
 const getFilteredOffers = createSelector(
     getOffers,
     getCity,
@@ -30,4 +34,11 @@ const getLocations = createSelector(
     }
 );
 
-export {getOffers, getCity, getComments, getFilteredOffers, getLocations};
+const getFavoritesLocations = createSelector(
+    getFavorites,
+    (result) => {
+      return Array.from(new Set(result.map((it) => it.city.name)));
+    }
+);
+
+export {getOffers, getCity, getComments, getFavorites, getFilteredOffers, getLocations, getFavoritesLocations};

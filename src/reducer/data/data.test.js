@@ -82,6 +82,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      favorites: [],
     });
   });
 
@@ -90,6 +91,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      favorites: [],
     }, {
       type: ActionType.LOAD_OFFERS,
       payload: offersRaw,
@@ -97,6 +99,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersRaw,
       comments: [],
+      favorites: [],
     });
   });
 
@@ -105,6 +108,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      favorites: [],
     }, {
       type: ActionType.CHANGE_CITY,
       payload: `Paris`,
@@ -112,6 +116,7 @@ describe(`Reducer work correctly`, () => {
       city: `Paris`,
       offers: [],
       comments: [],
+      favorites: [],
     });
   });
 
@@ -120,6 +125,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      favorites: [],
     }, {
       type: ActionType.LOAD_COMMENTS,
       payload: commentsRaw,
@@ -127,6 +133,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: commentsRaw,
+      favorites: [],
     });
   });
 
@@ -135,6 +142,7 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersResult,
       comments: [],
+      favorites: [],
     }, {
       type: ActionType.UPDATE_FAVORITE,
       payload: offersResult[0],
@@ -142,6 +150,24 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersResult,
       comments: [],
+      favorites: [],
+    });
+  });
+
+  it(`Reducer should change comments by a given value`, () => {
+    expect(reducer({
+      city: ``,
+      offers: [],
+      comments: [],
+      favorites: [],
+    }, {
+      type: ActionType.LOAD_FAVORITES,
+      payload: offersResult,
+    })).toEqual({
+      city: ``,
+      offers: [],
+      comments: [],
+      favorites: offersResult,
     });
   });
 });
@@ -174,6 +200,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.updateFavorite(offersResult[0])).toEqual({
       type: ActionType.UPDATE_FAVORITE,
       payload: offersResult[0],
+    });
+  });
+
+  it(`Action creator for load comments returns correct action`, () => {
+    expect(ActionCreator.loadFavorites(offersResult)).toEqual({
+      type: ActionType.LOAD_FAVORITES,
+      payload: offersResult,
     });
   });
 });
