@@ -76,6 +76,13 @@ const Operation = {
           history.push(AppRoute.LOGIN);
         }
       });
+  },
+  loadFavorite: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const loadedFavorites = response.data.map((offer) => offerAdapter(offer));
+        dispatch(ActionCreator.loadFavorites(loadedFavorites));
+      });
   }
 };
 

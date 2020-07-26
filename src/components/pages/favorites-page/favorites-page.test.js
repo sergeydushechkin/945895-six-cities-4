@@ -21,6 +21,7 @@ it(`Render FavoritesPage`, () => {
             <FavoritesPage
               favoritesLocations={[offers[0].city.name, offers[1].city.name]}
               favoritesOffers={offers}
+              loadFavorite={() => {}}
             />
           </Router>
         </Provider>
