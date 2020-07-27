@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import {Router} from "react-router-dom";
+import {Router, Route} from "react-router-dom";
 
 import history from "../../../history.js";
 import PropertyPage from "./property-page.jsx";
@@ -19,9 +19,13 @@ it(`Render PropertyPage`, () => {
     .create(
         <Provider store={store}>
           <Router history={history}>
-            <PropertyPage
-              offerId = {1}
-              offers = {offers}
+            <Route exact path={`/offer/1`}
+              render={() => {
+                return <PropertyPage
+                  offerId = {1}
+                  offers = {offers}
+                />;
+              }}
             />
           </Router>
         </Provider>,

@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 import {Operation} from "../../reducer/data/data.js";
-import {CardType} from "../../const.js";
+import {CardType, AppRoute} from "../../const.js";
 import {getRatingWidth, capitalizeFirstLetter} from "../../utils.js";
 
 const typeToArticleClass = {
@@ -60,7 +61,7 @@ const Card = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>

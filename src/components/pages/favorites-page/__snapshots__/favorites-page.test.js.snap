@@ -18,6 +18,8 @@ exports[`Render FavoritesPage 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -189,7 +191,8 @@ exports[`Render FavoritesPage 1`] = `
                     className="place-card__name"
                   >
                     <a
-                      href="#"
+                      href="/offer/1"
+                      onClick={[Function]}
                     >
                       Beautiful & luxurious apartment at great location
                     </a>
@@ -311,7 +314,8 @@ exports[`Render FavoritesPage 1`] = `
                     className="place-card__name"
                   >
                     <a
-                      href="#"
+                      href="/offer/5"
+                      onClick={[Function]}
                     >
                       Not bad!
                     </a>

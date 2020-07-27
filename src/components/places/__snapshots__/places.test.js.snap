@@ -174,7 +174,8 @@ exports[`Render Places 1`] = `
             className="place-card__name"
           >
             <a
-              href="#"
+              href="/offer/1"
+              onClick={[Function]}
             >
               Beautiful & luxurious apartment at great location
             </a>
@@ -272,7 +273,8 @@ exports[`Render Places 1`] = `
             className="place-card__name"
           >
             <a
-              href="#"
+              href="/offer/5"
+              onClick={[Function]}
             >
               Not bad!
             </a>

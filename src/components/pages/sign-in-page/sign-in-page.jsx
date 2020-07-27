@@ -2,8 +2,9 @@ import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
+import history from "../../../history.js";
+import {AppRoute} from "../../../const.js";
 import {Operation} from "../../../reducer/user/user.js";
-import {ActionCreator as AppActionCreator} from "../../../reducer/app/app.js";
 
 import Header from "../../header/header.jsx";
 
@@ -21,7 +22,7 @@ class SignInPage extends React.PureComponent {
   }
 
   _handleSubmit(evt) {
-    const {onUserLogin, onChangeAuthPageState} = this.props;
+    const {onUserLogin} = this.props;
     evt.preventDefault();
 
     onUserLogin({
@@ -30,7 +31,7 @@ class SignInPage extends React.PureComponent {
     })
     .then(() => {
       this.setState({error: false});
-      onChangeAuthPageState(false);
+      history.push(AppRoute.ROOT);
     })
     .catch((err) => {
       this.errorText = err.response.data.error;
@@ -79,13 +80,9 @@ class SignInPage extends React.PureComponent {
 
 SignInPage.propTypes = {
   onUserLogin: PropTypes.func.isRequired,
-  onChangeAuthPageState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeAuthPageState(state) {
-    dispatch(AppActionCreator.changeAuthPageState(state));
-  },
   onUserLogin(authInfo) {
     return dispatch(Operation.loginUser(authInfo));
   }

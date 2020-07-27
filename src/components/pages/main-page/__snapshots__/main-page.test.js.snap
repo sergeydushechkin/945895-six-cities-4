@@ -18,6 +18,8 @@ exports[`Render MainPage 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -279,7 +281,8 @@ exports[`Render MainPage 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
+                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>

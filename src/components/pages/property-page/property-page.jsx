@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {useParams} from "react-router-dom";
 
 import {AuthorizationStatus} from "../../../reducer/user/user.js";
 import {getAuthStatus} from "../../../reducer/user/selectors.js";
 import {Operation} from "../../../reducer/data/data.js";
-import {getComments} from "../../../reducer/data/selectors.js";
-import history from "../../../history.js";
-import {AppRoute, CardType} from "../../../const.js";
+import {getComments, getOffers} from "../../../reducer/data/selectors.js";
+import {CardType} from "../../../const.js";
 
 import {getRatingWidth} from "../../../utils.js";
 import CardsList from "../../cards-list/cards-list.jsx";
@@ -16,7 +16,8 @@ import Map from "../../map/map.jsx";
 import Reviews from "../../reviews/reviews.jsx";
 
 const PropertyPage = (props) => {
-  const {offerId, offers, authStatus, reviews, postComment} = props;
+  const offerId = parseInt(useParams().id, 10);
+  const {offers, authStatus, reviews, postComment} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
   const offer = offers.find((it) => it.id === offerId);
@@ -145,7 +146,6 @@ const PropertyPage = (props) => {
 };
 
 PropertyPage.propTypes = {
-  offerId: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   reviews: PropTypes.array.isRequired,
@@ -156,20 +156,13 @@ const mapStateToProps = (state) => {
   return {
     authStatus: getAuthStatus(state),
     reviews: getComments(state),
+    offers: getOffers(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   postComment(offerId, commentData) {
     return dispatch(Operation.postComment(offerId, commentData));
-  },
-  onFavoritesToggle(offerId, favoriteStatus) {
-    dispatch(Operation.postFavorite(offerId, favoriteStatus))
-    .catch((error) => {
-      if (error.response.status === 401) {
-        history.push(AppRoute.LOGIN);
-      }
-    });
   },
 });
 
