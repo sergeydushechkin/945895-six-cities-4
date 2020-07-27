@@ -152,10 +152,10 @@ describe(`Reducer work correctly`, () => {
       comments: [],
     }, {
       type: ActionType.LOAD_FAVORITES,
-      payload: offersResult,
+      payload: [Object.assign({}, offersResult[0], {isFavorite: true})],
     })).toEqual({
       city: ``,
-      offers: offersResult,
+      offers: [Object.assign({}, offersResult[0], {isFavorite: true})],
       comments: [],
     });
   });
