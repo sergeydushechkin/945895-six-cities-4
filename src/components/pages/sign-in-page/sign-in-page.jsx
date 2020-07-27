@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import history from "../../../history.js";
 import {AppRoute} from "../../../const.js";
 import {Operation} from "../../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../../reducer/data/data.js";
 
 import Header from "../../header/header.jsx";
 
@@ -22,7 +23,7 @@ class SignInPage extends React.PureComponent {
   }
 
   _handleSubmit(evt) {
-    const {onUserLogin} = this.props;
+    const {onUserLogin, loadFavorite} = this.props;
     evt.preventDefault();
 
     onUserLogin({
@@ -31,6 +32,7 @@ class SignInPage extends React.PureComponent {
     })
     .then(() => {
       this.setState({error: false});
+      loadFavorite();
       history.push(AppRoute.ROOT);
     })
     .catch((err) => {
@@ -80,11 +82,15 @@ class SignInPage extends React.PureComponent {
 
 SignInPage.propTypes = {
   onUserLogin: PropTypes.func.isRequired,
+  loadFavorite: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onUserLogin(authInfo) {
     return dispatch(Operation.loginUser(authInfo));
+  },
+  loadFavorite() {
+    dispatch(DataOperation.loadFavorite());
   }
 });
 

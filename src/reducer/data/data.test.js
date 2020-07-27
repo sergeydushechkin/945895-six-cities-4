@@ -82,7 +82,6 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
-      favorites: [],
     });
   });
 
@@ -91,7 +90,6 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
-      favorites: [],
     }, {
       type: ActionType.LOAD_OFFERS,
       payload: offersRaw,
@@ -99,7 +97,6 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersRaw,
       comments: [],
-      favorites: [],
     });
   });
 
@@ -108,7 +105,6 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
-      favorites: [],
     }, {
       type: ActionType.CHANGE_CITY,
       payload: `Paris`,
@@ -116,7 +112,6 @@ describe(`Reducer work correctly`, () => {
       city: `Paris`,
       offers: [],
       comments: [],
-      favorites: [],
     });
   });
 
@@ -125,7 +120,6 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
-      favorites: [],
     }, {
       type: ActionType.LOAD_COMMENTS,
       payload: commentsRaw,
@@ -133,16 +127,14 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: commentsRaw,
-      favorites: [],
     });
   });
 
-  it(`Reducer should change comments by a given value`, () => {
+  it(`Reducer should change favorites by a given value`, () => {
     expect(reducer({
       city: ``,
       offers: offersResult,
       comments: [],
-      favorites: [],
     }, {
       type: ActionType.UPDATE_FAVORITE,
       payload: offersResult[0],
@@ -150,24 +142,21 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersResult,
       comments: [],
-      favorites: [],
     });
   });
 
-  it(`Reducer should change comments by a given value`, () => {
+  it(`Reducer should load favorites `, () => {
     expect(reducer({
       city: ``,
-      offers: [],
+      offers: offersResult,
       comments: [],
-      favorites: [],
     }, {
       type: ActionType.LOAD_FAVORITES,
       payload: offersResult,
     })).toEqual({
       city: ``,
-      offers: [],
+      offers: offersResult,
       comments: [],
-      favorites: offersResult,
     });
   });
 });

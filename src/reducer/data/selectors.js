@@ -15,9 +15,9 @@ const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
-const getFavorites = (state) => {
-  return state[NAME_SPACE].favorites;
-};
+// const getFavorites = (state) => {
+//   return state[NAME_SPACE].favorites;
+// };
 
 const getFilteredOffers = createSelector(
     getOffers,
@@ -31,6 +31,13 @@ const getLocations = createSelector(
     getOffers,
     (result) => {
       return Array.from(new Set(result.map((it) => it.city.name)));
+    }
+);
+
+const getFavorites = createSelector(
+    getOffers,
+    (result) => {
+      return result.filter((it) => it.isFavorite);
     }
 );
 

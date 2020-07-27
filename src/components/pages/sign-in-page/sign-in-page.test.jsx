@@ -21,6 +21,7 @@ it(`Render SignInPage`, () => {
           <Router history={history}>
             <SignInPage
               onUserLogin={() => {}}
+              loadFavorite={() => {}}
             />
           </Router>
         </Provider>,

@@ -13,7 +13,6 @@ const initialState = {
   city: ``,
   offers: [],
   comments: [],
-  favorites: [],
 };
 
 const ActionType = {
@@ -98,7 +97,11 @@ const reducer = (state = initialState, action) => {
       const index = state.offers.findIndex((it) => it.id === action.payload.id);
       return extend(state, {offers: [].concat(...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1, state.offers.length))});
     case ActionType.LOAD_FAVORITES:
-      return extend(state, {favorites: action.payload});
+      const newOffers = state.offers.map((offer) => {
+        const offerIndex = action.payload.findIndex((it) => it.id === offer.id);
+        return offerIndex !== -1 ? action.payload[offerIndex] : offer;
+      });
+      return extend(state, {offers: newOffers});
   }
 
   return state;
