@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {useParams} from "react-router-dom";
 
 import {AuthorizationStatus} from "../../../reducer/user/user.js";
 import {getAuthStatus} from "../../../reducer/user/selectors.js";
@@ -16,7 +15,7 @@ import Map from "../../map/map.jsx";
 import Reviews from "../../reviews/reviews.jsx";
 
 const PropertyPage = (props) => {
-  const offerId = parseInt(useParams().id, 10);
+  const offerId = parseInt(props.match.params.id, 10);
   const {offers, authStatus, reviews, postComment} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
@@ -150,6 +149,11 @@ PropertyPage.propTypes = {
   authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   reviews: PropTypes.array.isRequired,
   postComment: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => {
