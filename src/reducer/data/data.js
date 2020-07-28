@@ -56,6 +56,14 @@ const Operation = {
         return loadedOffers;
       });
   },
+  getComments: (offerId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${offerId}`)
+      .then((response) => {
+        const loadedComments = response.data.map((comment) => createCommentsGet(comment));
+        dispatch(ActionCreator.loadComments(loadedComments));
+        return loadedComments;
+      });
+  },
   postComment: (offerId, commentsData) => (dispatch, getState, api) => {
     return api.post(`/comments/${offerId}`, commentsData)
       .then((response) => {

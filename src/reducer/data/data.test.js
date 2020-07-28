@@ -224,7 +224,26 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /comments/1`, function () {
+  it(`Should make a correct API call to get /comments/1`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const getComments = Operation.getComments(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, [...commentsRaw]);
+
+    return getComments(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: [...commentsResult],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to post /comments/1`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const postComment = Operation.postComment(1, {comment: `test`, rating: `5`});

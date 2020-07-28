@@ -16,12 +16,13 @@ import Reviews from "../../reviews/reviews.jsx";
 
 const PropertyPage = (props) => {
   const offerId = parseInt(props.match.params.id, 10);
-  const {offers, authStatus, reviews, postComment} = props;
+  const {offers, authStatus, reviews, postComment, loadComments} = props;
   const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
 
   const offer = offers.find((it) => it.id === offerId);
   const {pictures, isPremium, isFavorite, title, rating, type, bedrooms, guests, features, description, host, location, price} = offer;
   const {name, isPro, avatarUrl} = host;
+  loadComments(offerId);
 
   return (
     <div className="page">
@@ -154,6 +155,7 @@ PropertyPage.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  loadComments: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -167,6 +169,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   postComment(offerId, commentData) {
     return dispatch(Operation.postComment(offerId, commentData));
+  },
+  loadComments(offerId) {
+    return dispatch(Operation.getComments(offerId));
   },
 });
 

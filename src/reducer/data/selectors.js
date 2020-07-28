@@ -15,10 +15,6 @@ const getComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
-// const getFavorites = (state) => {
-//   return state[NAME_SPACE].favorites;
-// };
-
 const getFilteredOffers = createSelector(
     getOffers,
     getCity,
