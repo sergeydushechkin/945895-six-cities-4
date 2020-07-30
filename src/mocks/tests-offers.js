@@ -50,7 +50,7 @@ export default [
     type: TYPES.hotel,
     rating: 3.2,
     isPremium: false,
-    isFavorite: false,
+    isFavorite: true,
     bedrooms: 1,
     description: `An independent House.`,
     guests: 1,

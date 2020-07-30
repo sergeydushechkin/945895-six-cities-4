@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getFavorites, getFavoritesLocations} from "../../../reducer/data/selectors.js";
+import {getFavorites} from "../../../reducer/data/selectors.js";
 
 import Header from "../../header/header.jsx";
 import Favorites from "../../favorites/favorites.jsx";
@@ -10,7 +10,7 @@ import FavoritesEmpty from "../../favorites-empty/favorites-empty.jsx";
 
 
 const FavoritesPage = (props) => {
-  const {favoritesOffers, favoritesLocations} = props;
+  const {favoritesOffers} = props;
   return (
     <div className={`page${favoritesOffers.length ? `` : `page--favorites-empty`}`}>
       <Header
@@ -19,7 +19,7 @@ const FavoritesPage = (props) => {
       <main className={`page__main page__main--favorites${favoritesOffers.length ? `` : `page__main--favorites-empty`}`}>
         <div className="page__favorites-container container">
           {favoritesOffers.length
-            ? <Favorites offers={favoritesOffers} locations={favoritesLocations}/>
+            ? <Favorites />
             : <FavoritesEmpty />
           }
         </div>
@@ -35,13 +35,11 @@ const FavoritesPage = (props) => {
 
 FavoritesPage.propTypes = {
   favoritesOffers: PropTypes.array.isRequired,
-  favoritesLocations: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     favoritesOffers: getFavorites(state),
-    favoritesLocations: getFavoritesLocations(state),
   };
 };
 

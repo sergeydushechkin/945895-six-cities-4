@@ -7,8 +7,7 @@ const testStore = {
     city: offers[0].city.name,
     offers,
     comments: [],
-  },
-  [NameSpace.APP]: {
+    nearby: [],
     sortType: `popular`,
   },
   [NameSpace.USER]: {

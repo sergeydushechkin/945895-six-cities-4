@@ -24,7 +24,7 @@ it(`Render Places`, () => {
               onActiveItemChange={() => {}}
               activeItemId={1}
               city={`Paris`}
-              sortType={`popular`}
+              sortedActiveOffers={offers}
             />
           </Provider>
         </Router>,

@@ -19,8 +19,8 @@ it(`Render Favorites`, () => {
         <Router history={history}>
           <Provider store={store}>
             <Favorites
-              locations={[offers[0].city.name, offers[1].city.name]}
-              offers={offers}
+              favoritesLocations={[offers[0].city.name, offers[1].city.name]}
+              favoritesOffers={offers}
             />
           </Provider>
         </Router>

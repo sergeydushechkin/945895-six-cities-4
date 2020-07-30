@@ -150,7 +150,7 @@ Array [
           </span>
         </div>
         <button
-          className="place-card__bookmark-button button"
+          className="place-card__bookmark-button button place-card__bookmark-button--active"
           onClick={[Function]}
           type="button"
         >
@@ -166,7 +166,7 @@ Array [
           <span
             className="visually-hidden"
           >
-            To bookmarks
+            In bookmarks
           </span>
         </button>
       </div>

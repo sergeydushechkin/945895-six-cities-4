@@ -1,5 +1,5 @@
 import history from "../../history.js";
-import {AppRoute} from "../../const.js";
+import {AppRoute, SortTypes} from "../../const.js";
 import {extend} from "../../utils.js";
 import offerAdapter from "../../adapters/offer/offer.js";
 import createCommentsGet from "../../adapters/comment-get/comment-get.js";
@@ -13,6 +13,8 @@ const initialState = {
   city: ``,
   offers: [],
   comments: [],
+  nearby: [],
+  sortType: SortTypes.POPULAR,
 };
 
 const ActionType = {
@@ -21,6 +23,8 @@ const ActionType = {
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   UPDATE_FAVORITE: `UPDATE_FAVORITE`,
   LOAD_FAVORITES: `LOAD_FAVORITES`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
+  CHANGE_SORT: `CHANGE_SORT`,
 };
 
 const ActionCreator = {
@@ -43,6 +47,14 @@ const ActionCreator = {
   loadFavorites: (favorites) => ({
     type: ActionType.LOAD_FAVORITES,
     payload: favorites
+  }),
+  loadNearbyOffers: (nearby) => ({
+    type: ActionType.LOAD_NEARBY_OFFERS,
+    payload: nearby,
+  }),
+  changeSort: (sortType) => ({
+    type: ActionType.CHANGE_SORT,
+    payload: sortType
   }),
 };
 
@@ -90,6 +102,13 @@ const Operation = {
         const loadedFavorites = response.data.map((offer) => offerAdapter(offer));
         dispatch(ActionCreator.loadFavorites(loadedFavorites));
       });
+  },
+  getNearbyOffers: (offerId) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${offerId}/nearby`)
+      .then((response) => {
+        const loadedNearby = response.data.map((offer) => offerAdapter(offer));
+        dispatch(ActionCreator.loadNearbyOffers(loadedNearby));
+      });
   }
 };
 
@@ -110,6 +129,10 @@ const reducer = (state = initialState, action) => {
         return offerIndex !== -1 ? action.payload[offerIndex] : offer;
       });
       return extend(state, {offers: newOffers});
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return extend(state, {nearby: action.payload});
+    case ActionType.CHANGE_SORT:
+      return extend(state, {sortType: action.payload});
   }
 
   return state;
