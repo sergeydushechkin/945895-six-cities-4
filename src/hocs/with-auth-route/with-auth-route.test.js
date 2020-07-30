@@ -7,7 +7,7 @@ import {Router} from "react-router-dom";
 import history from "../../history.js";
 
 import NameSpace from "../../reducer/name-space.js";
-import withAuthRoute from "./withAuthRoute.js";
+import withAuthRoute from "./with-auth-route.js";
 
 const mockStore = configureStore([]);
 

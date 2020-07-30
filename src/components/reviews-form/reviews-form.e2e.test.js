@@ -14,6 +14,16 @@ it(`Test ReviewsForm component items clicks and return value`, () => {
       <ReviewsForm
         offerId={1}
         onPostComment={onPostComment}
+        resetFromState={() => {}}
+        disableForm={() => {}}
+        enableForm={() => {}}
+        changeElementState={() => {}}
+        formStates={{
+          rating: `5`,
+          review: `test test test test test test test test test test test test test test test test test test test test test test test test`,
+          isFormDisabled: false,
+          errorText: ``,
+        }}
       />
   );
 

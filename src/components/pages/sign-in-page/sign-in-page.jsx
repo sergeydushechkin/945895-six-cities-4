@@ -16,14 +16,11 @@ class SignInPage extends React.PureComponent {
     this.email = createRef();
     this.password = createRef();
 
-    this._handleSubmit = this._handleSubmit.bind(this);
-
-    this.errorText = ``;
-    this.state = {error: false};
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  _handleSubmit(evt) {
-    const {onUserLogin, loadFavorite} = this.props;
+  handleSubmit(evt) {
+    const {onUserLogin, loadFavorite, onActiveItemChange} = this.props;
     evt.preventDefault();
 
     onUserLogin({
@@ -31,17 +28,18 @@ class SignInPage extends React.PureComponent {
       password: this.password.current.value,
     })
     .then(() => {
-      this.setState({error: false});
+      onActiveItemChange(``);
       loadFavorite();
       history.push(AppRoute.ROOT);
     })
     .catch((err) => {
-      this.errorText = err.response.data.error;
-      this.setState({error: true});
+      onActiveItemChange(err.response.data.error);
     });
   }
 
   render() {
+    const {activeItemId} = this.props;
+
     return (
       <div className="page page--gray page--login">
         <Header
@@ -51,7 +49,7 @@ class SignInPage extends React.PureComponent {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form onSubmit={this._handleSubmit} className="login__form form" action="#" method="post">
+              <form onSubmit={this.handleSubmit} className="login__form form" action="#" method="post">
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
                   <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" ref={this.email}/>
@@ -61,8 +59,8 @@ class SignInPage extends React.PureComponent {
                   <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" ref={this.password}/>
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
-                {this.state.error &&
-                  <div style={{marginTop: `15px`, fontSize: `15px`, color: `#ff0000`}}>{this.errorText}</div>
+                {activeItemId &&
+                  <div style={{marginTop: `15px`, fontSize: `15px`, color: `#ff0000`}}>{activeItemId}</div>
                 }
               </form>
             </section>
@@ -83,6 +81,8 @@ class SignInPage extends React.PureComponent {
 SignInPage.propTypes = {
   onUserLogin: PropTypes.func.isRequired,
   loadFavorite: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
+  activeItemId: PropTypes.any.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,6 +8,16 @@ it(`Render ReviewsForm`, () => {
         <ReviewsForm
           offerId={1}
           onPostComment={() => {}}
+          resetFromState={() => {}}
+          disableForm={() => {}}
+          enableForm={() => {}}
+          changeElementState={() => {}}
+          formStates={{
+            rating: ``,
+            review: ``,
+            isFormDisabled: false,
+            errorText: ``,
+          }}
         />
     )
     .toJSON();
