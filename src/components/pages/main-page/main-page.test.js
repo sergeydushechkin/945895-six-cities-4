@@ -23,7 +23,6 @@ it(`Render MainPage`, () => {
           <Router history={history}>
             <MainPage
               activeOffers = {offers}
-              sortType = {`popular`}
             />
           </Router>
         </Provider>,

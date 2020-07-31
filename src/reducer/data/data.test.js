@@ -1,6 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation, ActionCreator} from "./data.js";
+import {SortTypes} from "../../const.js";
 
 const offersRaw = [
   {
@@ -82,14 +83,18 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     });
   });
 
-  it(`Reducer should update offers by load offers`, () => {
+  it(`Reducer should change offers by load offers`, () => {
     expect(reducer({
       city: ``,
       offers: [],
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     }, {
       type: ActionType.LOAD_OFFERS,
       payload: offersRaw,
@@ -97,6 +102,8 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersRaw,
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     });
   });
 
@@ -105,6 +112,8 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     }, {
       type: ActionType.CHANGE_CITY,
       payload: `Paris`,
@@ -112,6 +121,8 @@ describe(`Reducer work correctly`, () => {
       city: `Paris`,
       offers: [],
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     });
   });
 
@@ -120,6 +131,8 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     }, {
       type: ActionType.LOAD_COMMENTS,
       payload: commentsRaw,
@@ -127,14 +140,18 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: [],
       comments: commentsRaw,
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     });
   });
 
-  it(`Reducer should change comments by a given value`, () => {
+  it(`Reducer should change favorites by a given value`, () => {
     expect(reducer({
       city: ``,
       offers: offersResult,
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
     }, {
       type: ActionType.UPDATE_FAVORITE,
       payload: offersResult[0],
@@ -142,10 +159,68 @@ describe(`Reducer work correctly`, () => {
       city: ``,
       offers: offersResult,
       comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+    });
+  });
+
+  it(`Reducer should load favorites `, () => {
+    expect(reducer({
+      city: ``,
+      offers: offersResult,
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+    }, {
+      type: ActionType.LOAD_FAVORITES,
+      payload: [Object.assign({}, offersResult[0], {isFavorite: true})],
+    })).toEqual({
+      city: ``,
+      offers: [Object.assign({}, offersResult[0], {isFavorite: true})],
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+    });
+  });
+
+  it(`Reducer should update nearby by load nearby offers`, () => {
+    expect(reducer({
+      city: ``,
+      offers: [],
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+    }, {
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: offersRaw,
+    })).toEqual({
+      city: ``,
+      offers: [],
+      comments: [],
+      nearby: offersRaw,
+      sortType: SortTypes.POPULAR,
+    });
+  });
+
+  it(`Reducer should change sort type by a given value`, () => {
+    expect(reducer({
+      city: ``,
+      offers: [],
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+    }, {
+      type: ActionType.CHANGE_SORT,
+      payload: SortTypes.PRICE_HIGH_LOW,
+    })).toEqual({
+      city: ``,
+      offers: [],
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.PRICE_HIGH_LOW,
     });
   });
 });
-
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for changing city returns correct action`, () => {
@@ -155,7 +230,7 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for changing city returns correct action`, () => {
+  it(`Action creator for load offers returns correct action`, () => {
     expect(ActionCreator.loadOffers(offersResult)).toEqual({
       type: ActionType.LOAD_OFFERS,
       payload: offersResult,
@@ -170,10 +245,31 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for changing offer id returns correct action`, () => {
+  it(`Action creator for update favorite id returns correct action`, () => {
     expect(ActionCreator.updateFavorite(offersResult[0])).toEqual({
       type: ActionType.UPDATE_FAVORITE,
       payload: offersResult[0],
+    });
+  });
+
+  it(`Action creator for load favorites returns correct action`, () => {
+    expect(ActionCreator.loadFavorites(offersResult)).toEqual({
+      type: ActionType.LOAD_FAVORITES,
+      payload: offersResult,
+    });
+  });
+
+  it(`Action creator for load nearby offers returns correct action`, () => {
+    expect(ActionCreator.loadNearbyOffers(offersResult)).toEqual({
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: offersResult,
+    });
+  });
+
+  it(`Action creator for changing sort returns correct action`, () => {
+    expect(ActionCreator.changeSort(SortTypes.TOP_RATED_FIRST)).toEqual({
+      type: ActionType.CHANGE_SORT,
+      payload: SortTypes.TOP_RATED_FIRST,
     });
   });
 });
@@ -202,7 +298,26 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /comments/1`, function () {
+  it(`Should make a correct API call to get /comments/1`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const getComments = Operation.getComments(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, [...commentsRaw]);
+
+    return getComments(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: [...commentsResult],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to post /comments/1`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const postComment = Operation.postComment(1, {comment: `test`, rating: `5`});
@@ -236,6 +351,44 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.UPDATE_FAVORITE,
           payload: offersResult[0],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteLoader = Operation.loadFavorite();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [...offersRaw]);
+
+    return favoriteLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITES,
+          payload: [...offersResult],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /hotels/id/nearby`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const nearbyLoader = Operation.getNearbyOffers(1);
+
+    apiMock
+      .onGet(`/hotels/1/nearby`)
+      .reply(200, [...offersRaw]);
+
+    return nearbyLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_NEARBY_OFFERS,
+          payload: [...offersResult],
         });
       });
   });

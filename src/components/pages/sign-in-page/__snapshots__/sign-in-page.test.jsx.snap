@@ -18,6 +18,8 @@ exports[`Render SignInPage 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -115,6 +117,17 @@ exports[`Render SignInPage 1`] = `
           >
             Sign in
           </button>
+          <div
+            style={
+              Object {
+                "color": "#ff0000",
+                "fontSize": "15px",
+                "marginTop": "15px",
+              }
+            }
+          >
+            Error
+          </div>
         </form>
       </section>
       <section

@@ -95,7 +95,8 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/1"
+          onClick={[Function]}
         >
           Beautiful & luxurious apartment at great location
         </a>
@@ -149,7 +150,7 @@ Array [
           </span>
         </div>
         <button
-          className="place-card__bookmark-button button"
+          className="place-card__bookmark-button button place-card__bookmark-button--active"
           onClick={[Function]}
           type="button"
         >
@@ -165,7 +166,7 @@ Array [
           <span
             className="visually-hidden"
           >
-            To bookmarks
+            In bookmarks
           </span>
         </button>
       </div>
@@ -193,7 +194,8 @@ Array [
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/5"
+          onClick={[Function]}
         >
           Not bad!
         </a>

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import LocationsList from "./locations-list.jsx";
+import {LocationsList} from "./locations-list.jsx";
 
 it(`Render LocationsList`, () => {
   const tree = renderer

@@ -21,7 +21,9 @@ it(`Render SignInPage`, () => {
           <Router history={history}>
             <SignInPage
               onUserLogin={() => {}}
-              onChangeAuthPageState={() => {}}
+              loadFavorite={() => {}}
+              onActiveItemChange={() => {}}
+              activeItemId={`Error`}
             />
           </Router>
         </Provider>,

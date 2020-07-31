@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
-import {SortTypes} from "../../const.js";
-import {sortOffers} from "../../utils.js";
+import {getFilteredOffers, getCity, getSortedFilteredOffers} from "../../reducer/data/selectors.js";
+
+import {CardType} from "../../const.js";
 import CardsList from "../cards-list/cards-list.jsx";
 import Map from "../map/map.jsx";
 import PlacesSorting from "../places-sorting/places-sorting.jsx";
@@ -11,8 +13,7 @@ import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sortin
 const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 const Places = (props) => {
-  const {activeOffers, onActiveItemChange, activeItemId, city, sortType} = props;
-  const filteredOffers = sortOffers(activeOffers, sortType);
+  const {activeOffers, onActiveItemChange, activeItemId, city, sortedActiveOffers} = props;
 
   return (
     <div className="cities__places-container container">
@@ -22,9 +23,9 @@ const Places = (props) => {
         <WrappedPlacesSorting />
         <div className="cities__places-list places__list tabs__content">
           <CardsList
-            offers={filteredOffers}
+            offers={sortedActiveOffers}
             onActiveItemChange={onActiveItemChange}
-            isNearPlaces={false}
+            cardType={CardType.MAIN}
           />
         </div>
       </section>
@@ -46,7 +47,16 @@ Places.propTypes = {
   onActiveItemChange: PropTypes.func.isRequired,
   activeItemId: PropTypes.any.isRequired,
   city: PropTypes.string.isRequired,
-  sortType: PropTypes.oneOf([SortTypes.POPULAR, SortTypes.PRICE_LOW_HIGH, SortTypes.PRICE_HIGH_LOW, SortTypes.TOP_RATED_FIRST]).isRequired,
+  sortedActiveOffers: PropTypes.array.isRequired,
 };
 
-export default Places;
+const mapStateToProps = (state) => {
+  return {
+    activeOffers: getFilteredOffers(state),
+    city: getCity(state),
+    sortedActiveOffers: getSortedFilteredOffers(state),
+  };
+};
+
+export {Places};
+export default connect(mapStateToProps, null)(Places);
