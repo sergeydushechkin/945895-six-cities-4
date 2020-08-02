@@ -1,20 +1,20 @@
-import React, {createRef} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import history from "../../../history.js";
-import {AppRoute} from "../../../const.js";
-import {Operation} from "../../../reducer/user/user.js";
-import {Operation as DataOperation} from "../../../reducer/data/data.js";
+import history from "../../../history";
+import {AppRoute} from "../../../const";
+import {Operation} from "../../../reducer/user/user";
+import {Operation as DataOperation} from "../../../reducer/data/data";
 
-import Header from "../../header/header.jsx";
+import Header from "../../header/header";
 
 class SignInPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.email = createRef();
-    this.password = createRef();
+    this.email = React.createRef();
+    this.password = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }

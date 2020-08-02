@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getFilteredOffers, getCity, getSortedFilteredOffers} from "../../reducer/data/selectors.js";
+import {getFilteredOffers, getCity, getSortedFilteredOffers} from "../../reducer/data/selectors";
 
-import {CardType} from "../../const.js";
-import CardsList from "../cards-list/cards-list.jsx";
-import Map from "../map/map.jsx";
-import PlacesSorting from "../places-sorting/places-sorting.jsx";
-import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sorting.js";
+import {CardType} from "../../const";
+import CardsList from "../cards-list/cards-list";
+import Map from "../map/map";
+import PlacesSorting from "../places-sorting/places-sorting";
+import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sorting";
 
 const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 

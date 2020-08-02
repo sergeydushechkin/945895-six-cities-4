@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getAuthStatus} from "../../reducer/user/selectors.js";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {getAuthStatus} from "../../reducer/user/selectors";
 
 const withAuthRoute = (Component, path) => {
   const WithPrivateRoute = (props) => {

@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {Operation} from "../../reducer/data/data.js";
-import {CardType, AppRoute} from "../../const.js";
-import {getRatingWidth, capitalizeFirstLetter} from "../../utils.js";
+import {Operation} from "../../reducer/data/data";
+import {CardType, AppRoute} from "../../const";
+import {getRatingWidth, capitalizeFirstLetter} from "../../utils";
 
 const typeToArticleClass = {
   [CardType.MAIN]: `cities__place-card`,

@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer/data/data.js";
-import {getLocations, getCity} from "../../reducer/data/selectors.js";
+import {ActionCreator} from "../../reducer/data/data";
+import {getLocations, getCity} from "../../reducer/data/selectors";
 
 class LocationsList extends React.PureComponent {
   render() {

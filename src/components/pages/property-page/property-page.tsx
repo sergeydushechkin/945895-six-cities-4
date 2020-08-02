@@ -1,18 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {AuthorizationStatus} from "../../../reducer/user/user.js";
-import {getAuthStatus} from "../../../reducer/user/selectors.js";
-import {Operation} from "../../../reducer/data/data.js";
-import {getComments, getOfferById, getNearby} from "../../../reducer/data/selectors.js";
-import {CardType} from "../../../const.js";
+import {AuthorizationStatus} from "../../../reducer/user/user";
+import {getAuthStatus} from "../../../reducer/user/selectors";
+import {Operation} from "../../../reducer/data/data";
+import {getComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
+import {CardType} from "../../../const";
 
-import {getRatingWidth} from "../../../utils.js";
-import CardsList from "../../cards-list/cards-list.jsx";
-import Header from "../../header/header.jsx";
-import Map from "../../map/map.jsx";
-import Reviews from "../../reviews/reviews.jsx";
+import {getRatingWidth} from "../../../utils";
+import CardsList from "../../cards-list/cards-list";
+import Header from "../../header/header";
+import Map from "../../map/map";
+import Reviews from "../../reviews/reviews";
 
 class PropertyPage extends React.PureComponent {
   constructor(props) {

@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
-import {AppRoute} from "../../const.js";
-import Navigation from "../navigation/navigation.jsx";
+import {AppRoute} from "../../const";
+import Navigation from "../navigation/navigation";
 
 const Header = (props) => {
   const {isLogoActive} = props;

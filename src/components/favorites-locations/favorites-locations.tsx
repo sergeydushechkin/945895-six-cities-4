@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 
-import {CardType} from "../../const.js";
-import CardsList from "../cards-list/cards-list.jsx";
+import {CardType} from "../../const";
+import CardsList from "../cards-list/cards-list";
 
 const FavoritesLocations = (props) => {
   const {location, offers} = props;

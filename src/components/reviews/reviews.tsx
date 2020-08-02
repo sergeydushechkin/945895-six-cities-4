@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 
-import ReviewsList from "../reviews-list/reviews-list.jsx";
-import ReviewsForm from "../reviews-form/reviews-form.jsx";
-import withFormState from "../../hocs/with-form-states/with-form-states.js";
+import ReviewsList from "../reviews-list/reviews-list";
+import ReviewsForm from "../reviews-form/reviews-form";
+import withFormState from "../../hocs/with-form-states/with-form-states";
 
 const ReviewsFormWrapped = withFormState(ReviewsForm);
 

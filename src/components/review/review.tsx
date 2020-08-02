@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {getRatingWidth, getMonthYearDate} from "../../utils.js";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import {getRatingWidth, getMonthYearDate} from "../../utils";
 
 const Review = (props) => {
   const {review} = props;

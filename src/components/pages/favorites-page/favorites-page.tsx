@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getFavorites} from "../../../reducer/data/selectors.js";
+import {getFavorites} from "../../../reducer/data/selectors";
 
-import Header from "../../header/header.jsx";
-import Favorites from "../../favorites/favorites.jsx";
-import FavoritesEmpty from "../../favorites-empty/favorites-empty.jsx";
+import Header from "../../header/header";
+import Favorites from "../../favorites/favorites";
+import FavoritesEmpty from "../../favorites-empty/favorites-empty";
 
 
 const FavoritesPage = (props) => {

@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import leaflet from "leaflet";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import * as leaflet from "leaflet";
 
 class Map extends React.PureComponent {
   constructor(props) {

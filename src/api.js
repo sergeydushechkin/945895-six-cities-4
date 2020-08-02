@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Error} from "./const.js";
+import {Error} from "./const";
 
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({

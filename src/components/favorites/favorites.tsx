@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getFavorites, getFavoritesLocations} from "../../reducer/data/selectors.js";
-import FavoritesLocations from "../favorites-locations/favorites-locations.jsx";
+import {getFavorites, getFavoritesLocations} from "../../reducer/data/selectors";
+import FavoritesLocations from "../favorites-locations/favorites-locations";
 
 const Favorites = (props) => {
   const {favoritesOffers, favoritesLocations} = props;

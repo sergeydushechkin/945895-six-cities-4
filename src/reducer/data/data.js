@@ -1,8 +1,8 @@
-import history from "../../history.js";
-import {AppRoute, SortTypes} from "../../const.js";
-import {extend} from "../../utils.js";
-import offerAdapter from "../../adapters/offer/offer.js";
-import createCommentsGet from "../../adapters/comment-get/comment-get.js";
+import history from "../../history";
+import {AppRoute, SortTypes} from "../../const";
+import {extend} from "../../utils";
+import offerAdapter from "../../adapters/offer/offer";
+import createCommentsGet from "../../adapters/comment-get/comment-get";
 
 const FavoriteStatus = {
   IN_FAVORITES: `1`,

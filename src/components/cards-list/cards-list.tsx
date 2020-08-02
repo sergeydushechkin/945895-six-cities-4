@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Card from "../card/card.jsx";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import Card from "../card/card";
 
 const CardsList = (props) => {
   const {offers, onActiveItemChange, cardType} = props;

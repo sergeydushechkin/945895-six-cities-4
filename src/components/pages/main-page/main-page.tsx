@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getFilteredOffers} from "../../../reducer/data/selectors.js";
+import {getFilteredOffers} from "../../../reducer/data/selectors";
 
-import withActiveItem from "../../../hocs/with-active-item/with-active-item.js";
-import Header from "../../header/header.jsx";
-import LocationsList from "../../locations-list/locations-list.jsx";
-import Places from "../../places/places.jsx";
-import PlacesEmpty from "../../places-empty/places-empty.jsx";
+import withActiveItem from "../../../hocs/with-active-item/with-active-item";
+import Header from "../../header/header";
+import LocationsList from "../../locations-list/locations-list";
+import Places from "../../places/places";
+import PlacesEmpty from "../../places-empty/places-empty";
 
 const PlacesWrapped = withActiveItem(Places);
 

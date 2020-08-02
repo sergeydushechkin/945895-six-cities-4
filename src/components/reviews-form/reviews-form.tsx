@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 
-import ReviewsRating from "../reviews-rating/reviews-rating.jsx";
+import ReviewsRating from "../reviews-rating/reviews-rating";
 
 class ReviewsForm extends React.PureComponent {
   constructor(props) {

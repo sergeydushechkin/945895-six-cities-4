@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/data/data.js";
-import {SortTypes, SortTypeTexts} from "../../const.js";
-import {getSortType} from "../../reducer/data/selectors.js";
+import {ActionCreator} from "../../reducer/data/data";
+import {SortTypes, SortTypeTexts} from "../../const";
+import {getSortType} from "../../reducer/data/selectors";
 
 class PlacesSorting extends React.PureComponent {
   constructor(props) {
