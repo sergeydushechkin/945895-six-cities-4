@@ -3,12 +3,12 @@ import * as leaflet from "leaflet";
 import {Offer} from "../../types";
 
 interface Props {
-  activeOfferId: any,
-  city: [number, number],
-  zoom: number,
-  offers: Array<Offer>,
-  className: string,
-};
+  activeOfferId: number;
+  city: [number, number];
+  zoom: number;
+  offers: Array<Offer>;
+  className: string;
+}
 
 class Map extends React.PureComponent<Props, null> {
   private mapRef: React.RefObject<HTMLSelectElement>;

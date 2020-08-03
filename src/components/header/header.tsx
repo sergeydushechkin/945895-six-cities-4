@@ -5,10 +5,10 @@ import {AppRoute} from "../../const";
 import Navigation from "../navigation/navigation";
 
 interface Props {
-  isLogoActive: boolean,
-};
+  isLogoActive: boolean;
+}
 
-const Header: React.FunctionComponent<Props> = (props) => {
+const Header: React.FunctionComponent<Props> = (props: Props) => {
   const {isLogoActive} = props;
   return (
     <header className="header">

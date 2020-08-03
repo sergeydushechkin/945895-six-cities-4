@@ -2,13 +2,13 @@ import * as React from "react";
 import {Subtract} from "utility-types";
 
 interface InjectedProps {
-  onMenuClick: () => void,
-  onMenuClose: () => void,
+  onMenuClick: () => void;
+  onMenuClose: () => void;
 }
 
 interface State {
-  isOpen: boolean,
-};
+  isOpen: boolean;
+}
 
 const withPlacesSorting = (Component) => {
   type P = React.ComponentProps<typeof Component>;

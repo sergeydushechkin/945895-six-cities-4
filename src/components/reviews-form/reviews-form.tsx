@@ -3,19 +3,19 @@ import * as React from "react";
 import ReviewsRating from "../reviews-rating/reviews-rating";
 
 interface Props {
-  onPostComment: (id: number, commentData: {comment: string, rating: string}) => Promise<void>,
-  offerId: number,
-  resetFromState: () => void,
-  disableForm: () => void,
-  enableForm: () => void,
-  changeElementState: (name: string, value: string) => void,
+  onPostComment: (id: number, commentData: {comment: string, rating: string}) => Promise<void>;
+  offerId: number;
+  resetFromState: () => void;
+  disableForm: () => void;
+  enableForm: () => void;
+  changeElementState: (name: string, value: string) => void;
   formStates: {
     rating: string,
     review: string,
     isFormDisabled: boolean,
     errorText: string,
-  },
-};
+  };
+}
 
 class ReviewsForm extends React.PureComponent<Props, null> {
   constructor(props) {

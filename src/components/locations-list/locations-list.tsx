@@ -5,10 +5,10 @@ import {ActionCreator} from "../../reducer/data/data";
 import {getLocations, getCity} from "../../reducer/data/selectors";
 
 interface Props {
-  locations: Array<string>,
-  city: string,
-  onCityChange: (city: string) => void,
-};
+  locations: Array<string>;
+  city: string;
+  onCityChange: (city: string) => void;
+}
 
 class LocationsList extends React.PureComponent<Props, null> {
   render() {

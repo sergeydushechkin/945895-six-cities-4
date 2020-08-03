@@ -4,10 +4,10 @@ import {Comment} from "../../types";
 import {getRatingWidth, getMonthYearDate} from "../../utils";
 
 interface Props {
-  review: Comment,
-};
+  review: Comment;
+}
 
-const Review: React.FunctionComponent<Props> = (props) => {
+const Review: React.FunctionComponent<Props> = (props: Props) => {
   const {review} = props;
 
   const {comment, rating, date, user} = review;

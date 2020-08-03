@@ -6,11 +6,11 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthStatus} from "../../reducer/user/selectors";
 
 interface Props {
-  authStatus: AuthorizationStatus,
-};
+  authStatus: string;
+}
 
 const withAuthRoute = (Component, path) => {
-  const WithPrivateRoute: React.FunctionComponent<Props> = (props) => {
+  const WithPrivateRoute: React.FunctionComponent<Props> = (props: Props) => {
     const {authStatus} = props;
     return authStatus === AuthorizationStatus.AUTH
       ? <Component {...props} />

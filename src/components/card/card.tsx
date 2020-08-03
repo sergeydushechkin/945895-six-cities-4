@@ -3,17 +3,16 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {Operation} from "../../reducer/data/data";
-import {Offer} from "../../types";
+import {CardType, Offer} from "../../types";
 import {AppRoute} from "../../const";
 import {getRatingWidth, capitalizeFirstLetter} from "../../utils";
-import {CardType} from "../../types";
 
 interface Props {
-  offer: Offer,
-  onActiveItemChange: (id: number) => void,
-  onFavoritesToggle: (id: any, isFavorite: boolean) => void,
-  cardType: CardType,
-};
+  offer: Offer;
+  onActiveItemChange: (id: number) => void;
+  onFavoritesToggle: (id: number, isFavorite: boolean) => void;
+  cardType: CardType;
+}
 
 const typeToArticleClass = {
   [CardType.MAIN]: `cities__place-card`,
@@ -27,7 +26,7 @@ const typeToWrapperClass = {
   [CardType.FAVORITES]: `favorites__image-wrapper`,
 };
 
-const Card: React.FunctionComponent<Props> = (props) => {
+const Card: React.FunctionComponent<Props> = (props: Props) => {
   const {offer, cardType, onActiveItemChange, onFavoritesToggle} = props;
   const {title, price, rating, type, isPremium, isFavorite, id, previewImage} = offer;
 

@@ -2,21 +2,21 @@ import * as React from "react";
 import {Subtract} from "utility-types";
 
 interface FormStates {
-  rating: string,
-  review: string,
-  isFormDisabled: boolean,
-  errorText: string,
-};
+  rating: string;
+  review: string;
+  isFormDisabled: boolean;
+  errorText: string;
+}
 
 type State = FormStates;
 
 interface InjectedProps {
-  formStates: FormStates,
-  resetFromState: () => void,
-  disableForm: () => void,
-  enableForm: () => void,
-  changeElementState: (name: string, value: string) => void,
-};
+  formStates: FormStates;
+  resetFromState: () => void;
+  disableForm: () => void;
+  enableForm: () => void;
+  changeElementState: (name: string, value: string) => void;
+}
 
 const withFormState = (Component) => {
   type P = React.ComponentProps<typeof Component>;
@@ -55,7 +55,7 @@ const withFormState = (Component) => {
       this.setState({isFormDisabled: false});
     }
 
-    changeElementState(name: string, value: any) {
+    changeElementState(name: string, value: string | number | boolean) {
       this.setState((prevState) => ({...prevState, [name]: value}));
     }
 

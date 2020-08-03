@@ -9,10 +9,10 @@ import Favorites from "../../favorites/favorites";
 import FavoritesEmpty from "../../favorites-empty/favorites-empty";
 
 interface Props {
-  favoritesOffers: Array<Offer>,
-};
+  favoritesOffers: Array<Offer>;
+}
 
-const FavoritesPage: React.FunctionComponent<Props> = (props) => {
+const FavoritesPage: React.FunctionComponent<Props> = (props: Props) => {
   const {favoritesOffers} = props;
   return (
     <div className={`page${favoritesOffers.length ? `` : `page--favorites-empty`}`}>

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const FavoritesEmpty = () => {
+const FavoritesEmpty: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <h1 className="visually-hidden">Favorites (empty)</h1>

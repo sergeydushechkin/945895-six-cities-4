@@ -39,4 +39,8 @@ const getMonthYearDate = (dateString) => {
   return `${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
 };
 
-export {getRatingWidth, extend, sortOffers, capitalizeFirstLetter, getMonthYearDate};
+const noop = () => {
+  // do nothing
+};
+
+export {getRatingWidth, extend, sortOffers, capitalizeFirstLetter, getMonthYearDate, noop};

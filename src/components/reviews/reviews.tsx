@@ -8,13 +8,13 @@ import withFormState from "../../hocs/with-form-states/with-form-states";
 const ReviewsFormWrapped = withFormState(ReviewsForm);
 
 interface Props {
-  reviews: Array<Comment>,
-  isUserLoggedIn: boolean,
-  onPostComment: (id: number, {}) => Promise<void>,
-  offerId: number,
-};
+  reviews: Array<Comment>;
+  isUserLoggedIn: boolean;
+  onPostComment: (id: number, {}) => Promise<void>;
+  offerId: number;
+}
 
-const Reviews: React.FunctionComponent<Props> = (props) => {
+const Reviews: React.FunctionComponent<Props> = (props: Props) => {
   const {reviews, isUserLoggedIn, offerId, onPostComment} = props;
 
   return (

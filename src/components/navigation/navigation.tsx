@@ -9,11 +9,11 @@ import {AppRoute} from "../../const";
 import {AuthInfo} from "../../types";
 
 interface Props {
-  authStatus: AuthorizationStatus,
-  authInfo: AuthInfo,
-};
+  authStatus: AuthorizationStatus;
+  authInfo: AuthInfo;
+}
 
-const Navigation: React.FunctionComponent<Props> = (props) => {
+const Navigation: React.FunctionComponent<Props> = (props: Props) => {
   const {authStatus, authInfo} = props;
 
   return (

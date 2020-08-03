@@ -6,11 +6,11 @@ import {getFavorites, getFavoritesLocations} from "../../reducer/data/selectors"
 import FavoritesLocations from "../favorites-locations/favorites-locations";
 
 interface Props {
-  favoritesOffers: Array<Offer>,
-  favoritesLocations: Array<string>,
-};
+  favoritesOffers: Array<Offer>;
+  favoritesLocations: Array<string>;
+}
 
-const Favorites: React.FunctionComponent<Props> = (props) => {
+const Favorites: React.FunctionComponent<Props> = (props: Props) => {
   const {favoritesOffers, favoritesLocations} = props;
 
   return (

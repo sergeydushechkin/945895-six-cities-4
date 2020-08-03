@@ -7,27 +7,27 @@ import {Operation} from "../../../reducer/data/data";
 import {getComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
 import {CardType, Offer, Comment} from "../../../types";
 
-import {getRatingWidth} from "../../../utils";
+import {getRatingWidth, noop} from "../../../utils";
 import CardsList from "../../cards-list/cards-list";
 import Header from "../../header/header";
 import Map from "../../map/map";
 import Reviews from "../../reviews/reviews";
 
 interface Props {
-  nearby: Array<Offer>,
-  authStatus: AuthorizationStatus,
-  reviews: Array<Comment>,
-  postComment: (id: number, {}) => Promise<void>,
+  nearby: Array<Offer>;
+  authStatus: AuthorizationStatus;
+  reviews: Array<Comment>;
+  postComment: (id: number, {}) => Promise<void>;
   match: {
     params: {
       id: string,
     },
   },
-  loadComments: (id: number) => void,
-  loadNearby: (id: number) => void,
-  offer: Offer,
-  onFavoritesToggle: (id: any, isFavorite: boolean) => void,
-};
+  loadComments: (id: number) => void;
+  loadNearby: (id: number) => void;
+  offer: Offer;
+  onFavoritesToggle: (id: number, isFavorite: boolean) => void;
+}
 
 class PropertyPage extends React.PureComponent<Props> {
   private offerId: number;
@@ -177,7 +177,7 @@ class PropertyPage extends React.PureComponent<Props> {
               <div className="near-places__list places__list">
                 <CardsList
                   offers={nearby}
-                  onActiveItemChange={() => {}}
+                  onActiveItemChange={noop}
                   cardType={CardType.PROPERTY}
                 />
               </div>

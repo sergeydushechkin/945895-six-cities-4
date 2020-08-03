@@ -1,14 +1,15 @@
 import * as React from "react";
 
 import {Offer, CardType} from "../../types";
+import {noop} from "../../utils";
 import CardsList from "../cards-list/cards-list";
 
 interface Props {
-  location: string,
-  offers: Array<Offer>,
-};
+  location: string;
+  offers: Array<Offer>;
+}
 
-const FavoritesLocations: React.FunctionComponent<Props> = (props) => {
+const FavoritesLocations: React.FunctionComponent<Props> = (props: Props) => {
   const {location, offers} = props;
 
   return (
@@ -23,7 +24,7 @@ const FavoritesLocations: React.FunctionComponent<Props> = (props) => {
       <div className="favorites__places">
         <CardsList
           offers={offers}
-          onActiveItemChange={() => {}}
+          onActiveItemChange={noop}
           cardType={CardType.FAVORITES}
         />
       </div>

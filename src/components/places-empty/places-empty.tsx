@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const PlacesEmpty = () => {
+const PlacesEmpty: React.FunctionComponent = () => {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">

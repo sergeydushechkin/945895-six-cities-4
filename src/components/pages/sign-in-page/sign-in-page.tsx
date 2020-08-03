@@ -9,11 +9,11 @@ import {Operation as DataOperation} from "../../../reducer/data/data";
 import Header from "../../header/header";
 
 interface Props {
-    onUserLogin: (userData: {email: string, password: string}) => Promise<void>,
-    loadFavorite: () => void,
-    onActiveItemChange: (data: string) => void,
-    activeItemId: number,
-};
+    onUserLogin: (userData: {email: string, password: string}) => Promise<void>;
+    loadFavorite: () => void;
+    onActiveItemChange: (data: string) => void;
+    activeItemId: number;
+}
 
 class SignInPage extends React.PureComponent<Props, null> {
   private email: React.RefObject<HTMLInputElement>;

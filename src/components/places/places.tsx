@@ -12,14 +12,14 @@ import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sortin
 const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
 interface Props {
-  activeOffers: Array<Offer>,
-  onActiveItemChange: () => void,
-  activeItemId: number,
-  city: string,
-  sortedActiveOffers: Array<Offer>,
-};
+  activeOffers: Array<Offer>;
+  onActiveItemChange: (id: number) => void;
+  activeItemId: number;
+  city: string;
+  sortedActiveOffers: Array<Offer>;
+}
 
-const Places: React.FunctionComponent<Props> = (props) => {
+const Places: React.FunctionComponent<Props> = (props: Props) => {
   const {activeOffers, onActiveItemChange, activeItemId, city, sortedActiveOffers} = props;
 
   return (

@@ -2,21 +2,21 @@ enum CardType  {
   MAIN = `MAIN`,
   PROPERTY = `PROPERTY`,
   FAVORITES = `FAVORITES`,
-};
+}
 
 enum Type {
   apartment = `apartment`,
   room = `room`,
   house = `house`,
   hotel = `hotel`,
-};
+}
 
 enum SortTypes {
   POPULAR = `popular`,
   PRICE_LOW_HIGH = `priceLowHigh`,
   PRICE_HIGH_LOW = `priceHighLow`,
   TOP_RATED_FIRST = `topRatedFirst`
-};
+}
 
 interface Offer {
   city: {
@@ -47,7 +47,7 @@ interface Offer {
     coordinates: [number, number],
     zoom: number,
   },
-};
+}
 
 interface Comment {
   comment: string,
@@ -60,7 +60,7 @@ interface Comment {
     isPro: boolean,
     name: string,
   },
-};
+}
 
 interface AuthInfo {
   avatarUrl: string,
@@ -68,6 +68,6 @@ interface AuthInfo {
   id: number,
   isPro: boolean,
   name: string,
-};
+}
 
 export {CardType, SortTypes, Offer, Comment, AuthInfo};

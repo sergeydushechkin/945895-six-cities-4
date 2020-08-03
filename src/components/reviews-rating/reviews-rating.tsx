@@ -11,12 +11,12 @@ const ratingToTitle = {
 };
 
 interface Props {
-  onRatingChange: (evt: React.ChangeEvent) => void,
-  isFormDisabled: boolean,
-  rating: string,
-};
+  onRatingChange: (evt: React.ChangeEvent) => void;
+  isFormDisabled: boolean;
+  rating: string;
+}
 
-const ReviewsRating: React.FunctionComponent<Props> = (props) => {
+const ReviewsRating: React.FunctionComponent<Props> = (props: Props) => {
   const {onRatingChange, isFormDisabled, rating} = props;
 
   return (

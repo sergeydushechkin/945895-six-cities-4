@@ -11,12 +11,12 @@ import Places from "../../places/places";
 import PlacesEmpty from "../../places-empty/places-empty";
 
 interface Props {
-  activeOffers: Array<Offer>,
-};
+  activeOffers: Array<Offer>;
+}
 
 const PlacesWrapped = withActiveItem(Places);
 
-const MainPage: React.FunctionComponent<Props> = (props) => {
+const MainPage: React.FunctionComponent<Props> = (props: Props) => {
   const {activeOffers} = props;
 
   return (

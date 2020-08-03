@@ -3,12 +3,12 @@ import {Offer, CardType} from "../../types";
 import Card from "../card/card";
 
 interface Props {
-  offers: Array<Offer>,
-  onActiveItemChange: () => void,
-  cardType: CardType,
-};
+  offers: Array<Offer>;
+  onActiveItemChange: (id: number) => void;
+  cardType: CardType;
+}
 
-const CardsList: React.FunctionComponent<Props> = (props) => {
+const CardsList: React.FunctionComponent<Props> = (props: Props) => {
   const {offers, onActiveItemChange, cardType} = props;
 
   return (

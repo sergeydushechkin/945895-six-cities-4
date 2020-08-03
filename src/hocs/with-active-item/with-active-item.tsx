@@ -2,12 +2,12 @@ import * as React from "react";
 import {Subtract} from "utility-types";
 
 interface State {
-  activeItemId: number,
-};
+  activeItemId: number;
+}
 
 interface InjectedProps {
   onActiveItemChange: (id: number) => void;
-};
+}
 
 const withActiveItem = (Component) => {
   type P = React.ComponentProps<typeof Component>;

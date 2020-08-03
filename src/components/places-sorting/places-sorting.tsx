@@ -13,12 +13,12 @@ const SortTypeTexts = {
 };
 
 interface Props {
-  sortType: SortTypes,
-  onSortMenuItemClick: (SortTypes) => void,
-  onMenuClick: () => void,
-  onMenuClose: () => void,
-  isOpen: boolean,
-};
+  sortType: SortTypes;
+  onSortMenuItemClick: (SortTypes) => void;
+  onMenuClick: () => void;
+  onMenuClose: () => void;
+  isOpen: boolean;
+}
 
 class PlacesSorting extends React.PureComponent<Props, null> {
   constructor(props) {
