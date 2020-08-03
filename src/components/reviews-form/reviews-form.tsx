@@ -1,9 +1,23 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 
 import ReviewsRating from "../reviews-rating/reviews-rating";
 
-class ReviewsForm extends React.PureComponent {
+interface Props {
+  onPostComment: (id: number, commentData: {comment: string, rating: string}) => Promise<void>,
+  offerId: number,
+  resetFromState: () => void,
+  disableForm: () => void,
+  enableForm: () => void,
+  changeElementState: (name: string, value: string) => void,
+  formStates: {
+    rating: string,
+    review: string,
+    isFormDisabled: boolean,
+    errorText: string,
+  },
+};
+
+class ReviewsForm extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
 
@@ -62,20 +76,5 @@ class ReviewsForm extends React.PureComponent {
     );
   }
 }
-
-ReviewsForm.propTypes = {
-  onPostComment: PropTypes.func.isRequired,
-  offerId: PropTypes.any.isRequired,
-  resetFromState: PropTypes.func.isRequired,
-  disableForm: PropTypes.func.isRequired,
-  enableForm: PropTypes.func.isRequired,
-  changeElementState: PropTypes.func.isRequired,
-  formStates: PropTypes.shape({
-    rating: PropTypes.string,
-    review: PropTypes.text,
-    isFormDisabled: PropTypes.bool.isRequired,
-    errorText: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default ReviewsForm;

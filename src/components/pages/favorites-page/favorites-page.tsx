@@ -1,15 +1,18 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {getFavorites} from "../../../reducer/data/selectors";
+import {Offer} from "../../../types";
 
 import Header from "../../header/header";
 import Favorites from "../../favorites/favorites";
 import FavoritesEmpty from "../../favorites-empty/favorites-empty";
 
+interface Props {
+  favoritesOffers: Array<Offer>,
+};
 
-const FavoritesPage = (props) => {
+const FavoritesPage: React.FunctionComponent<Props> = (props) => {
   const {favoritesOffers} = props;
   return (
     <div className={`page${favoritesOffers.length ? `` : `page--favorites-empty`}`}>
@@ -31,10 +34,6 @@ const FavoritesPage = (props) => {
       </footer>
     </div>
   );
-};
-
-FavoritesPage.propTypes = {
-  favoritesOffers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {

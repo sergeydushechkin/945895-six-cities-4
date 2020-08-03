@@ -1,54 +1,65 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import * as leaflet from "leaflet";
+import {Offer} from "../../types";
 
-class Map extends React.PureComponent {
+interface Props {
+  activeOfferId: any,
+  city: [number, number],
+  zoom: number,
+  offers: Array<Offer>,
+  className: string,
+};
+
+class Map extends React.PureComponent<Props, null> {
+  private mapRef: React.RefObject<HTMLSelectElement>;
+  private markersLayer: leaflet.LayerGroup;
+  private map: leaflet.Map;
+
   constructor(props) {
     super(props);
 
-    this._mapRef = React.createRef();
-    this._markersLayer = null;
-    this._map = null;
+    this.mapRef = React.createRef();
+    this.markersLayer = null;
+    this.map = null;
   }
 
   componentDidMount() {
     const {city, zoom} = this.props;
 
-    this._map = leaflet.map(this._mapRef.current, {
+    this.map = leaflet.map(this.mapRef.current, {
       center: city,
       zoom,
       zoomControl: false,
-      marker: true
     });
 
-    this._map.setView(city, zoom);
+    this.map.setView(city, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(this._map);
+      .addTo(this.map);
 
-    this._markersLayer = leaflet.layerGroup().addTo(this._map);
+    this.markersLayer = leaflet.layerGroup().addTo(this.map);
     this._renderMarkers();
   }
 
   componentWillUnmount() {
-    this._mapRef.current.remove();
+    this.mapRef.current.remove();
   }
 
   componentDidUpdate() {
     const {city, zoom} = this.props;
 
-    this._markersLayer.clearLayers();
-    this._map.setView(city, zoom);
+    this.markersLayer.clearLayers();
+    this.map.setView(city, zoom);
     this._renderMarkers();
   }
 
   _renderMarkers() {
     const {activeOfferId, offers} = this.props;
 
-    const icon = leaflet.icon({
+    const iconPassive = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
@@ -60,26 +71,18 @@ class Map extends React.PureComponent {
 
     offers.forEach((it) => {
       if (it.id === activeOfferId) {
-        leaflet.marker(it.location.coordinates, {iconActive}).addTo(this._markersLayer);
+        leaflet.marker(it.location.coordinates, {icon: iconActive}).addTo(this.markersLayer);
       } else {
-        leaflet.marker(it.location.coordinates, {icon}).addTo(this._markersLayer);
+        leaflet.marker(it.location.coordinates, {icon: iconPassive}).addTo(this.markersLayer);
       }
     });
   }
 
   render() {
     return (
-      <section ref={this._mapRef} className={this.props.className}></section>
+      <section ref={this.mapRef} className={this.props.className}></section>
     );
   }
 }
-
-Map.propTypes = {
-  activeOfferId: PropTypes.any,
-  city: PropTypes.array.isRequired,
-  zoom: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
-  className: PropTypes.string.isRequired
-};
 
 export default Map;

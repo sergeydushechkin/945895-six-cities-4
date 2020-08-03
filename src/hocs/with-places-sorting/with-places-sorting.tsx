@@ -1,7 +1,20 @@
 import * as React from "react";
+import {Subtract} from "utility-types";
+
+interface InjectedProps {
+  onMenuClick: () => void,
+  onMenuClose: () => void,
+}
+
+interface State {
+  isOpen: boolean,
+};
 
 const withPlacesSorting = (Component) => {
-  class WithPlacesSorting extends React.PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithPlacesSorting extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 

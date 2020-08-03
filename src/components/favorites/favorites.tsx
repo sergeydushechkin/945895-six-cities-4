@@ -1,11 +1,16 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
+import {Offer} from "../../types";
 import {getFavorites, getFavoritesLocations} from "../../reducer/data/selectors";
 import FavoritesLocations from "../favorites-locations/favorites-locations";
 
-const Favorites = (props) => {
+interface Props {
+  favoritesOffers: Array<Offer>,
+  favoritesLocations: Array<string>,
+};
+
+const Favorites: React.FunctionComponent<Props> = (props) => {
   const {favoritesOffers, favoritesLocations} = props;
 
   return (
@@ -22,11 +27,6 @@ const Favorites = (props) => {
       </ul>
     </section>
   );
-};
-
-Favorites.propTypes = {
-  favoritesOffers: PropTypes.array.isRequired,
-  favoritesLocations: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {

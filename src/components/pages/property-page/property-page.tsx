@@ -1,12 +1,11 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {AuthorizationStatus} from "../../../reducer/user/user";
 import {getAuthStatus} from "../../../reducer/user/selectors";
 import {Operation} from "../../../reducer/data/data";
 import {getComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
-import {CardType} from "../../../const";
+import {CardType, Offer, Comment} from "../../../types";
 
 import {getRatingWidth} from "../../../utils";
 import CardsList from "../../cards-list/cards-list";
@@ -14,7 +13,26 @@ import Header from "../../header/header";
 import Map from "../../map/map";
 import Reviews from "../../reviews/reviews";
 
-class PropertyPage extends React.PureComponent {
+interface Props {
+  nearby: Array<Offer>,
+  authStatus: AuthorizationStatus,
+  reviews: Array<Comment>,
+  postComment: (id: number, {}) => Promise<void>,
+  match: {
+    params: {
+      id: string,
+    },
+  },
+  loadComments: (id: number) => void,
+  loadNearby: (id: number) => void,
+  offer: Offer,
+  onFavoritesToggle: (id: any, isFavorite: boolean) => void,
+};
+
+class PropertyPage extends React.PureComponent<Props> {
+  private offerId: number;
+  private prevOfferId: number;
+
   constructor(props) {
     super(props);
 
@@ -171,22 +189,6 @@ class PropertyPage extends React.PureComponent {
   }
 }
 
-PropertyPage.propTypes = {
-  nearby: PropTypes.array.isRequired,
-  authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  reviews: PropTypes.array.isRequired,
-  postComment: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  loadComments: PropTypes.func.isRequired,
-  loadNearby: PropTypes.func.isRequired,
-  offer: PropTypes.object.isRequired,
-  onFavoritesToggle: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = (state, ownProps) => {
   return {
     authStatus: getAuthStatus(state),
@@ -206,7 +208,7 @@ const mapDispatchToProps = (dispatch) => ({
   loadNearby: (offerId) => {
     return dispatch(Operation.getNearbyOffers(offerId));
   },
-  onFavoritesToggle(offerId, favoriteStatus) {
+  onFavoritesToggle: (offerId, favoriteStatus) => {
     dispatch(Operation.postFavorite(offerId, favoriteStatus));
   },
 });

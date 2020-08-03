@@ -1,11 +1,16 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {ActionCreator} from "../../reducer/data/data";
 import {getLocations, getCity} from "../../reducer/data/selectors";
 
-class LocationsList extends React.PureComponent {
+interface Props {
+  locations: Array<string>,
+  city: string,
+  onCityChange: (city: string) => void,
+};
+
+class LocationsList extends React.PureComponent<Props, null> {
   render() {
     const {locations, onCityChange, city} = this.props;
 
@@ -32,12 +37,6 @@ class LocationsList extends React.PureComponent {
   }
 }
 
-LocationsList.propTypes = {
-  locations: PropTypes.arrayOf(PropTypes.string).isRequired,
-  city: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = (state) => {
   return {
     city: getCity(state),
@@ -46,7 +45,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityChange(city) {
+  onCityChange: (city) => {
     dispatch(ActionCreator.changeCity(city));
   }
 });

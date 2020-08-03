@@ -1,13 +1,20 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 
+import {Comment} from "../../types";
 import ReviewsList from "../reviews-list/reviews-list";
 import ReviewsForm from "../reviews-form/reviews-form";
 import withFormState from "../../hocs/with-form-states/with-form-states";
 
 const ReviewsFormWrapped = withFormState(ReviewsForm);
 
-const Reviews = (props) => {
+interface Props {
+  reviews: Array<Comment>,
+  isUserLoggedIn: boolean,
+  onPostComment: (id: number, {}) => Promise<void>,
+  offerId: number,
+};
+
+const Reviews: React.FunctionComponent<Props> = (props) => {
   const {reviews, isUserLoggedIn, offerId, onPostComment} = props;
 
   return (
@@ -24,13 +31,6 @@ const Reviews = (props) => {
       }
     </section>
   );
-};
-
-Reviews.propTypes = {
-  reviews: PropTypes.array.isRequired,
-  isUserLoggedIn: PropTypes.bool.isRequired,
-  onPostComment: PropTypes.func.isRequired,
-  offerId: PropTypes.any.isRequired,
 };
 
 export default Reviews;

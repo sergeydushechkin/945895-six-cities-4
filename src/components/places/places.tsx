@@ -1,10 +1,9 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {getFilteredOffers, getCity, getSortedFilteredOffers} from "../../reducer/data/selectors";
 
-import {CardType} from "../../const";
+import {CardType, Offer} from "../../types";
 import CardsList from "../cards-list/cards-list";
 import Map from "../map/map";
 import PlacesSorting from "../places-sorting/places-sorting";
@@ -12,7 +11,15 @@ import withPlacesSorting from "../../hocs/with-places-sorting/with-places-sortin
 
 const WrappedPlacesSorting = withPlacesSorting(PlacesSorting);
 
-const Places = (props) => {
+interface Props {
+  activeOffers: Array<Offer>,
+  onActiveItemChange: () => void,
+  activeItemId: number,
+  city: string,
+  sortedActiveOffers: Array<Offer>,
+};
+
+const Places: React.FunctionComponent<Props> = (props) => {
   const {activeOffers, onActiveItemChange, activeItemId, city, sortedActiveOffers} = props;
 
   return (
@@ -40,14 +47,6 @@ const Places = (props) => {
       </div>
     </div>
   );
-};
-
-Places.propTypes = {
-  activeOffers: PropTypes.array.isRequired,
-  onActiveItemChange: PropTypes.func.isRequired,
-  activeItemId: PropTypes.any.isRequired,
-  city: PropTypes.string.isRequired,
-  sortedActiveOffers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {

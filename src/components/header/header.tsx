@@ -1,11 +1,14 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 import {AppRoute} from "../../const";
 import Navigation from "../navigation/navigation";
 
-const Header = (props) => {
+interface Props {
+  isLogoActive: boolean,
+};
+
+const Header: React.FunctionComponent<Props> = (props) => {
   const {isLogoActive} = props;
   return (
     <header className="header">
@@ -21,10 +24,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  isLogoActive: PropTypes.bool.isRequired,
 };
 
 export default Header;

@@ -1,12 +1,24 @@
 import * as React from "react";
+import {Subtract} from "utility-types";
+
+interface State {
+  activeItemId: number,
+};
+
+interface InjectedProps {
+  onActiveItemChange: (id: number) => void;
+};
 
 const withActiveItem = (Component) => {
-  class WithActiveItem extends React.PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithActiveItem extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 
       this.state = {
-        activeItemId: -1,
+        activeItemId: null,
       };
 
       this.onActiveItemChange = this.onActiveItemChange.bind(this);

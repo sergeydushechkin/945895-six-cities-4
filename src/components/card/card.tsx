@@ -1,11 +1,19 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {Operation} from "../../reducer/data/data";
-import {CardType, AppRoute} from "../../const";
+import {Offer} from "../../types";
+import {AppRoute} from "../../const";
 import {getRatingWidth, capitalizeFirstLetter} from "../../utils";
+import {CardType} from "../../types";
+
+interface Props {
+  offer: Offer,
+  onActiveItemChange: (id: number) => void,
+  onFavoritesToggle: (id: any, isFavorite: boolean) => void,
+  cardType: CardType,
+};
 
 const typeToArticleClass = {
   [CardType.MAIN]: `cities__place-card`,
@@ -19,7 +27,7 @@ const typeToWrapperClass = {
   [CardType.FAVORITES]: `favorites__image-wrapper`,
 };
 
-const Card = (props) => {
+const Card: React.FunctionComponent<Props> = (props) => {
   const {offer, cardType, onActiveItemChange, onFavoritesToggle} = props;
   const {title, price, rating, type, isPremium, isFavorite, id, previewImage} = offer;
 
@@ -69,24 +77,8 @@ const Card = (props) => {
   );
 };
 
-Card.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired
-  }),
-  onActiveItemChange: PropTypes.func.isRequired,
-  onFavoritesToggle: PropTypes.func.isRequired,
-  cardType: PropTypes.oneOf([CardType.MAIN, CardType.PROPERTY, CardType.FAVORITES]).isRequired,
-};
-
 const mapDispatchToProps = (dispatch) => ({
-  onFavoritesToggle(offerId, favoriteStatus) {
+  onFavoritesToggle: (offerId, favoriteStatus) => {
     dispatch(Operation.postFavorite(offerId, favoriteStatus));
   },
 });

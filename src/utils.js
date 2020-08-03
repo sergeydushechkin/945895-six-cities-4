@@ -1,4 +1,5 @@
-import {SortTypes, MONTH_NAMES} from "./const";
+import {MONTH_NAMES} from "./const";
+import {SortTypes} from "./types";
 
 const getRatingWidth = (rating) => {
   return Math.round(rating) * 20;

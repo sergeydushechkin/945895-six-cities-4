@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
@@ -7,8 +6,14 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {getAuthStatus, getAuthInfo} from "../../reducer/user/selectors";
 
 import {AppRoute} from "../../const";
+import {AuthInfo} from "../../types";
 
-const Navigation = (props) => {
+interface Props {
+  authStatus: AuthorizationStatus,
+  authInfo: AuthInfo,
+};
+
+const Navigation: React.FunctionComponent<Props> = (props) => {
   const {authStatus, authInfo} = props;
 
   return (
@@ -31,17 +36,6 @@ const Navigation = (props) => {
       </ul>
     </nav>
   );
-};
-
-Navigation.propTypes = {
-  authStatus: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  authInfo: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    id: PropTypes.any,
-    isPro: PropTypes.bool,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 const mapStateToProps = (state) => {

@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {getFilteredOffers} from "../../../reducer/data/selectors";
+import {Offer} from "../../../types";
 
 import withActiveItem from "../../../hocs/with-active-item/with-active-item";
 import Header from "../../header/header";
@@ -10,9 +10,13 @@ import LocationsList from "../../locations-list/locations-list";
 import Places from "../../places/places";
 import PlacesEmpty from "../../places-empty/places-empty";
 
+interface Props {
+  activeOffers: Array<Offer>,
+};
+
 const PlacesWrapped = withActiveItem(Places);
 
-const MainPage = (props) => {
+const MainPage: React.FunctionComponent<Props> = (props) => {
   const {activeOffers} = props;
 
   return (
@@ -33,10 +37,6 @@ const MainPage = (props) => {
       </main>
     </div>
   );
-};
-
-MainPage.propTypes = {
-  activeOffers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {

@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 
 const RATING_STARS_TEMPLATE = [5, 4, 3, 2, 1];
 
@@ -11,7 +10,13 @@ const ratingToTitle = {
   1: `terribly`,
 };
 
-const ReviewsRating = (props) => {
+interface Props {
+  onRatingChange: (evt: React.ChangeEvent) => void,
+  isFormDisabled: boolean,
+  rating: string,
+};
+
+const ReviewsRating: React.FunctionComponent<Props> = (props) => {
   const {onRatingChange, isFormDisabled, rating} = props;
 
   return (
@@ -33,12 +38,6 @@ const ReviewsRating = (props) => {
       }
     </div>
   );
-};
-
-ReviewsRating.propTypes = {
-  onRatingChange: PropTypes.func.isRequired,
-  isFormDisabled: PropTypes.bool.isRequired,
-  rating: PropTypes.string.isRequired,
 };
 
 export default ReviewsRating;

@@ -1,10 +1,14 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 
-import {CardType} from "../../const";
+import {Offer, CardType} from "../../types";
 import CardsList from "../cards-list/cards-list";
 
-const FavoritesLocations = (props) => {
+interface Props {
+  location: string,
+  offers: Array<Offer>,
+};
+
+const FavoritesLocations: React.FunctionComponent<Props> = (props) => {
   const {location, offers} = props;
 
   return (
@@ -25,11 +29,6 @@ const FavoritesLocations = (props) => {
       </div>
     </li>
   );
-};
-
-FavoritesLocations.propTypes = {
-  location: PropTypes.string.isRequired,
-  offers: PropTypes.array.isRequired,
 };
 
 export default FavoritesLocations;

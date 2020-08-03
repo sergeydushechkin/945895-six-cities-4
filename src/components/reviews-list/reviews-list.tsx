@@ -1,8 +1,12 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
+import {Comment} from "../../types";
 import Review from "../review/review";
 
-const ReviewsList = (props) => {
+interface Props {
+  reviews: Array<Comment>,
+};
+
+const ReviewsList: React.FunctionComponent<Props> = (props) => {
   const {reviews} = props;
 
   return (
@@ -17,10 +21,6 @@ const ReviewsList = (props) => {
       })}
     </ul>
   );
-};
-
-ReviewsList.propTypes = {
-  reviews: PropTypes.array.isRequired,
 };
 
 export default ReviewsList;

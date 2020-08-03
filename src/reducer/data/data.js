@@ -1,5 +1,6 @@
 import history from "../../history";
-import {AppRoute, SortTypes} from "../../const";
+import {SortTypes} from "../../types";
+import {AppRoute} from "../../const";
 import {extend} from "../../utils";
 import offerAdapter from "../../adapters/offer/offer";
 import createCommentsGet from "../../adapters/comment-get/comment-get";

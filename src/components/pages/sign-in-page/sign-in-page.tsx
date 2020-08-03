@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import history from "../../../history";
@@ -9,7 +8,17 @@ import {Operation as DataOperation} from "../../../reducer/data/data";
 
 import Header from "../../header/header";
 
-class SignInPage extends React.PureComponent {
+interface Props {
+    onUserLogin: (userData: {email: string, password: string}) => Promise<void>,
+    loadFavorite: () => void,
+    onActiveItemChange: (data: string) => void,
+    activeItemId: number,
+};
+
+class SignInPage extends React.PureComponent<Props, null> {
+  private email: React.RefObject<HTMLInputElement>;
+  private password: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
 
@@ -52,11 +61,11 @@ class SignInPage extends React.PureComponent {
               <form onSubmit={this.handleSubmit} className="login__form form" action="#" method="post">
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required="" ref={this.email}/>
+                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required={true} ref={this.email}/>
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required="" ref={this.password}/>
+                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required={true} ref={this.password}/>
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
                 {activeItemId &&
@@ -78,18 +87,11 @@ class SignInPage extends React.PureComponent {
   }
 }
 
-SignInPage.propTypes = {
-  onUserLogin: PropTypes.func.isRequired,
-  loadFavorite: PropTypes.func.isRequired,
-  onActiveItemChange: PropTypes.func.isRequired,
-  activeItemId: PropTypes.any.isRequired,
-};
-
 const mapDispatchToProps = (dispatch) => ({
-  onUserLogin(authInfo) {
+  onUserLogin: (authInfo) => {
     return dispatch(Operation.loginUser(authInfo));
   },
-  loadFavorite() {
+  loadFavorite: () => {
     dispatch(DataOperation.loadFavorite());
   }
 });
