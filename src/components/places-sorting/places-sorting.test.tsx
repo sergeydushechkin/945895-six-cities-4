@@ -1,16 +1,18 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import {PlacesSorting} from "./places-sorting.jsx";
+import {SortTypes} from "../../types";
+import {noop} from "../../utils";
+import {PlacesSorting} from "./places-sorting";
 
 it(`Render PlacesSorting`, () => {
   const tree = renderer
     .create(
         <PlacesSorting
-          sortType={`popular`}
-          onSortMenuItemClick={() => {}}
-          onMenuClose={() => {}}
-          onMenuClick={() => {}}
+          sortType={SortTypes.POPULAR}
+          onSortMenuItemClick={noop}
+          onMenuClose={noop}
+          onMenuClick={noop}
           isOpen={false}
         />
     )

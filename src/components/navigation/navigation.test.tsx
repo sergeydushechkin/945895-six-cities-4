@@ -1,11 +1,12 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import {Navigation} from "./navigation.jsx";
+import {AuthInfo} from "../../types";
+import history from "../../history";
+import {Navigation} from "./navigation";
 
-const AuthInfo = {
+const authInfo: AuthInfo = {
   avatarUrl: `img/1.png`,
   email: `Oliver.conner@gmail.com`,
   id: 1,
@@ -19,7 +20,7 @@ it(`Render Navigation AUTH`, () => {
         <Router history={history}>
           <Navigation
             authStatus={`AUTH`}
-            authInfo={AuthInfo}
+            authInfo={authInfo}
           />
         </Router>
     )
@@ -34,7 +35,7 @@ it(`Render Navigation NO AUTH`, () => {
         <Router history={history}>
           <Navigation
             authStatus={`NO_AUTH`}
-            authInfo={AuthInfo}
+            authInfo={authInfo}
           />
         </Router>
     )

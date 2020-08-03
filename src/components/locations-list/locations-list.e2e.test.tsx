@@ -1,9 +1,10 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import {LocationsList} from "./locations-list.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import {LocationsList} from "./locations-list";
+import {noop} from "../../utils";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 
@@ -21,7 +22,7 @@ it(`Should LocationsList item to be pressed and return proper value`, () => {
   const locationButton = locationList.find(`a.locations__item-link`).at(2);
 
   locationButton.simulate(`click`, {
-    preventDefault: () => {}
+    preventDefault: noop
   });
 
   expect(onCityChange.mock.calls.length).toBe(1);

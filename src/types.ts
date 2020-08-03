@@ -70,4 +70,4 @@ interface AuthInfo {
   name: string,
 }
 
-export {CardType, SortTypes, Offer, Comment, AuthInfo};
+export {CardType, SortTypes, Type, Offer, Comment, AuthInfo};

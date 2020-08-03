@@ -1,14 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import Places from "./places.jsx";
+import {noop} from "../../utils";
+import history from "../../history";
+import Places from "./places";
 
-import testStore from "../../mocks/tests-mock-store.js";
-import offers from "../../mocks/tests-offers.js";
+import testStore from "../../mocks/tests-mock-store";
+import offers from "../../mocks/tests-offers";
 
 const mockStore = configureStore([]);
 
@@ -21,7 +22,7 @@ it(`Render Places`, () => {
           <Provider store={store}>
             <Places
               activeOffers={offers}
-              onActiveItemChange={() => {}}
+              onActiveItemChange={noop}
               activeItemId={1}
               city={`Paris`}
               sortedActiveOffers={offers}

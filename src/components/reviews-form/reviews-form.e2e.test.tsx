@@ -1,9 +1,11 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import ReviewsForm from "./reviews-form.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-Enzyme.configure({
+import {noop} from "../../utils";
+import ReviewsForm from "./reviews-form";
+
+configure({
   adapter: new Adapter(),
 });
 
@@ -14,10 +16,10 @@ it(`Test ReviewsForm component items clicks and return value`, () => {
       <ReviewsForm
         offerId={1}
         onPostComment={onPostComment}
-        resetFromState={() => {}}
-        disableForm={() => {}}
-        enableForm={() => {}}
-        changeElementState={() => {}}
+        resetFromState={noop}
+        disableForm={noop}
+        enableForm={noop}
+        changeElementState={noop}
         formStates={{
           rating: `5`,
           review: `test test test test test test test test test test test test test test test test test test test test test test test test`,
@@ -30,7 +32,7 @@ it(`Test ReviewsForm component items clicks and return value`, () => {
   const headerNavItem = reviewsForm.find(`.reviews__form`);
 
   headerNavItem.simulate(`submit`, {
-    preventDefault: () => {}
+    preventDefault: noop
   });
 
   expect(onPostComment).toHaveBeenCalledTimes(1);

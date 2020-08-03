@@ -1,9 +1,12 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import {PlacesSorting} from "./places-sorting.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
-Enzyme.configure({
+import {noop} from "../../utils";
+import {SortTypes} from "../../types";
+import {PlacesSorting} from "./places-sorting";
+
+configure({
   adapter: new Adapter(),
 });
 
@@ -14,9 +17,9 @@ describe(`Test PlacesSorting component items clicks and return value`, () => {
     const placesSorting = shallow(
         <PlacesSorting
           onSortMenuItemClick={onSortMenuItemClick}
-          sortType={`popular`}
-          onMenuClose={() => {}}
-          onMenuClick={() => {}}
+          sortType={SortTypes.POPULAR}
+          onMenuClose={noop}
+          onMenuClick={noop}
           isOpen={false}
         />
     );
@@ -35,9 +38,9 @@ describe(`Test PlacesSorting component items clicks and return value`, () => {
     const placesSorting = shallow(
         <PlacesSorting
           onSortMenuItemClick={onSortMenuItemClick}
-          sortType={`popular`}
-          onMenuClose={() => {}}
-          onMenuClick={() => {}}
+          sortType={SortTypes.POPULAR}
+          onMenuClose={noop}
+          onMenuClick={noop}
           isOpen={false}
         />
     );

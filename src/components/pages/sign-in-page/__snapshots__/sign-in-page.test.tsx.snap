@@ -91,7 +91,7 @@ exports[`Render SignInPage 1`] = `
               className="login__input form__input"
               name="email"
               placeholder="Email"
-              required=""
+              required={true}
               type="email"
             />
           </div>
@@ -107,7 +107,7 @@ exports[`Render SignInPage 1`] = `
               className="login__input form__input"
               name="password"
               placeholder="Password"
-              required=""
+              required={true}
               type="password"
             />
           </div>
@@ -126,7 +126,7 @@ exports[`Render SignInPage 1`] = `
               }
             }
           >
-            Error
+            1
           </div>
         </form>
       </section>

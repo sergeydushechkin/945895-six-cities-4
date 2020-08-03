@@ -1,13 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
+import history from "../../history";
 
-import NameSpace from "../../reducer/name-space.js";
-import withAuthRoute from "./with-auth-route.js";
+import NameSpace from "../../reducer/name-space";
+import withAuthRoute from "./with-auth-route";
 
 const mockStore = configureStore([]);
 

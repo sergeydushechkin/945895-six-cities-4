@@ -1,12 +1,12 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import {CardType} from "../../const.js";
-import {Card} from "./card.jsx";
+import * as React from "react";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+import {CardType} from "../../types";
+import {Card} from "./card";
 
-import offers from "../../mocks/tests-offers.js";
+import offers from "../../mocks/tests-offers";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 
@@ -29,7 +29,8 @@ describe(`Card mouse input testing`, () => {
   it(`Should bookmark button registered, value is correct`, () => {
     placeCardBookmark.props().onClick();
     expect(onFavoritesToggle.mock.calls.length).toBe(1);
-    expect(onFavoritesToggle.mock.calls[0][0]).toBe(offers[0].id, !offers[0].isFavorite);
+    expect(onFavoritesToggle.mock.calls[0][0]).toBe(offers[0].id);
+    expect(onFavoritesToggle.mock.calls[0][1]).toBe(!offers[0].isFavorite);
   });
 
   it(`Should mouse enter registered, value is correct`, () => {

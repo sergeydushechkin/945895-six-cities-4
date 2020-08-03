@@ -1,11 +1,6 @@
-const TYPES = {
-  apartment: `apartment`,
-  room: `room`,
-  house: `house`,
-  hotel: `hotel`
-};
+import {Offer, Type} from "../types";
 
-export default [
+const offers: Array<Offer> = [
   {
     id: 1,
     city: {
@@ -17,7 +12,7 @@ export default [
     previewImage: `img/apartment-01.jpg`,
     pictures: [`img/apartment-01.jpg`, `img/room.jpg`, `img/apartment-02.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     price: 120,
-    type: TYPES.apartment,
+    type: Type.apartment,
     rating: 4.8,
     isPremium: true,
     isFavorite: false,
@@ -47,7 +42,7 @@ export default [
     previewImage: `img/apartment-03.jpg`,
     pictures: [`img/apartment-03.jpg`, `img/room.jpg`, `img/studio-01.jpg`, `img/apartment-03.jpg`],
     price: 999,
-    type: TYPES.hotel,
+    type: Type.hotel,
     rating: 3.2,
     isPremium: false,
     isFavorite: true,
@@ -67,3 +62,5 @@ export default [
     },
   }
 ];
+
+export default offers;

@@ -1,12 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import {CardType} from "../../const.js";
-import {Card} from "./card.jsx";
+import history from "../../history";
+import {CardType} from "../../types";
+import {noop} from "../../utils";
+import {Card} from "./card";
 
-import offers from "../../mocks/tests-offers.js";
+import offers from "../../mocks/tests-offers";
 
 
 it(`Render Card`, () => {
@@ -16,8 +17,8 @@ it(`Render Card`, () => {
           <Card
             key={offers[0].id}
             offer={offers[0]}
-            onActiveItemChange={() => {}}
-            onFavoritesToggle={() => {}}
+            onActiveItemChange={noop}
+            onFavoritesToggle={noop}
             cardType={CardType.MAIN}
           />
         </Router>

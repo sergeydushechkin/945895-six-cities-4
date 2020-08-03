@@ -1,14 +1,15 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
-import history from "../../../history.js";
-import {PropertyPage} from "./property-page.jsx";
+import {noop} from "../../../utils";
+import history from "../../../history";
+import {PropertyPage} from "./property-page";
 
-import testStore from "../../../mocks/tests-mock-store.js";
-import offers from "../../../mocks/tests-offers.js";
+import testStore from "../../../mocks/tests-mock-store";
+import offers from "../../../mocks/tests-offers";
 
 const mockStore = configureStore([]);
 
@@ -25,10 +26,10 @@ it(`Render PropertyPage`, () => {
               reviews={[]}
               nearby={offers}
               authStatus={`AUTH`}
-              loadComments={() => {}}
-              loadNearby={() => {}}
-              postComment={() => {}}
-              onFavoritesToggle={() => {}}
+              loadComments={noop}
+              loadNearby={noop}
+              postComment={noop}
+              onFavoritesToggle={noop}
             />
           </Router>
         </Provider>,

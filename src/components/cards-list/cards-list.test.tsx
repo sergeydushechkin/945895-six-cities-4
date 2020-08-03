@@ -1,15 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 
-import history from "../../history.js";
-import {CardType} from "../../const.js";
-import CardsList from "./cards-list.jsx";
+import history from "../../history";
+import {noop} from "../../utils";
+import {CardType} from "../../types";
+import CardsList from "./cards-list";
 
-import testStore from "../../mocks/tests-mock-store.js";
-import offers from "../../mocks/tests-offers.js";
+import testStore from "../../mocks/tests-mock-store";
+import offers from "../../mocks/tests-offers";
 
 const mockStore = configureStore([]);
 
@@ -22,7 +23,7 @@ it(`Render CardsList`, () => {
           <Provider store={store}>
             <CardsList
               offers={offers}
-              onActiveItemChange={() => {}}
+              onActiveItemChange={noop}
               cardType={CardType.MAIN}
             />
           </Provider>

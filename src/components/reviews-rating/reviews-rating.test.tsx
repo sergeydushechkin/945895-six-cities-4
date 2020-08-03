@@ -1,12 +1,14 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ReviewsRating from "./reviews-rating.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
+
+import {noop} from "../../utils";
+import ReviewsRating from "./reviews-rating";
 
 it(`Render ReviewsRating`, () => {
   const tree = renderer
     .create(
         <ReviewsRating
-          onRatingChange={() => {}}
+          onRatingChange={noop}
           isFormDisabled={false}
           rating={`5`}
         />

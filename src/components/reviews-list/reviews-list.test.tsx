@@ -1,8 +1,10 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ReviewsList from "./reviews-list.jsx";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-const reviews = [
+import {Comment} from "../../types";
+import ReviewsList from "./reviews-list";
+
+const reviews: Array<Comment> = [
   {
     id: 1,
     comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
