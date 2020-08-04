@@ -61,6 +61,11 @@ class PropertyPage extends React.PureComponent<Props> {
   render() {
     const offerId = this.offerId;
     const {authStatus, reviews, postComment, offer, nearby, onFavoritesToggle} = this.props;
+
+    if (!offer) {
+      return null;
+    }
+
     const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
     const mapOffers = [].concat(nearby, offer);
 
