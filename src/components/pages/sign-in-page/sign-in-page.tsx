@@ -7,6 +7,7 @@ import {Operation} from "../../../reducer/user/user";
 import {Operation as DataOperation} from "../../../reducer/data/data";
 
 import Header from "../../header/header";
+import SignInForm from "../../sign-in-form/sign-in-form";
 
 interface Props {
     onUserLogin: (userData: {email: string, password: string}) => Promise<void>;
@@ -58,20 +59,12 @@ class SignInPage extends React.PureComponent<Props, null> {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              <form onSubmit={this.handleSubmit} className="login__form form" action="#" method="post">
-                <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required={true} ref={this.email}/>
-                </div>
-                <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">Password</label>
-                  <input className="login__input form__input" type="password" name="password" placeholder="Password" required={true} ref={this.password}/>
-                </div>
-                <button className="login__submit form__submit button" type="submit">Sign in</button>
-                {activeItemId &&
-                  <div style={{marginTop: `15px`, fontSize: `15px`, color: `#ff0000`}}>{activeItemId}</div>
-                }
-              </form>
+              <SignInForm
+                onSubmit = {this.handleSubmit}
+                errorText = {activeItemId}
+                emailRef = {this.email}
+                passwordRef = {this.password}
+              />
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
