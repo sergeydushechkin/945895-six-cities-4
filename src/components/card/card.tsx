@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {Operation} from "../../reducer/data/data";
-import {CardType, Offer, Type} from "../../types";
+import {CardType, Offer, Type, FavoritesImageSize, OthersImageSize} from "../../types";
 import {AppRoute} from "../../const";
 import {getRatingWidth} from "../../utils";
 
@@ -49,8 +49,8 @@ const Card: React.FunctionComponent<Props> = (props: Props) => {
           <img
             className="place-card__image"
             src={previewImage}
-            width={cardType === CardType.FAVORITES ? `150` : `260`}
-            height={cardType === CardType.FAVORITES ? `110` : `200`}
+            width={cardType === CardType.FAVORITES ? FavoritesImageSize.WIDTH : OthersImageSize.WIDTH}
+            height={cardType === CardType.FAVORITES ? FavoritesImageSize.HEIGHT : OthersImageSize.HEIGHT}
             alt="Place image"
           />
         </a>

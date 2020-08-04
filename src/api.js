@@ -1,9 +1,12 @@
 import axios from "axios";
 
+const SERVER = `https://4.react.pages.academy/six-cities`;
+const TIMEOUT = 5000;
+
 export const createAPI = (onError) => {
   const api = axios.create({
-    baseURL: `https://4.react.pages.academy/six-cities`,
-    timeout: 5000,
+    baseURL: SERVER,
+    timeout: TIMEOUT,
     withCredentials: true,
   });
 

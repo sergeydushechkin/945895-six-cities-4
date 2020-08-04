@@ -10,6 +10,16 @@ interface Props {
   className: string;
 }
 
+const iconPassive = leaflet.icon({
+  iconUrl: `img/pin.svg`,
+  iconSize: [30, 30]
+});
+
+const iconActive = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
 class Map extends React.PureComponent<Props, null> {
   private mapRef: React.RefObject<HTMLSelectElement>;
   private markersLayer: leaflet.LayerGroup;
@@ -41,7 +51,7 @@ class Map extends React.PureComponent<Props, null> {
       .addTo(this.map);
 
     this.markersLayer = leaflet.layerGroup().addTo(this.map);
-    this._renderMarkers();
+    this.renderMarkers();
   }
 
   componentWillUnmount() {
@@ -53,21 +63,11 @@ class Map extends React.PureComponent<Props, null> {
 
     this.markersLayer.clearLayers();
     this.map.setView(city, zoom);
-    this._renderMarkers();
+    this.renderMarkers();
   }
 
-  _renderMarkers() {
+  private renderMarkers(): void {
     const {activeOfferId, offers} = this.props;
-
-    const iconPassive = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
-
-    const iconActive = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
-      iconSize: [30, 30]
-    });
 
     offers.forEach((it) => {
       if (it.id === activeOfferId) {

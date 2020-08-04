@@ -10,32 +10,30 @@ interface Props {
   onCityChange: (city: string) => void;
 }
 
-class LocationsList extends React.PureComponent<Props, null> {
-  render() {
-    const {locations, onCityChange, city} = this.props;
+const LocationsList: React.FunctionComponent<Props> = (props: Props) => {
+  const {locations, onCityChange, city} = props;
 
-    return (
-      <ul className="locations__list tabs__list">
-        {locations.map((it) => {
-          return (
-            <li key={it} className="locations__item">
-              <a
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  onCityChange(it);
-                }}
-                className={`locations__item-link tabs__item${it === city ? ` tabs__item--active` : ``}`}
-                href="#"
-              >
-                <span>{it}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    );
-  }
-}
+  return (
+    <ul className="locations__list tabs__list">
+      {locations.map((it) => {
+        return (
+          <li key={it} className="locations__item">
+            <a
+              onClick={(evt) => {
+                evt.preventDefault();
+                onCityChange(it);
+              }}
+              className={`locations__item-link tabs__item${it === city ? ` tabs__item--active` : ``}`}
+              href="#"
+            >
+              <span>{it}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {

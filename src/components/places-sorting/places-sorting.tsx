@@ -33,7 +33,7 @@ class PlacesSorting extends React.PureComponent<Props, null> {
     onSortMenuItemClick(sortType);
   }
 
-  _getMenuClass(type) {
+  private getMenuClass(type: SortTypes):string {
     const {sortType} = this.props;
     return `places__option${type === sortType ? ` places__option--active` : ``}`;
   }
@@ -51,10 +51,10 @@ class PlacesSorting extends React.PureComponent<Props, null> {
           </svg>
         </span>
         <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`}>
-          <li onClick={() => this.handleOptionClick(SortTypes.POPULAR)} className={this._getMenuClass(SortTypes.POPULAR)} tabIndex={0}>Popular</li>
-          <li onClick={() => this.handleOptionClick(SortTypes.PRICE_LOW_HIGH)} className={this._getMenuClass(SortTypes.PRICE_LOW_HIGH)} tabIndex={0}>Price: low to high</li>
-          <li onClick={() => this.handleOptionClick(SortTypes.PRICE_HIGH_LOW)} className={this._getMenuClass(SortTypes.PRICE_HIGH_LOW)} tabIndex={0}>Price: high to low</li>
-          <li onClick={() => this.handleOptionClick(SortTypes.TOP_RATED_FIRST)} className={this._getMenuClass(SortTypes.TOP_RATED_FIRST)} tabIndex={0}>Top rated first</li>
+          <li onClick={() => this.handleOptionClick(SortTypes.POPULAR)} className={this.getMenuClass(SortTypes.POPULAR)} tabIndex={0}>Popular</li>
+          <li onClick={() => this.handleOptionClick(SortTypes.PRICE_LOW_HIGH)} className={this.getMenuClass(SortTypes.PRICE_LOW_HIGH)} tabIndex={0}>Price: low to high</li>
+          <li onClick={() => this.handleOptionClick(SortTypes.PRICE_HIGH_LOW)} className={this.getMenuClass(SortTypes.PRICE_HIGH_LOW)} tabIndex={0}>Price: high to low</li>
+          <li onClick={() => this.handleOptionClick(SortTypes.TOP_RATED_FIRST)} className={this.getMenuClass(SortTypes.TOP_RATED_FIRST)} tabIndex={0}>Top rated first</li>
         </ul>
       </form>
     );

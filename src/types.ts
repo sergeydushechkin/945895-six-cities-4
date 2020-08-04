@@ -18,6 +18,16 @@ enum SortTypes {
   TOP_RATED_FIRST = `topRatedFirst`
 }
 
+enum FavoritesImageSize {
+  WIDTH = `150`,
+  HEIGHT = `110`,
+};
+
+enum OthersImageSize {
+  WIDTH = `260`,
+  HEIGHT = `200`,
+}
+
 interface Offer {
   city: {
     name: string,
@@ -70,4 +80,4 @@ interface AuthInfo {
   name: string,
 }
 
-export {CardType, SortTypes, Type, Offer, Comment, AuthInfo};
+export {CardType, SortTypes, Type, Offer, Comment, AuthInfo, FavoritesImageSize, OthersImageSize};
