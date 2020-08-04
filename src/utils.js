@@ -1,4 +1,5 @@
-import {SortTypes, MONTH_NAMES} from "./const.js";
+import {MONTH_NAMES} from "./const";
+import {SortTypes} from "./types";
 
 const getRatingWidth = (rating) => {
   return Math.round(rating) * 20;
@@ -38,4 +39,8 @@ const getMonthYearDate = (dateString) => {
   return `${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
 };
 
-export {getRatingWidth, extend, sortOffers, capitalizeFirstLetter, getMonthYearDate};
+const noop = () => {
+  // do nothing
+};
+
+export {getRatingWidth, extend, sortOffers, capitalizeFirstLetter, getMonthYearDate, noop};

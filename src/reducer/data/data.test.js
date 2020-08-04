@@ -1,7 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {reducer, ActionType, Operation, ActionCreator} from "./data.js";
-import {SortTypes} from "../../const.js";
+import {createAPI} from "../../api";
+import {reducer, ActionType, Operation, ActionCreator} from "./data";
+import {SortTypes} from "../../types";
 
 const offersRaw = [
   {

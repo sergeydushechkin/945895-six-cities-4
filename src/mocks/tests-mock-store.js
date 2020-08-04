@@ -1,6 +1,6 @@
-import NameSpace from "../reducer/name-space.js";
+import NameSpace from "../reducer/name-space";
 
-import offers from "./tests-offers.js";
+import offers from "./tests-offers";
 
 const testStore = {
   [NameSpace.DATA]: {

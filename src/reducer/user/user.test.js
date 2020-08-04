@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {reducer, ActionType, Operation, AuthorizationStatus} from "./user.js";
+import {createAPI} from "../../api";
+import {reducer, ActionType, Operation, AuthorizationStatus} from "./user";
 
 const AuthInfoRaw = {
   [`avatar_url`]: `img/1.png`,

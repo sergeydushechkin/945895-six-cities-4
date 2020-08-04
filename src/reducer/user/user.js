@@ -1,5 +1,5 @@
-import createAuthInfo from "../../adapters/auth-info/auth-info.js";
-import {extend} from "../../utils.js";
+import createAuthInfo from "../../adapters/auth-info/auth-info";
+import {extend} from "../../utils";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
