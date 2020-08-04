@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../../reducer/user/user";
 import {getAuthStatus} from "../../../reducer/user/selectors";
 import {Operation} from "../../../reducer/data/data";
-import {getSortedComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
+import {getSortedComments, getOfferById, getActualNearby} from "../../../reducer/data/selectors";
 import {CardType, Offer, Comment} from "../../../types";
 
 import {getRatingWidth, noop} from "../../../utils";
@@ -199,7 +199,7 @@ const mapStateToProps = (state, ownProps) => {
     authStatus: getAuthStatus(state),
     reviews: getSortedComments(state),
     offer: getOfferById(state, parseInt(ownProps.match.params.id, 10)),
-    nearby: getNearby(state),
+    nearby: getActualNearby(state),
   };
 };
 

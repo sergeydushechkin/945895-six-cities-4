@@ -77,6 +77,17 @@ const getSortedComments = createSelector(
     (comments) => comments.slice().sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
 );
 
+const getActualNearby = createSelector(
+    getOffers,
+    getNearby,
+    (offers, nearby) => {
+      return offers.filter((offer) => {
+        const offerIndex = nearby.findIndex((it) => it.id === offer.id);
+        return offerIndex !== -1 ? true : false;
+      });
+    }
+);
+
 export {
   getOffers,
   getCity,
@@ -91,4 +102,5 @@ export {
   getOfferById,
   getSortedFilteredOffers,
   getSortedComments,
+  getActualNearby
 };
