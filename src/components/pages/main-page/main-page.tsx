@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-import {getFilteredOffers} from "../../../reducer/data/selectors";
+import {getFilteredOffers, getCity} from "../../../reducer/data/selectors";
 import {Offer} from "../../../types";
 
 import withActiveItem from "../../../hocs/with-active-item/with-active-item";
@@ -12,12 +12,13 @@ import PlacesEmpty from "../../places-empty/places-empty";
 
 interface Props {
   activeOffers: Array<Offer>;
+  activeCity: string;
 }
 
 const PlacesWrapped = withActiveItem(Places);
 
 const MainPage: React.FunctionComponent<Props> = (props: Props) => {
-  const {activeOffers} = props;
+  const {activeOffers, activeCity} = props;
 
   return (
     <div className={`page page--gray page--main${activeOffers.length ? `` : ` page__main--index-empty`}`}>
@@ -32,7 +33,7 @@ const MainPage: React.FunctionComponent<Props> = (props: Props) => {
           </section>
         </div>
         <div className="cities">
-          {activeOffers.length ? <PlacesWrapped /> : <PlacesEmpty />}
+          {activeOffers.length ? <PlacesWrapped /> : <PlacesEmpty city={activeCity}/>}
         </div>
       </main>
     </div>
@@ -42,6 +43,7 @@ const MainPage: React.FunctionComponent<Props> = (props: Props) => {
 const mapStateToProps = (state) => {
   return {
     activeOffers: getFilteredOffers(state),
+    activeCity: getCity(state),
   };
 };
 
