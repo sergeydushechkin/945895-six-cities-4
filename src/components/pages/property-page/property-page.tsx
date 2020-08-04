@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../../reducer/user/user";
 import {getAuthStatus} from "../../../reducer/user/selectors";
 import {Operation} from "../../../reducer/data/data";
-import {getComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
+import {getSortedComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
 import {CardType, Offer, Comment} from "../../../types";
 
 import {getRatingWidth, noop} from "../../../utils";
@@ -15,7 +15,7 @@ import Reviews from "../../reviews/reviews";
 
 interface Props {
   nearby: Array<Offer>;
-  authStatus: AuthorizationStatus;
+  authStatus: string;
   reviews: Array<Comment>;
   postComment: (id: number, {}) => Promise<void>;
   match: {
@@ -192,7 +192,7 @@ class PropertyPage extends React.PureComponent<Props> {
 const mapStateToProps = (state, ownProps) => {
   return {
     authStatus: getAuthStatus(state),
-    reviews: getComments(state),
+    reviews: getSortedComments(state),
     offer: getOfferById(state, parseInt(ownProps.match.params.id, 10)),
     nearby: getNearby(state),
   };

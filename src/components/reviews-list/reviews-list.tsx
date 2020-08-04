@@ -2,6 +2,8 @@ import * as React from "react";
 import {Comment} from "../../types";
 import Review from "../review/review";
 
+const MAX_REVIEWS = 10;
+
 interface Props {
   reviews: Array<Comment>;
 }
@@ -11,7 +13,7 @@ const ReviewsList: React.FunctionComponent<Props> = (props: Props) => {
 
   return (
     <ul className="reviews__list">
-      {reviews.map((review) => {
+      {reviews.slice(0, MAX_REVIEWS).map((review) => {
         return (
           <Review
             key={review.id}

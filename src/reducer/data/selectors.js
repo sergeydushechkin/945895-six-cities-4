@@ -68,4 +68,22 @@ const getSortedFilteredOffers = createSelector(
     (offers, sortType) => sortOffers(offers, sortType)
 );
 
-export {getOffers, getCity, getComments, getNearby, getSortType, getFavorites, getFilteredOffers, getLocations, getFavoritesLocations, getOfferById, getSortedFilteredOffers};
+const getSortedComments = createSelector(
+    getComments,
+    (comments) => comments.slice().sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+);
+
+export {
+  getOffers,
+  getCity,
+  getComments,
+  getNearby,
+  getSortType,
+  getFavorites,
+  getFilteredOffers,
+  getLocations,
+  getFavoritesLocations,
+  getOfferById,
+  getSortedFilteredOffers,
+  getSortedComments,
+};

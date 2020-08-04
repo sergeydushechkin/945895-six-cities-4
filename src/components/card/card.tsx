@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {Operation} from "../../reducer/data/data";
-import {CardType, Offer} from "../../types";
+import {CardType, Offer, Type} from "../../types";
 import {AppRoute} from "../../const";
-import {getRatingWidth, capitalizeFirstLetter} from "../../utils";
+import {getRatingWidth} from "../../utils";
 
 interface Props {
   offer: Offer;
@@ -24,6 +24,13 @@ const typeToWrapperClass = {
   [CardType.MAIN]: `cities__image-wrapper`,
   [CardType.PROPERTY]: `near-places__image-wrapper`,
   [CardType.FAVORITES]: `favorites__image-wrapper`,
+};
+
+const typeToCardTypeTitle = {
+  [Type.apartment]: `Apartment`,
+  [Type.room]: `Private Room`,
+  [Type.house]: `House`,
+  [Type.hotel]: `Hotel`,
 };
 
 const Card: React.FunctionComponent<Props> = (props: Props) => {
@@ -70,7 +77,7 @@ const Card: React.FunctionComponent<Props> = (props: Props) => {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
+        <p className="place-card__type">{typeToCardTypeTitle[type]}</p>
       </div>
     </article>
   );
