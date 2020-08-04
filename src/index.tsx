@@ -3,17 +3,30 @@ import * as ReactDOM from "react-dom";
 import {createStore, applyMiddleware, compose} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
+
 import {createAPI} from "./api";
-import App from "./components/app/app";
+import history from "./history";
+
+import {Error} from "./const";
+
 import reducer from "./reducer/reducer";
-import {Operation as DataOperation} from "./reducer/data/data";
+import {Operation as DataOperation, ActionCreator as DataActionCreator} from "./reducer/data/data";
 import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from "./reducer/user/user";
 
-const onUnauthorized = (() => {
-  store.dispatch(UserActionCreator.changeAuthStatus(AuthorizationStatus.NO_AUTH));
+import App from "./components/app/app";
+
+
+const onError = ((err) => {
+  if (err.response && err.response.status === Error.UNAUTHORIZED) {
+    store.dispatch(UserActionCreator.changeAuthStatus(AuthorizationStatus.NO_AUTH));
+    throw err;
+  }
+
+  store.dispatch(DataActionCreator.changeError(err.toJSON().message));
+  history.push(`/error`);
 });
 
-const api = createAPI(onUnauthorized);
+const api = createAPI(onError);
 
 const store = createStore(
     reducer,

@@ -16,6 +16,7 @@ const initialState = {
   comments: [],
   nearby: [],
   sortType: SortTypes.POPULAR,
+  errorText: ``,
 };
 
 const ActionType = {
@@ -26,6 +27,7 @@ const ActionType = {
   LOAD_FAVORITES: `LOAD_FAVORITES`,
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   CHANGE_SORT: `CHANGE_SORT`,
+  CHANGE_ERROR: `CHANGE_ERROR`,
 };
 
 const ActionCreator = {
@@ -56,6 +58,10 @@ const ActionCreator = {
   changeSort: (sortType) => ({
     type: ActionType.CHANGE_SORT,
     payload: sortType
+  }),
+  changeError: (errorText) => ({
+    type: ActionType.CHANGE_ERROR,
+    payload: errorText
   }),
 };
 
@@ -134,6 +140,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {nearby: action.payload});
     case ActionType.CHANGE_SORT:
       return extend(state, {sortType: action.payload});
+    case ActionType.CHANGE_ERROR:
+      return extend(state, {errorText: action.payload});
   }
 
   return state;

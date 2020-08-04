@@ -1,7 +1,6 @@
 import axios from "axios";
-import {Error} from "./const";
 
-export const createAPI = (onUnauthorized) => {
+export const createAPI = (onError) => {
   const api = axios.create({
     baseURL: `https://4.react.pages.academy/six-cities`,
     timeout: 5000,
@@ -13,12 +12,11 @@ export const createAPI = (onUnauthorized) => {
   };
 
   const onFail = (err) => {
-    const {response} = err;
-
-    if (response.status === Error.UNAUTHORIZED) {
-      onUnauthorized();
+    if (err.response && err.response.config.method === `post`) {
       throw err;
     }
+
+    onError(err);
 
     throw err;
   };

@@ -85,6 +85,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -95,6 +96,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.LOAD_OFFERS,
       payload: offersRaw,
@@ -104,6 +106,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -114,6 +117,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.CHANGE_CITY,
       payload: `Paris`,
@@ -123,6 +127,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -133,6 +138,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.LOAD_COMMENTS,
       payload: commentsRaw,
@@ -142,6 +148,7 @@ describe(`Reducer work correctly`, () => {
       comments: commentsRaw,
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -152,6 +159,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.UPDATE_FAVORITE,
       payload: offersResult[0],
@@ -161,6 +169,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -171,6 +180,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.LOAD_FAVORITES,
       payload: [Object.assign({}, offersResult[0], {isFavorite: true})],
@@ -180,6 +190,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -190,6 +201,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.LOAD_NEARBY_OFFERS,
       payload: offersRaw,
@@ -199,6 +211,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: offersRaw,
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     });
   });
 
@@ -209,6 +222,7 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.POPULAR,
+      errorText: ``,
     }, {
       type: ActionType.CHANGE_SORT,
       payload: SortTypes.PRICE_HIGH_LOW,
@@ -218,6 +232,28 @@ describe(`Reducer work correctly`, () => {
       comments: [],
       nearby: [],
       sortType: SortTypes.PRICE_HIGH_LOW,
+      errorText: ``,
+    });
+  });
+
+  it(`Reducer should change error by a given value`, () => {
+    expect(reducer({
+      city: ``,
+      offers: [],
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+      errorText: ``,
+    }, {
+      type: ActionType.CHANGE_ERROR,
+      payload: `error`,
+    })).toEqual({
+      city: ``,
+      offers: [],
+      comments: [],
+      nearby: [],
+      sortType: SortTypes.POPULAR,
+      errorText: `error`,
     });
   });
 });
@@ -270,6 +306,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.changeSort(SortTypes.TOP_RATED_FIRST)).toEqual({
       type: ActionType.CHANGE_SORT,
       payload: SortTypes.TOP_RATED_FIRST,
+    });
+  });
+
+  it(`Action creator for changing error returns correct action`, () => {
+    expect(ActionCreator.changeError(`error`)).toEqual({
+      type: ActionType.CHANGE_ERROR,
+      payload: `error`,
     });
   });
 });

@@ -25,6 +25,10 @@ const getSortType = (state) => {
   return state[NAME_SPACE].sortType;
 };
 
+const getErrorText = (state) => {
+  return state[NAME_SPACE].errorText;
+};
+
 const getId = (state, id) => id;
 
 const getFilteredOffers = createSelector(
@@ -79,6 +83,7 @@ export {
   getComments,
   getNearby,
   getSortType,
+  getErrorText,
   getFavorites,
   getFilteredOffers,
   getLocations,
