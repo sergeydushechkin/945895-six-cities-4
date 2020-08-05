@@ -30,10 +30,6 @@ const sortOffers = (offers, sortType) => {
   return sortedOffers;
 };
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
 const getMonthYearDate = (dateString) => {
   const date = new Date(dateString);
   return `${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
@@ -43,4 +39,4 @@ const noop = () => {
   // do nothing
 };
 
-export {getRatingWidth, extend, sortOffers, capitalizeFirstLetter, getMonthYearDate, noop};
+export {getRatingWidth, extend, sortOffers, getMonthYearDate, noop};

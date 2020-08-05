@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../../reducer/user/user";
 import {getAuthStatus} from "../../../reducer/user/selectors";
 import {Operation} from "../../../reducer/data/data";
-import {getComments, getOfferById, getNearby} from "../../../reducer/data/selectors";
+import {getSortedComments, getOfferById, getActualNearby} from "../../../reducer/data/selectors";
 import {CardType, Offer, Comment} from "../../../types";
 
 import {getRatingWidth, noop} from "../../../utils";
@@ -15,7 +15,7 @@ import Reviews from "../../reviews/reviews";
 
 interface Props {
   nearby: Array<Offer>;
-  authStatus: AuthorizationStatus;
+  authStatus: string;
   reviews: Array<Comment>;
   postComment: (id: number, {}) => Promise<void>;
   match: {
@@ -30,37 +30,38 @@ interface Props {
 }
 
 class PropertyPage extends React.PureComponent<Props> {
-  private offerId: number;
-  private prevOfferId: number;
-
   constructor(props) {
     super(props);
-
-    this.offerId = parseInt(this.props.match.params.id, 10);
-    this.prevOfferId = this.offerId;
   }
 
   componentDidMount() {
-    const {loadComments, loadNearby} = this.props;
+    const {loadComments, loadNearby, match} = this.props;
+    const id = parseInt(match.params.id, 10);
 
-    loadComments(this.offerId);
-    loadNearby(this.offerId);
+    loadComments(id);
+    loadNearby(id);
   }
 
-  componentDidUpdate() {
-    const {loadComments, loadNearby} = this.props;
-    this.offerId = parseInt(this.props.match.params.id, 10);
+  componentDidUpdate(prevProps) {
+    const {loadComments, loadNearby, match} = this.props;
+    const {match: prevMatch} = prevProps;
+    const id = parseInt(match.params.id, 10);
+    const prevId = parseInt(prevMatch.params.id, 10);
 
-    if (this.offerId !== this.prevOfferId) {
-      loadComments(this.offerId);
-      loadNearby(this.offerId);
-      this.prevOfferId = this.offerId;
+    if (id !== prevId) {
+      loadComments(id);
+      loadNearby(id);
     }
   }
 
   render() {
-    const offerId = this.offerId;
-    const {authStatus, reviews, postComment, offer, nearby, onFavoritesToggle} = this.props;
+    const {authStatus, reviews, postComment, offer, nearby, onFavoritesToggle, match} = this.props;
+    const offerId = parseInt(match.params.id, 10);
+
+    if (!offer) {
+      return null;
+    }
+
     const isUserLoggedIn = authStatus === AuthorizationStatus.AUTH;
     const mapOffers = [].concat(nearby, offer);
 
@@ -192,25 +193,17 @@ class PropertyPage extends React.PureComponent<Props> {
 const mapStateToProps = (state, ownProps) => {
   return {
     authStatus: getAuthStatus(state),
-    reviews: getComments(state),
+    reviews: getSortedComments(state),
     offer: getOfferById(state, parseInt(ownProps.match.params.id, 10)),
-    nearby: getNearby(state),
+    nearby: getActualNearby(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  postComment: (offerId, commentData) => {
-    return dispatch(Operation.postComment(offerId, commentData));
-  },
-  loadComments: (offerId) => {
-    return dispatch(Operation.getComments(offerId));
-  },
-  loadNearby: (offerId) => {
-    return dispatch(Operation.getNearbyOffers(offerId));
-  },
-  onFavoritesToggle: (offerId, favoriteStatus) => {
-    dispatch(Operation.postFavorite(offerId, favoriteStatus));
-  },
+  postComment: (offerId, commentData) => dispatch(Operation.postComment(offerId, commentData)),
+  loadComments: (offerId) => dispatch(Operation.getComments(offerId)),
+  loadNearby: (offerId) => dispatch(Operation.getNearbyOffers(offerId)),
+  onFavoritesToggle: (offerId, favoriteStatus) => dispatch(Operation.postFavorite(offerId, favoriteStatus)),
 });
 
 export {PropertyPage};

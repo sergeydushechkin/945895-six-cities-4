@@ -25,6 +25,10 @@ const getSortType = (state) => {
   return state[NAME_SPACE].sortType;
 };
 
+const getErrorText = (state) => {
+  return state[NAME_SPACE].errorText;
+};
+
 const getId = (state, id) => id;
 
 const getFilteredOffers = createSelector(
@@ -68,4 +72,35 @@ const getSortedFilteredOffers = createSelector(
     (offers, sortType) => sortOffers(offers, sortType)
 );
 
-export {getOffers, getCity, getComments, getNearby, getSortType, getFavorites, getFilteredOffers, getLocations, getFavoritesLocations, getOfferById, getSortedFilteredOffers};
+const getSortedComments = createSelector(
+    getComments,
+    (comments) => comments.slice().sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+);
+
+const getActualNearby = createSelector(
+    getOffers,
+    getNearby,
+    (offers, nearby) => {
+      return offers.filter((offer) => {
+        const offerIndex = nearby.findIndex((it) => it.id === offer.id);
+        return offerIndex !== -1 ? true : false;
+      });
+    }
+);
+
+export {
+  getOffers,
+  getCity,
+  getComments,
+  getNearby,
+  getSortType,
+  getErrorText,
+  getFavorites,
+  getFilteredOffers,
+  getLocations,
+  getFavoritesLocations,
+  getOfferById,
+  getSortedFilteredOffers,
+  getSortedComments,
+  getActualNearby
+};

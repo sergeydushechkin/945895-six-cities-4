@@ -2,6 +2,9 @@ import * as React from "react";
 
 import ReviewsRating from "../reviews-rating/reviews-rating";
 
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+
 interface Props {
   onPostComment: (id: number, commentData: {comment: string, rating: string}) => Promise<void>;
   offerId: number;
@@ -52,7 +55,7 @@ class ReviewsForm extends React.PureComponent<Props, null> {
   render() {
     const {formStates} = this.props;
     const {rating, review, isFormDisabled, errorText} = formStates;
-    const isSubmitDisabled = !(rating && (review.length >= 50 && review.length <= 300));
+    const isSubmitDisabled = !(rating && (review.length >= MIN_COMMENT_LENGTH && review.length <= MAX_COMMENT_LENGTH));
 
     return (
       <form onSubmit={this.handleSubmit} className="reviews__form form" action="#" method="post">

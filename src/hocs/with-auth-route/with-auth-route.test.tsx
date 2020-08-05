@@ -12,7 +12,7 @@ import withAuthRoute from "./with-auth-route";
 const mockStore = configureStore([]);
 
 const MockComponent = () => <div />;
-const MockComponentWrapped = withAuthRoute(MockComponent, `/login`);
+const MockComponentWrapped = withAuthRoute(`AUTH`, MockComponent, `/login`);
 
 it(`Render withAuthRoute wrapped component renders correct`, () => {
   const store = mockStore({[NameSpace.USER]: {authorizationStatus: `AUTH`}});

@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {Operation} from "../../reducer/data/data";
-import {CardType, Offer} from "../../types";
+import {CardType, Offer, Type, FavoritesImageSize, OthersImageSize} from "../../types";
 import {AppRoute} from "../../const";
-import {getRatingWidth, capitalizeFirstLetter} from "../../utils";
+import {getRatingWidth} from "../../utils";
 
 interface Props {
   offer: Offer;
@@ -26,6 +26,13 @@ const typeToWrapperClass = {
   [CardType.FAVORITES]: `favorites__image-wrapper`,
 };
 
+const typeToCardTypeTitle = {
+  [Type.apartment]: `Apartment`,
+  [Type.room]: `Private Room`,
+  [Type.house]: `House`,
+  [Type.hotel]: `Hotel`,
+};
+
 const Card: React.FunctionComponent<Props> = (props: Props) => {
   const {offer, cardType, onActiveItemChange, onFavoritesToggle} = props;
   const {title, price, rating, type, isPremium, isFavorite, id, previewImage} = offer;
@@ -42,8 +49,8 @@ const Card: React.FunctionComponent<Props> = (props: Props) => {
           <img
             className="place-card__image"
             src={previewImage}
-            width={cardType === CardType.FAVORITES ? `150` : `260`}
-            height={cardType === CardType.FAVORITES ? `110` : `200`}
+            width={cardType === CardType.FAVORITES ? FavoritesImageSize.WIDTH : OthersImageSize.WIDTH}
+            height={cardType === CardType.FAVORITES ? FavoritesImageSize.HEIGHT : OthersImageSize.HEIGHT}
             alt="Place image"
           />
         </a>
@@ -70,16 +77,14 @@ const Card: React.FunctionComponent<Props> = (props: Props) => {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
+        <p className="place-card__type">{typeToCardTypeTitle[type]}</p>
       </div>
     </article>
   );
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onFavoritesToggle: (offerId, favoriteStatus) => {
-    dispatch(Operation.postFavorite(offerId, favoriteStatus));
-  },
+  onFavoritesToggle: (offerId, favoriteStatus) => dispatch(Operation.postFavorite(offerId, favoriteStatus)),
 });
 
 export {Card};
