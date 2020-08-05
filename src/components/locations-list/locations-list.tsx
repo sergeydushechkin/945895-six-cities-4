@@ -43,9 +43,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityChange: (city) => {
-    dispatch(ActionCreator.changeCity(city));
-  }
+  onCityChange: (city) => dispatch(ActionCreator.changeCity(city)),
 });
 
 export {LocationsList};

@@ -81,12 +81,8 @@ class SignInPage extends React.PureComponent<Props, null> {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onUserLogin: (authInfo) => {
-    return dispatch(Operation.loginUser(authInfo));
-  },
-  loadFavorite: () => {
-    dispatch(DataOperation.loadFavorite());
-  }
+  onUserLogin: (authInfo) => dispatch(Operation.loginUser(authInfo)),
+  loadFavorite: () => dispatch(DataOperation.loadFavorite()),
 });
 
 export {SignInPage};

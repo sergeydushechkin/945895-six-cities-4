@@ -84,9 +84,7 @@ const Card: React.FunctionComponent<Props> = (props: Props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onFavoritesToggle: (offerId, favoriteStatus) => {
-    dispatch(Operation.postFavorite(offerId, favoriteStatus));
-  },
+  onFavoritesToggle: (offerId, favoriteStatus) => dispatch(Operation.postFavorite(offerId, favoriteStatus)),
 });
 
 export {Card};

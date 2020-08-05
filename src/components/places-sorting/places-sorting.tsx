@@ -68,9 +68,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortMenuItemClick: (sortType) => {
-    dispatch(ActionCreator.changeSort(sortType));
-  }
+  onSortMenuItemClick: (sortType) => dispatch(ActionCreator.changeSort(sortType)),
 });
 
 export {PlacesSorting};

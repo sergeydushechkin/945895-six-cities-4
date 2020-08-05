@@ -30,37 +30,33 @@ interface Props {
 }
 
 class PropertyPage extends React.PureComponent<Props> {
-  private offerId: number;
-  private prevOfferId: number;
-
   constructor(props) {
     super(props);
-
-    this.offerId = parseInt(this.props.match.params.id, 10);
-    this.prevOfferId = this.offerId;
   }
 
   componentDidMount() {
-    const {loadComments, loadNearby} = this.props;
+    const {loadComments, loadNearby, match} = this.props;
+    const id = parseInt(match.params.id, 10);
 
-    loadComments(this.offerId);
-    loadNearby(this.offerId);
+    loadComments(id);
+    loadNearby(id);
   }
 
-  componentDidUpdate() {
-    const {loadComments, loadNearby} = this.props;
-    this.offerId = parseInt(this.props.match.params.id, 10);
+  componentDidUpdate(prevProps) {
+    const {loadComments, loadNearby, match} = this.props;
+    const {match: prevMatch} = prevProps;
+    const id = parseInt(match.params.id, 10);
+    const prevId = parseInt(prevMatch.params.id, 10);
 
-    if (this.offerId !== this.prevOfferId) {
-      loadComments(this.offerId);
-      loadNearby(this.offerId);
-      this.prevOfferId = this.offerId;
+    if (id !== prevId) {
+      loadComments(id);
+      loadNearby(id);
     }
   }
 
   render() {
-    const offerId = this.offerId;
-    const {authStatus, reviews, postComment, offer, nearby, onFavoritesToggle} = this.props;
+    const {authStatus, reviews, postComment, offer, nearby, onFavoritesToggle, match} = this.props;
+    const offerId = parseInt(match.params.id, 10);
 
     if (!offer) {
       return null;
@@ -204,18 +200,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  postComment: (offerId, commentData) => {
-    return dispatch(Operation.postComment(offerId, commentData));
-  },
-  loadComments: (offerId) => {
-    return dispatch(Operation.getComments(offerId));
-  },
-  loadNearby: (offerId) => {
-    return dispatch(Operation.getNearbyOffers(offerId));
-  },
-  onFavoritesToggle: (offerId, favoriteStatus) => {
-    dispatch(Operation.postFavorite(offerId, favoriteStatus));
-  },
+  postComment: (offerId, commentData) => dispatch(Operation.postComment(offerId, commentData)),
+  loadComments: (offerId) => dispatch(Operation.getComments(offerId)),
+  loadNearby: (offerId) => dispatch(Operation.getNearbyOffers(offerId)),
+  onFavoritesToggle: (offerId, favoriteStatus) => dispatch(Operation.postFavorite(offerId, favoriteStatus)),
 });
 
 export {PropertyPage};
