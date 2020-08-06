@@ -1,6 +1,6 @@
 import history from "../../history";
 import {SortTypes} from "../../types";
-import {AppRoute} from "../../const";
+import {AppRoute, Error} from "../../const";
 import {extend} from "../../utils";
 import offerAdapter from "../../adapters/offer/offer";
 import createCommentsGet from "../../adapters/comment-get/comment-get";
@@ -98,7 +98,7 @@ const Operation = {
         dispatch(ActionCreator.updateFavorite(offerAdapter(response.data)));
       })
       .catch((error) => {
-        if (error.response.status === 401) {
+        if (error.response.status === Error.UNAUTHORIZED) {
           history.push(AppRoute.LOGIN);
         }
       });

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 const RATING_STARS_TEMPLATE = [5, 4, 3, 2, 1];
+const FIRST_START_NUM = 1;
 
 const ratingToTitle = {
   5: `perfect`,
@@ -23,7 +24,7 @@ const ReviewsRating: React.FunctionComponent<Props> = (props: Props) => {
     <div className="reviews__rating-form form__rating" >
       {
         RATING_STARS_TEMPLATE.map((num) => {
-          const id = num === 1 ? `${num}-star` : `${num}-stars`;
+          const id = num === FIRST_START_NUM ? `${num}-star` : `${num}-stars`;
           return (
             <React.Fragment key={num}>
               <input onChange={onRatingChange} disabled={isFormDisabled} checked={rating === String(num)} className="form__rating-input visually-hidden" name="rating" value={num} id={id} type="radio"/>
