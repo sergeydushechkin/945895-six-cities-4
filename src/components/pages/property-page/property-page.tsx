@@ -20,9 +20,9 @@ interface Props {
   postComment: (id: number, {}) => Promise<void>;
   match: {
     params: {
-      id: string,
-    },
-  },
+      id: string;
+    };
+  };
   loadComments: (id: number) => void;
   loadNearby: (id: number) => void;
   offer: Offer;

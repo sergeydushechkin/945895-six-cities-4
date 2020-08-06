@@ -1,12 +1,8 @@
 import * as React from "react";
 import {configure, shallow} from "enzyme";
 import * as Adapter from "enzyme-adapter-react-16";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import {Router} from "react-router-dom";
 
 import {noop} from "../../utils";
-import testStore from "../../mocks/tests-mock-store";
 import SignInForm from "./sign-in-form";
 
 configure({
