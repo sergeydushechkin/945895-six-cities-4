@@ -1,9 +1,12 @@
 import history from "../../history";
 import {SortTypes} from "../../types";
-import {AppRoute} from "../../const";
+import {AppRoute, Error} from "../../const";
 import {extend} from "../../utils";
 import offerAdapter from "../../adapters/offer/offer";
 import createCommentsGet from "../../adapters/comment-get/comment-get";
+import NameSpace from "../name-space";
+
+const NAME_SPACE = NameSpace.DATA;
 
 const FavoriteStatus = {
   IN_FAVORITES: `1`,
@@ -23,8 +26,6 @@ const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
-  LOAD_FAVORITES: `LOAD_FAVORITES`,
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_ERROR: `CHANGE_ERROR`,
@@ -42,14 +43,6 @@ const ActionCreator = {
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments
-  }),
-  updateFavorite: (offer) => ({
-    type: ActionType.UPDATE_FAVORITE,
-    payload: offer
-  }),
-  loadFavorites: (favorites) => ({
-    type: ActionType.LOAD_FAVORITES,
-    payload: favorites
   }),
   loadNearbyOffers: (nearby) => ({
     type: ActionType.LOAD_NEARBY_OFFERS,
@@ -95,10 +88,15 @@ const Operation = {
     const favoriteStatus = isFavorite ? FavoriteStatus.IN_FAVORITES : FavoriteStatus.NOT_IN_FAVORITES;
     return api.post(`/favorite/${offerId}/${favoriteStatus}`)
       .then((response) => {
-        dispatch(ActionCreator.updateFavorite(offerAdapter(response.data)));
+        const changedOffer = offerAdapter(response.data);
+        const stateOffers = getState()[NAME_SPACE].offers;
+
+        const index = stateOffers.findIndex((it) => it.id === changedOffer.id);
+        const newOffers = [].concat(...stateOffers.slice(0, index), changedOffer, ...stateOffers.slice(index + 1, stateOffers.length));
+        dispatch(ActionCreator.loadOffers(newOffers));
       })
       .catch((error) => {
-        if (error.response.status === 401) {
+        if (error.response.status === Error.UNAUTHORIZED) {
           history.push(AppRoute.LOGIN);
         }
       });
@@ -107,7 +105,11 @@ const Operation = {
     return api.get(`/favorite`)
       .then((response) => {
         const loadedFavorites = response.data.map((offer) => offerAdapter(offer));
-        dispatch(ActionCreator.loadFavorites(loadedFavorites));
+        const newOffers = getState()[NAME_SPACE].offers.map((offer) => {
+          const offerIndex = loadedFavorites.findIndex((it) => it.id === offer.id);
+          return offerIndex !== -1 ? loadedFavorites[offerIndex] : offer;
+        });
+        dispatch(ActionCreator.loadOffers(newOffers));
       });
   },
   getNearbyOffers: (offerId) => (dispatch, getState, api) => {
@@ -127,15 +129,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {city: action.payload});
     case ActionType.LOAD_COMMENTS:
       return extend(state, {comments: action.payload});
-    case ActionType.UPDATE_FAVORITE:
-      const index = state.offers.findIndex((it) => it.id === action.payload.id);
-      return extend(state, {offers: [].concat(...state.offers.slice(0, index), action.payload, ...state.offers.slice(index + 1, state.offers.length))});
-    case ActionType.LOAD_FAVORITES:
-      const newOffers = state.offers.map((offer) => {
-        const offerIndex = action.payload.findIndex((it) => it.id === offer.id);
-        return offerIndex !== -1 ? action.payload[offerIndex] : offer;
-      });
-      return extend(state, {offers: newOffers});
     case ActionType.LOAD_NEARBY_OFFERS:
       return extend(state, {nearby: action.payload});
     case ActionType.CHANGE_SORT:

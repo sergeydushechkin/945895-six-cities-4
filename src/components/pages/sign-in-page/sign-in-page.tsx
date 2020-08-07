@@ -10,7 +10,7 @@ import Header from "../../header/header";
 import SignInForm from "../../sign-in-form/sign-in-form";
 
 interface Props {
-    onUserLogin: (userData: {email: string, password: string}) => Promise<void>;
+    onUserLogin: (userData: {email: string; password: string}) => Promise<void>;
     loadFavorite: () => void;
     onActiveItemChange: (data: string) => void;
     activeItemId: number;
@@ -38,7 +38,6 @@ class SignInPage extends React.PureComponent<Props, null> {
       password: this.password.current.value,
     })
     .then(() => {
-      onActiveItemChange(``);
       loadFavorite();
       history.push(AppRoute.ROOT);
     })

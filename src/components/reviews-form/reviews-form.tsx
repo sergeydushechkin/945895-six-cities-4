@@ -6,17 +6,17 @@ const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 300;
 
 interface Props {
-  onPostComment: (id: number, commentData: {comment: string, rating: string}) => Promise<void>;
+  onPostComment: (id: number, commentData: {comment: string; rating: string}) => Promise<void>;
   offerId: number;
   resetFromState: () => void;
   disableForm: () => void;
   enableForm: () => void;
   changeElementState: (name: string, value: string) => void;
   formStates: {
-    rating: string,
-    review: string,
-    isFormDisabled: boolean,
-    errorText: string,
+    rating: string;
+    review: string;
+    isFormDisabled: boolean;
+    errorText: string;
   };
 }
 

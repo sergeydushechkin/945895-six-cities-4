@@ -33,7 +33,7 @@ class PlacesSorting extends React.PureComponent<Props, null> {
     onSortMenuItemClick(sortType);
   }
 
-  private getMenuClass(type: SortTypes):string {
+  private getMenuClass(type: SortTypes): string {
     const {sortType} = this.props;
     return `places__option${type === sortType ? ` places__option--active` : ``}`;
   }

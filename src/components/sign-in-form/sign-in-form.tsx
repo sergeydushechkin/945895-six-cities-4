@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  onSubmit: (evt: any) => void;
+  onSubmit: (evt: React.SyntheticEvent) => void;
   errorText: string | number;
   emailRef: React.RefObject<HTMLInputElement>;
   passwordRef: React.RefObject<HTMLInputElement>;
