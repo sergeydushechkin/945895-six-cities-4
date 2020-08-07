@@ -152,48 +152,6 @@ describe(`Reducer work correctly`, () => {
     });
   });
 
-  it(`Reducer should change favorites by a given value`, () => {
-    expect(reducer({
-      city: ``,
-      offers: offersResult,
-      comments: [],
-      nearby: [],
-      sortType: SortTypes.POPULAR,
-      errorText: ``,
-    }, {
-      type: ActionType.UPDATE_FAVORITE,
-      payload: offersResult[0],
-    })).toEqual({
-      city: ``,
-      offers: offersResult,
-      comments: [],
-      nearby: [],
-      sortType: SortTypes.POPULAR,
-      errorText: ``,
-    });
-  });
-
-  it(`Reducer should load favorites `, () => {
-    expect(reducer({
-      city: ``,
-      offers: offersResult,
-      comments: [],
-      nearby: [],
-      sortType: SortTypes.POPULAR,
-      errorText: ``,
-    }, {
-      type: ActionType.LOAD_FAVORITES,
-      payload: [Object.assign({}, offersResult[0], {isFavorite: true})],
-    })).toEqual({
-      city: ``,
-      offers: [Object.assign({}, offersResult[0], {isFavorite: true})],
-      comments: [],
-      nearby: [],
-      sortType: SortTypes.POPULAR,
-      errorText: ``,
-    });
-  });
-
   it(`Reducer should update nearby by load nearby offers`, () => {
     expect(reducer({
       city: ``,
@@ -281,20 +239,6 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for update favorite id returns correct action`, () => {
-    expect(ActionCreator.updateFavorite(offersResult[0])).toEqual({
-      type: ActionType.UPDATE_FAVORITE,
-      payload: offersResult[0],
-    });
-  });
-
-  it(`Action creator for load favorites returns correct action`, () => {
-    expect(ActionCreator.loadFavorites(offersResult)).toEqual({
-      type: ActionType.LOAD_FAVORITES,
-      payload: offersResult,
-    });
-  });
-
   it(`Action creator for load nearby offers returns correct action`, () => {
     expect(ActionCreator.loadNearbyOffers(offersResult)).toEqual({
       type: ActionType.LOAD_NEARBY_OFFERS,
@@ -379,21 +323,24 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /comments/1`, function () {
+  it(`Should make a correct API call to /favorite/1/0`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const postFavorite = Operation.postFavorite(1, false);
+    const getState = () => {
+      return {DATA: {offers: [...offersResult]}};
+    };
 
     apiMock
       .onPost(`/favorite/1/0`)
       .reply(200, offersRaw[0]);
 
-    return postFavorite(dispatch, () => {}, api)
+    return postFavorite(dispatch, getState, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.UPDATE_FAVORITE,
-          payload: offersResult[0],
+          type: ActionType.LOAD_OFFERS,
+          payload: offersResult,
         });
       });
   });
@@ -402,17 +349,20 @@ describe(`Operation work correctly`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const favoriteLoader = Operation.loadFavorite();
+    const getState = () => {
+      return {DATA: {offers: [...offersResult]}};
+    };
 
     apiMock
       .onGet(`/favorite`)
       .reply(200, [...offersRaw]);
 
-    return favoriteLoader(dispatch, () => {}, api)
+    return favoriteLoader(dispatch, getState, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_FAVORITES,
-          payload: [...offersResult],
+          type: ActionType.LOAD_OFFERS,
+          payload: offersResult,
         });
       });
   });
